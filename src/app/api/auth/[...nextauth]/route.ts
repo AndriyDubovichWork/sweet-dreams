@@ -5,6 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import SignToken from './SignToken';
 
 const handler = NextAuth({
+  secret: process.env.GOOGLE_JWT,
   session: {
     strategy: 'jwt',
   },

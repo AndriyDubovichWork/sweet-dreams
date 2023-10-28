@@ -6,7 +6,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Home() {
   const { data: session } = useSession();
-  console.log(session);
+  // console.log(session);
 
   return (
     <main className={style.home}>
