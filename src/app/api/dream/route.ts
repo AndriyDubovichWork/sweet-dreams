@@ -1,12 +1,34 @@
 import { NextResponse } from 'next/server';
-import { google } from 'googleapis';
+import { getServerSession } from 'next-auth';
+import { drive, auth } from '@googleapis/drive';
 
 export function GET(req: Request) {
   return NextResponse.json({ hello: 'world', req });
 }
-export function POST(req: Request) {
-  const { searchParams } = new URL(req.url);
-  // google.drive({ version: 'v3' });
+export async function POST(req: Request) {
+  const session: any = await getServerSession();
+  const token: any = {
+    accessToken: session?.accessToken,
+    refreshToken: session?.refreshToken,
+  };
 
-  return NextResponse.json({ path: searchParams.get('path') });
+  if (!session) {
+    return NextResponse.json({ code: 401, error: 'No Session Active' });
+  }
+
+  const accessToken = token?.accessToken;
+  const refreshToken = token?.refreshToken;
+
+  if (!accessToken) {
+    return NextResponse.json({ code: 401, error: 'No Access Token' });
+  }
+
+  const oauth2Client = new auth.OAuth2({});
+
+  oauth2Client.setCredentials({
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  });
+
+  return NextResponse.json({ code: 401, error: 'No Access Token' });
 }
