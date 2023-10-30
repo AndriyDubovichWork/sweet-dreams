@@ -1,34 +1,21 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { drive, auth } from '@googleapis/drive';
+import getFile from '@/app/drive/getFile';
+import saveFileToDrive from '@/app/drive/saveFileToDrive';
 
-export function GET(req: Request) {
-  return NextResponse.json({ hello: 'world', req });
-}
-export async function POST(req: Request) {
-  const session: any = await getServerSession();
-  const token: any = {
-    accessToken: session?.accessToken,
-    refreshToken: session?.refreshToken,
-  };
-
-  if (!session) {
-    return NextResponse.json({ code: 401, error: 'No Session Active' });
+export async function PUT(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const fileName = searchParams.get('fileName');
+  if (!fileName) {
+    return NextResponse.json(
+      { error: 'missing fileName param' },
+      { status: 422 }
+    );
   }
-
-  const accessToken = token?.accessToken;
-  const refreshToken = token?.refreshToken;
-
-  if (!accessToken) {
-    return NextResponse.json({ code: 401, error: 'No Access Token' });
-  }
-
-  const oauth2Client = new auth.OAuth2({});
-
-  oauth2Client.setCredentials({
-    access_token: accessToken,
-    refresh_token: refreshToken,
-  });
-
-  return NextResponse.json({ code: 401, error: 'No Access Token' });
+  return NextResponse.json({ data: await saveFileToDrive(fileName) });
 }
+// export async function POST(req: Request) {
+//   return NextResponse.json({ data: await getFile() });
+// }
+// export async function PUT(req: Request) {
+//   return NextResponse.json({ data: await createLink(' ') });
+// }

@@ -1,12 +1,12 @@
 'use client';
 
 import { postDream } from '../../requests';
+import saveFile from './drive/saveFileToDrive';
 import style from './home.module.scss';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Home() {
   const { data: session } = useSession();
-  // console.log(session);
 
   return (
     <main className={style.home}>

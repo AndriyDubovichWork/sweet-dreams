@@ -16,9 +16,11 @@
     "jsonwebtoken": "^9.0.2",
     "next": "13.5.6",
     "next-auth": "^4.24.3",
+    "pcloud-sdk-js": "^2.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.69.4"
+    "sass": "^1.69.4",
+    "zustand": "^4.4.4"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.4",
