@@ -3,19 +3,16 @@ import getFile from '@/app/drive/getFile';
 import saveFileToDrive from '@/app/drive/saveFileToDrive';
 
 export async function PUT(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const fileName = searchParams.get('fileName');
-  if (!fileName) {
+  const formData = await req.formData();
+  if (!formData) {
+    return NextResponse.json({ error: 'missing file' }, { status: 422 });
+  }
+  const savedFile = await saveFileToDrive(formData);
+  if (savedFile.status !== 200) {
     return NextResponse.json(
-      { error: 'missing fileName param' },
-      { status: 422 }
+      { error: 'couldnt upload file to drive' },
+      { status: 500 }
     );
   }
-  return NextResponse.json({ data: await saveFileToDrive(fileName) });
+  return NextResponse.json({ file: savedFile.data });
 }
-// export async function POST(req: Request) {
-//   return NextResponse.json({ data: await getFile() });
-// }
-// export async function PUT(req: Request) {
-//   return NextResponse.json({ data: await createLink(' ') });
-// }

@@ -1,19 +1,22 @@
 import { drive_v3 } from '@googleapis/drive';
 import Auth from './Auth';
-import fs from 'fs';
-import path from 'path';
+import { Readable } from 'stream';
 
-export default async function saveFileToDrive(name: string | null) {
-  const filepath = path.join(
-    __dirname,
-    `../../../../../src/app/files/${name}.mp3`
-  );
-
+export default async function saveFileToDrive(file: FormData) {
   const drive = (await Auth()) as drive_v3.Drive;
 
-  const sweetDreamsFolderID = '1ELrjadQU1A2PEHN4TfAO1QYPT2p5dNfK';
+  const blob = file.get('file') as Blob;
 
-  const file = await drive.files.create({
+  const buffer = Buffer.from(await blob.arrayBuffer());
+  const stream = new Readable();
+
+  stream.push(buffer);
+  stream.push(null);
+
+  const sweetDreamsFolderID = '1ELrjadQU1A2PEHN4TfAO1QYPT2p5dNfK';
+  const name = new Date().toLocaleDateString('en-GB');
+
+  const createdFile = await drive.files.create({
     requestBody: {
       name: `${name}.mp3`,
       mimeType: 'audio/mpeg',
@@ -21,9 +24,9 @@ export default async function saveFileToDrive(name: string | null) {
     },
     media: {
       mimeType: 'audio/mpeg',
-      body: fs.createReadStream(filepath),
+      body: stream,
     },
   });
 
-  return file;
+  return createdFile;
 }

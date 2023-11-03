@@ -18,8 +18,10 @@
     "next-auth": "^4.24.3",
     "pcloud-sdk-js": "^2.0.0",
     "react": "^18",
+    "react-audio-voice-recorder": "^2.2.0",
     "react-dom": "^18",
     "sass": "^1.69.4",
+    "streamifier": "^0.1.1",
     "zustand": "^4.4.4"
   },
   "devDependencies": {
@@ -27,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/streamifier": "^0.1.1",
     "autoprefixer": "^10",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",
