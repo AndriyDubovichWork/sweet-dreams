@@ -1,7 +1,7 @@
 'use client';
 
-import { postDream } from './api/requests';
-import UploadAudio from './components/uploadAudio';
+import AudiosList from './components/AudiosList/AudiosList';
+import UploadAudio from './components/UploadAudio/UploadAudio';
 import style from './home.module.scss';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
@@ -22,6 +22,7 @@ export default function Home() {
         <h1 onClick={() => signIn()}>login</h1>
       )}
       <UploadAudio />
+      <AudiosList />
     </main>
   );
 }

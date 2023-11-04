@@ -1,9 +1,9 @@
 import axios from 'axios';
+import { useStore } from '../store';
 export async function postDream(blob: Blob) {
   let formData = new FormData();
   let fileName = `hello.mp3`;
 
-  // let file = new File([blob], fileName, { type: blob.type });
   formData.append('file', blob, fileName);
 
   const res = await axios.put(`http://localhost:3000/api/dream`, formData, {
@@ -11,5 +11,18 @@ export async function postDream(blob: Blob) {
       'Content-Type': `multipart/form-data`,
     },
   });
+
   return res;
+}
+export async function getDreams() {
+  const res = await axios.get(`http://localhost:3000/api/dream`);
+  return res.data.res;
+}
+export async function deleteDream(fileId: string) {
+  const res = await axios.delete(`http://localhost:3000/api/dream`, {
+    params: {
+      fileId,
+    },
+  });
+  return res.data.res;
 }

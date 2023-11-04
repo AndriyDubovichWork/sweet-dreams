@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
-import getFile from '@/app/drive/getFile';
+import getFile from '@/app/drive/getFiles';
 import saveFileToDrive from '@/app/drive/saveFileToDrive';
+import getFiles from '@/app/drive/getFiles';
+import deleteFile from '@/app/drive/deleteFile';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -15,4 +17,32 @@ export async function PUT(req: Request) {
     );
   }
   return NextResponse.json({ file: savedFile.data });
+}
+export async function GET(req: Request) {
+  const recivedFiles = await getFiles();
+  if (recivedFiles.status !== 200) {
+    return NextResponse.json(
+      { error: 'couldnt load files from drive' },
+      { status: 500 }
+    );
+  }
+  return NextResponse.json({ res: recivedFiles.data });
+}
+export async function DELETE(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const fileId = searchParams.get('fileId');
+
+  if (!fileId) {
+    return NextResponse.json({ error: 'missing fileId' }, { status: 422 });
+  }
+
+  const deletedFile = await deleteFile(fileId);
+
+  if (deletedFile.status !== 204) {
+    return NextResponse.json(
+      { error: 'couldnt delete file from drive' },
+      { status: 500 }
+    );
+  }
+  return NextResponse.json({ res: deletedFile.data });
 }

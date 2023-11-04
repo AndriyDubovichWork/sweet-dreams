@@ -13,14 +13,13 @@ export default async function saveFileToDrive(file: FormData) {
   stream.push(buffer);
   stream.push(null);
 
-  const sweetDreamsFolderID = '1ELrjadQU1A2PEHN4TfAO1QYPT2p5dNfK';
   const name = new Date().toLocaleDateString('en-GB');
 
   const createdFile = await drive.files.create({
     requestBody: {
       name: `${name}.mp3`,
       mimeType: 'audio/mpeg',
-      parents: [sweetDreamsFolderID],
+      parents: [process.env.FOLDER_ID as string],
     },
     media: {
       mimeType: 'audio/mpeg',
