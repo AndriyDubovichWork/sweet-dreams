@@ -12,16 +12,18 @@ function UploadAudio() {
 
   return (
     <div>
-      <AudioRecorder onRecordingComplete={(blob) => setBlob(blob)} />
-      <input
-        type='file'
-        onChange={async (e) => {
-          const file = e.target.files?.[0];
-          if (file) {
-            setBlob(file);
-          }
-        }}
-      />
+      <div>
+        <AudioRecorder onRecordingComplete={(blob) => setBlob(blob)} />
+        <input
+          type='file'
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              setBlob(file);
+            }
+          }}
+        />
+      </div>
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Button
         disabled={!blob}

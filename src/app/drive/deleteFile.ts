@@ -7,5 +7,5 @@ export default async function deleteFile(id: string) {
   const driveFile = await drive.files.delete({
     fileId: id,
   });
-  return driveFile.data;
+  return driveFile;
 }

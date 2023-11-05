@@ -3,9 +3,10 @@
 import { deleteDream, getDreams } from '@/app/api/requests';
 import { useStore } from '@/app/store';
 import React, { useEffect } from 'react';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 function AudiosList() {
-  const { files, setFiles } = useStore();
+  const { files, setFiles, setApprove } = useStore();
 
   useEffect(() => {
     getDreams().then(({ files }) => {
@@ -17,17 +18,24 @@ function AudiosList() {
       {files.length &&
         files.map(({ name, size, id }) => {
           return (
-            <div
-              onClick={() => {
-                deleteDream(id).then(() => {
-                  getDreams().then(({ files }) => {
-                    setFiles(files);
-                  });
-                });
-              }}
-            >
+            <div key={id}>
               <p>{name}</p>
               <p>{size}</p>
+              <AiOutlineDelete
+                size={30}
+                onClick={() => {
+                  setApprove({
+                    approve: 'are you shure you want to delete',
+                    approveCallback: () => {
+                      deleteDream(id).then(() => {
+                        getDreams().then(({ files }) => {
+                          setFiles(files);
+                        });
+                      });
+                    },
+                  });
+                }}
+              />
             </div>
           );
         })}
