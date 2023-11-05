@@ -32,6 +32,8 @@ function UploadAudio() {
           getDreams().then(({ files }) => {
             setFiles(files);
           });
+          setBlob(null);
+          setName('');
         }}
       >
         save
