@@ -4,6 +4,7 @@ type File = {
   id: string;
   name: string;
   size: number;
+  webContentLink: string;
 };
 
 type BlobT = Blob | null;

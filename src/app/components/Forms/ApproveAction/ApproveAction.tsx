@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import style from './ApproveAction.module.scss';
-import Button from '../Button/Button';
+import Button from '../../Inputs/Button/Button';
 import { useStore } from '@/app/store';
 
 function ApproveAction({ children }: { children: ReactNode }) {

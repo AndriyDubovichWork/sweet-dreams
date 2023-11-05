@@ -16,9 +16,14 @@ function AudiosList() {
   return (
     <div>
       {files.length &&
-        files.map(({ name, size, id }) => {
+        files.map(({ name, size, id, webContentLink }) => {
           return (
             <div key={id}>
+              <audio
+                controls
+                src={webContentLink.replace('&export=download', '')}
+              />
+
               <p>{name}</p>
               <p>{size}</p>
               <AiOutlineDelete

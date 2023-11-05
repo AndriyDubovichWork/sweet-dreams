@@ -1,9 +1,9 @@
 'use client';
 
-import ApproveAction from './components/ApproveAction/ApproveAction';
-import AudiosList from './components/AudiosList/AudiosList';
-import Button from './components/Button/Button';
-import UploadAudio from './components/UploadAudio/UploadAudio';
+import ApproveAction from './components/Forms/ApproveAction/ApproveAction';
+import AudiosList from './components/Forms/AudiosList/AudiosList';
+import Button from './components/Inputs/Button/Button';
+import UploadAudio from './components/Forms/UploadAudio/UploadAudio';
 import style from './home.module.scss';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { AiOutlineUserAdd } from 'react-icons/ai';

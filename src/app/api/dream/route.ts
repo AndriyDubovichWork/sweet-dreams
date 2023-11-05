@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-import getFile from '@/app/drive/getFiles';
-import saveFileToDrive from '@/app/drive/saveFileToDrive';
-import getFiles from '@/app/drive/getFiles';
-import deleteFile from '@/app/drive/deleteFile';
+import saveFileToDrive from '@/app/api/dream/drive/saveFileToDrive';
+import getFiles from '@/app/api/dream/drive/getFiles';
+import deleteFile from '@/app/api/dream/drive/deleteFile';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -18,8 +17,9 @@ export async function PUT(req: Request) {
   }
   return NextResponse.json({ file: savedFile.data });
 }
-export async function GET(req: Request) {
+export async function GET() {
   const recivedFiles = await getFiles();
+
   if (recivedFiles.status !== 200) {
     return NextResponse.json(
       { error: 'couldnt load files from drive' },

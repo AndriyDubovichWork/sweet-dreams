@@ -16,6 +16,7 @@ export async function postDream(blob: Blob) {
 }
 export async function getDreams() {
   const res = await axios.get(`http://localhost:3000/api/dream`);
+
   return res.data.res;
 }
 export async function deleteDream(fileId: string) {

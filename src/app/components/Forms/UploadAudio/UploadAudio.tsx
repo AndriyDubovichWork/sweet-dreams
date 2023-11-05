@@ -2,10 +2,10 @@
 
 import React, { useEffect } from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
-import { getDreams, postDream } from '../../api/requests';
-import Input from '../Input/Input';
-import { useStore } from '../../store';
-import Button from '../Button/Button';
+import { getDreams, postDream } from '../../../api/requests';
+import Input from '../../Inputs/Input/Input';
+import { useStore } from '../../../store';
+import Button from '../../Inputs/Button/Button';
 
 function UploadAudio() {
   const { blob, setBlob, name, setName, setFiles } = useStore();

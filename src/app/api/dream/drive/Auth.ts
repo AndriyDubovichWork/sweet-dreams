@@ -1,6 +1,6 @@
 import { drive, auth } from '@googleapis/drive';
 
-const key = require('../../../pk.json');
+const key = require('../../../../../pk.json');
 
 export default async function Auth() {
   return new Promise((resolve, reject) => {
