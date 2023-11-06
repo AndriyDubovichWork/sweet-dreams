@@ -30,6 +30,9 @@ export type Store = {
     approve: Approve;
     approveCallback: () => void;
   }) => void;
+
+  date: string;
+  setDate: (date: string) => void;
 };
 
 export const useStore = create<Store>((set) => ({
@@ -46,4 +49,7 @@ export const useStore = create<Store>((set) => ({
   approveCallback: () => {},
   setApprove: ({ approve, approveCallback }) =>
     set((state) => ({ ...state, approve, approveCallback })),
+
+  date: new Date().toLocaleDateString(),
+  setDate: (date) => set((state) => ({ ...state, date })),
 }));

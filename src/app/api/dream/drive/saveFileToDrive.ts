@@ -4,8 +4,7 @@ import { Readable } from 'stream';
 
 export default async function saveFileToDrive(file: FormData) {
   const drive = (await Auth()) as drive_v3.Drive;
-
-  const blob = file.get('file') as Blob;
+  const blob = file.get('file') as File;
 
   const buffer = Buffer.from(await blob.arrayBuffer());
   const stream = new Readable();
@@ -13,11 +12,9 @@ export default async function saveFileToDrive(file: FormData) {
   stream.push(buffer);
   stream.push(null);
 
-  const name = new Date().toLocaleDateString('en-GB');
-
   const createdFile = await drive.files.create({
     requestBody: {
-      name: `${name}.mp3`,
+      name: blob.name,
       mimeType: 'audio/mpeg',
       parents: [process.env.FOLDER_ID as string],
     },

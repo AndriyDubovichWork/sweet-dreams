@@ -8,7 +8,7 @@ import { useStore } from '../../../store';
 import Button from '../../Inputs/Button/Button';
 
 function UploadAudio() {
-  const { blob, setBlob, name, setName, setFiles } = useStore();
+  const { blob, setBlob, name, setName, setFiles, date, setDate } = useStore();
 
   return (
     <div>
@@ -24,13 +24,19 @@ function UploadAudio() {
           }}
         />
       </div>
+      <Input
+        type='date'
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Button
         disabled={!blob}
         onClick={() => {
-          postDream(blob as Blob);
-          getDreams().then(({ files }) => {
-            setFiles(files);
+          postDream(blob as Blob, name ? `${name} ${date}` : date).then(() => {
+            getDreams().then(({ files }) => {
+              setFiles(files);
+            });
           });
           setBlob(null);
           setName('');

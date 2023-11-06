@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useStore } from '../store';
-export async function postDream(blob: Blob) {
+
+export async function postDream(blob: Blob, fileName: string) {
   let formData = new FormData();
-  let fileName = `hello.mp3`;
 
   formData.append('file', blob, fileName);
 
