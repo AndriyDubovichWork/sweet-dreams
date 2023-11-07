@@ -14,7 +14,7 @@ function UploadAudio() {
     <div>
       <div>
         <AudioRecorder onRecordingComplete={(blob) => setBlob(blob)} />
-        <input
+        <Input
           type='file'
           onChange={async (e) => {
             const file = e.target.files?.[0];
@@ -27,17 +27,21 @@ function UploadAudio() {
       <Input
         type='date'
         value={date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={(e) => {
+          setDate(e.target.value);
+        }}
       />
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Button
         disabled={!blob}
         onClick={() => {
-          postDream(blob as Blob, name ? `${name} ${date}` : date).then(() => {
-            getDreams().then(({ files }) => {
-              setFiles(files);
-            });
-          });
+          postDream(blob as Blob, `${name ? name + ' ' : ''}${date}`).then(
+            () => {
+              getDreams().then(({ files }) => {
+                setFiles(files);
+              });
+            }
+          );
           setBlob(null);
           setName('');
         }}

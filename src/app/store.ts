@@ -50,6 +50,6 @@ export const useStore = create<Store>((set) => ({
   setApprove: ({ approve, approveCallback }) =>
     set((state) => ({ ...state, approve, approveCallback })),
 
-  date: new Date().toLocaleDateString(),
+  date: new Date().toLocaleDateString('en-US'),
   setDate: (date) => set((state) => ({ ...state, date })),
 }));

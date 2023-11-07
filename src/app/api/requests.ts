@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { useStore } from '../store';
 
 export async function postDream(blob: Blob, fileName: string) {
   let formData = new FormData();
 
-  formData.append('file', blob, fileName);
+  formData.append(
+    'file',
+    blob,
+    fileName.replaceAll('/', 'tokenforslashwithoutitwillcutastring')
+  );
 
   const res = await axios.put(`http://localhost:3000/api/dream`, formData, {
     headers: {
