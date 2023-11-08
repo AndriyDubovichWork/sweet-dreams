@@ -13,12 +13,7 @@ export default function Home() {
 
   return (
     <main className={style.home}>
-      {session?.user?.email === 'andriydubovichwork@gmail.com' && (
-        <>
-          <UploadAudio />
-          <AudiosList />
-        </>
-      )}
+      {session?.user?.email === 'andriydubovichwork@gmail.com' && <></>}
     </main>
   );
 }

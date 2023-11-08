@@ -8,8 +8,6 @@ export async function PUT(req: Request) {
   if (!formData) {
     return NextResponse.json({ error: 'missing file' }, { status: 422 });
   }
-  console.log(formData);
-  console.log(formData.get('file'));
 
   const savedFile = await saveFileToDrive(formData);
   if (savedFile.status !== 200) {

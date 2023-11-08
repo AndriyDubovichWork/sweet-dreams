@@ -5,6 +5,7 @@ import { AiOutlineUserAdd } from 'react-icons/ai';
 import Button from '../components/Inputs/Button/Button';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import style from './Header.module.scss';
+import Link from 'next/link';
 
 export default function Header() {
   const { data: session } = useSession();
@@ -26,6 +27,8 @@ export default function Header() {
           <Button onClick={() => signIn()}>login</Button>
         </>
       )}
+      <Link href={'/dream/new'}>new</Link>
+      <Link href={'/dream/list'}>list</Link>
     </header>
   );
 }

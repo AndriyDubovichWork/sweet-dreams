@@ -15,35 +15,40 @@ function AudiosList() {
   }, []);
   return (
     <div>
-      {files.length &&
-        files.map(({ name, size, id, webContentLink }) => {
-          return (
-            <div key={id}>
-              <audio
-                controls
-                src={webContentLink.replace('&export=download', '')}
-              />
+      {files.length > 0 ? (
+        <>
+          {files.map(({ name, size, id, webContentLink }) => {
+            return (
+              <div key={id}>
+                <audio
+                  controls
+                  src={webContentLink.replace('&export=download', '')}
+                />
 
-              <p>{name}</p>
-              <p>{size}</p>
-              <AiOutlineDelete
-                size={30}
-                onClick={() => {
-                  setApprove({
-                    approve: 'are you shure you want to delete',
-                    approveCallback: () => {
-                      deleteDream(id).then(() => {
-                        getDreams().then(({ files }) => {
-                          setFiles(files);
+                <p>{name}</p>
+                <p>{size}</p>
+                <AiOutlineDelete
+                  size={30}
+                  onClick={() => {
+                    setApprove({
+                      approve: 'are you shure you want to delete',
+                      approveCallback: () => {
+                        deleteDream(id).then(() => {
+                          getDreams().then(({ files }) => {
+                            setFiles(files);
+                          });
                         });
-                      });
-                    },
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+                      },
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
+        </>
+      ) : (
+        <h1>empty</h1>
+      )}
     </div>
   );
 }
