@@ -9,7 +9,7 @@ import Button from '../../Inputs/Button/Button';
 
 function UploadAudio() {
   const { blob, setBlob, name, setName, setFiles, date, setDate } = useStore();
-
+  const fullName = `${name ? name + ' ' : ''}${date}`;
   return (
     <div>
       <div>
@@ -32,16 +32,15 @@ function UploadAudio() {
         }}
       />
       <Input value={name} onChange={(e) => setName(e.target.value)} />
+      <h3>preview: {fullName}</h3>
       <Button
         disabled={!blob}
         onClick={() => {
-          postDream(blob as Blob, `${name ? name + ' ' : ''}${date}`).then(
-            () => {
-              getDreams().then(({ files }) => {
-                setFiles(files);
-              });
-            }
-          );
+          postDream(blob as Blob, fullName).then(() => {
+            getDreams().then(({ files }) => {
+              setFiles(files);
+            });
+          });
           setBlob(null);
           setName('');
         }}

@@ -4,7 +4,7 @@ import { deleteDream, getDreams } from '@/app/api/requests';
 import { useStore } from '@/app/store';
 import React, { useEffect } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
-
+import style from './AudiosList.module.scss';
 function AudiosList() {
   const { files, setFiles, setApprove } = useStore();
 
@@ -28,6 +28,7 @@ function AudiosList() {
                 <p>{name}</p>
                 <p>{size}</p>
                 <AiOutlineDelete
+                  className={style.trashIcon}
                   size={30}
                   onClick={() => {
                     setApprove({
