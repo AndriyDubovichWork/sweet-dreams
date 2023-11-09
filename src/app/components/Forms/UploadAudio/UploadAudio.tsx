@@ -34,7 +34,9 @@ function UploadAudio() {
         }}
       />
       <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <h3>name preview: {fullName}</h3>
+      <h1>preview:</h1>
+      <h3>{fullName}</h3>
+      {blob && <audio controls src={URL.createObjectURL(blob as Blob)} />}
       <Button
         disabled={!blob}
         onClick={() => {
