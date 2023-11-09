@@ -9,7 +9,9 @@ import Button from '../../Inputs/Button/Button';
 
 function UploadAudio() {
   const { blob, setBlob, name, setName, setFiles, date, setDate } = useStore();
-  const fullName = `${name ? name + ' ' : ''}${date}`;
+  const fullName = `${name ? name + ' ' : ''}${new Date(
+    date
+  ).toLocaleDateString('en-US')}`;
   return (
     <div>
       <div>
@@ -32,7 +34,7 @@ function UploadAudio() {
         }}
       />
       <Input value={name} onChange={(e) => setName(e.target.value)} />
-      <h3>preview: {fullName}</h3>
+      <h3>name preview: {fullName}</h3>
       <Button
         disabled={!blob}
         onClick={() => {

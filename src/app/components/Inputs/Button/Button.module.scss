@@ -4,3 +4,7 @@
   padding: 1rem;
   border-radius: 12px;
 }
+.button:disabled {
+  background-color: #4d4d4d;
+  color: #fff;
+}

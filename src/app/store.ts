@@ -5,6 +5,7 @@ type File = {
   name: string;
   size: number;
   webContentLink: string;
+  deleting?: boolean;
 };
 
 type BlobT = Blob | null;
