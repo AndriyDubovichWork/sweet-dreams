@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type File = {
+export type File = {
   id: string;
   name: string;
   size: number;

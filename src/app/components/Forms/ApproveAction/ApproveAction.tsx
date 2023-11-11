@@ -9,7 +9,7 @@ function ApproveAction({ children }: { children: ReactNode }) {
     <>
       {approve && (
         <div className={style.approveAction}>
-          {approve}
+          <p>{approve}</p>
           <Button
             onClick={() => {
               approveCallback();

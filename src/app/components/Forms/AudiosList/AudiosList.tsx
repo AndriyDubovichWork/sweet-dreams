@@ -6,9 +6,10 @@ import React, { useEffect } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import style from './AudiosList.module.scss';
 import { filesize } from 'filesize';
+import Audio from './Audio/Audio';
 
 function AudiosList() {
-  const { files, setFiles, setApprove } = useStore();
+  const { files, setFiles } = useStore();
 
   useEffect(() => {
     getDreams().then(({ files }) => {
@@ -19,41 +20,8 @@ function AudiosList() {
     <div>
       {files.length > 0 ? (
         <>
-          {files.map(({ name, size, id, webContentLink, deleting }, idx) => {
-            return (
-              <div key={id}>
-                <audio controls src={webContentLink} />
-
-                <p>{name}</p>
-                <p>{filesize(size)}</p>
-                <AiOutlineDelete
-                  className={style.trashIcon}
-                  size={30}
-                  onClick={() => {
-                    if (deleting) {
-                      return;
-                    }
-                    setApprove({
-                      approve: 'are you shure you want to delete',
-                      approveCallback: () => {
-                        deleteDream(id).then(() => {
-                          getDreams().then(({ files }) => {
-                            setFiles(files);
-                          });
-                        });
-                        setFiles([
-                          ...files.map((file, localIdx) =>
-                            localIdx === idx
-                              ? { ...file, deleting: true }
-                              : file
-                          ),
-                        ]);
-                      },
-                    });
-                  }}
-                />
-              </div>
-            );
+          {files.map((file, id) => {
+            return <Audio file={file} id={id} key={file.id} />;
           })}
         </>
       ) : (
