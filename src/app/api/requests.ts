@@ -30,3 +30,12 @@ export async function deleteDream(fileId: string) {
   });
   return res.data.res;
 }
+export async function renameDream(fileId: string, newName: string) {
+  const res = await axios.patch(`http://localhost:3000/api/dream`, null, {
+    params: {
+      fileId,
+      newName,
+    },
+  });
+  return res.data.res;
+}

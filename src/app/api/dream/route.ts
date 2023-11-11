@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import saveFileToDrive from '@/app/api/dream/drive/saveFileToDrive';
 import getFiles from '@/app/api/dream/drive/getFiles';
 import deleteFile from '@/app/api/dream/drive/deleteFile';
+import renameFile from './drive/renameFile';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -46,4 +47,19 @@ export async function DELETE(req: Request) {
     );
   }
   return NextResponse.json({ res: deletedFile.data });
+}
+export async function PATCH(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const fileId = searchParams.get('fileId');
+  const newName = searchParams.get('newName');
+
+  if (!fileId || !newName) {
+    return NextResponse.json(
+      { error: 'missing required params' },
+      { status: 422 }
+    );
+  }
+  const renamedFile = await renameFile(fileId, newName);
+
+  return NextResponse.json({ res: renamedFile.data });
 }
