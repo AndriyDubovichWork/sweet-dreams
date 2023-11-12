@@ -9,21 +9,23 @@ import addDelitingProperty from '@/app/lib/addDelitingProperty';
 import Processing from '../../Processing/Processing';
 import Input from '@/app/components/Inputs/Input/Input';
 
-function Audio({ file, id }: { file: File; id: number }) {
+function Audio({
+  file,
+  id,
+  edit,
+}: {
+  file: File;
+  id: number;
+  edit: () => void;
+}) {
   const { name, size, id: fileId, webContentLink, deleting } = file;
   const { files, setFiles, setApprove } = useStore();
-  const [localName, setLocalName] = useState(name);
 
   return (
     <Processing isProcessing={file.deleting}>
       <>
         <audio controls src={webContentLink} />
-
-        <Input
-          value={localName}
-          onChange={(e) => setLocalName(e.target.value)}
-        />
-        <Button onClick={() => renameDream(fileId, localName)}>rename</Button>
+        {name}
         <p>{filesize(size)}</p>
         <Button
           disabled={deleting}
@@ -43,6 +45,7 @@ function Audio({ file, id }: { file: File; id: number }) {
         >
           <AiOutlineDelete className={style.trashIcon} size={30} />
         </Button>
+        <Button onClick={edit}>edit</Button>
       </>
     </Processing>
   );
