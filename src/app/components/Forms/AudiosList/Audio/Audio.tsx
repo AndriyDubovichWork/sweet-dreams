@@ -1,4 +1,3 @@
-import { File, useStore } from '@/app/store';
 import { filesize } from 'filesize';
 import React, { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -8,12 +7,40 @@ import Button from '@/app/components/Inputs/Button/Button';
 import Processing from '../../Processing/Processing';
 import Input from '@/app/components/Inputs/Input/Input';
 import addProcessingProperty from '@/app/lib/addProcessingProperty';
+import { File, useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
+import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, size, id: fileId, webContentLink, processing } = file;
-  const { files, setFiles, setApprove } = useStore();
+  const { setApprove } = useApproveAcrtionStore();
+
+  const { files, setFiles } = useSavedDreamsStore();
+
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
+
+  const renameFile = () => {
+    setFiles(addProcessingProperty(files, id, true));
+    renameDream(fileId, localName).then(() => {
+      setEditable(!editable);
+      getDreams().then(({ files }) => {
+        setFiles(files);
+        setFiles(addProcessingProperty(files, id, false));
+      });
+    });
+  };
+  const deleteFile = () =>
+    setApprove({
+      approve: 'are you shure you want to delete ' + name,
+      approveCallback: () => {
+        deleteDream(fileId).then(() => {
+          getDreams().then(({ files }) => {
+            setFiles(files);
+          });
+        });
+        setFiles(addProcessingProperty(files, id, true));
+      },
+    });
 
   return (
     <Processing isProcessing={file.processing}>
@@ -26,19 +53,7 @@ function Audio({ file, id }: { file: File; id: number }) {
               onChange={(e) => setLocalName(e.target.value)}
             />
             <p>{filesize(size)}</p>
-            <Button
-              disabled={processing}
-              onClick={() => {
-                setFiles(addProcessingProperty(files, id, true));
-                renameDream(fileId, localName).then(() => {
-                  setEditable(!editable);
-                  getDreams().then(({ files }) => {
-                    setFiles(files);
-                    setFiles(addProcessingProperty(files, id, false));
-                  });
-                });
-              }}
-            >
+            <Button disabled={processing} onClick={renameFile}>
               rename
             </Button>
           </>
@@ -46,25 +61,15 @@ function Audio({ file, id }: { file: File; id: number }) {
           <>
             {name}
             <p>{filesize(size)}</p>
-            <Button onClick={() => setEditable(!editable)}>edit</Button>
+            <Button
+              disabled={processing}
+              onClick={() => setEditable(!editable)}
+            >
+              edit
+            </Button>
           </>
         )}
-        <Button
-          disabled={processing}
-          onClick={() =>
-            setApprove({
-              approve: 'are you shure you want to delete ' + name,
-              approveCallback: () => {
-                deleteDream(fileId).then(() => {
-                  getDreams().then(({ files }) => {
-                    setFiles(files);
-                  });
-                });
-                setFiles(addProcessingProperty(files, id, true));
-              },
-            })
-          }
-        >
+        <Button disabled={processing} onClick={deleteFile}>
           <AiOutlineDelete className={style.trashIcon} size={30} />
         </Button>
       </>

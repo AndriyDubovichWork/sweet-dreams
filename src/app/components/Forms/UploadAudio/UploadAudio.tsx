@@ -4,14 +4,17 @@ import React, { useEffect } from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import { getDreams, postDream } from '../../../api/requests';
 import Input from '../../Inputs/Input/Input';
-import { useStore } from '../../../store';
+
 import Button from '../../Inputs/Button/Button';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../../Inputs/RecordAudio/RecordAudio';
 import createFullName from '@/app/lib/createFullName';
+import { useNewDreamStore } from '@/app/store/useNewDreamStore';
+import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 
 function UploadAudio() {
-  const { blob, setBlob, name, setName, setFiles, date, setDate } = useStore();
+  const { blob, setBlob, name, setName, date, setDate } = useNewDreamStore();
+  const { setFiles } = useSavedDreamsStore();
 
   return (
     <div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import Input from '../Input/Input';
-import { useStore } from '@/app/store';
+import { useNewDreamStore } from '@/app/store/useNewDreamStore';
 
 function RecordAudio() {
-  const { setBlob } = useStore();
+  const { setBlob } = useNewDreamStore();
   return (
     <div>
       <AudioRecorder onRecordingComplete={(blob) => setBlob(blob)} />

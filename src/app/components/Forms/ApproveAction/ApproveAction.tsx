@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react';
 import style from './ApproveAction.module.scss';
 import Button from '../../Inputs/Button/Button';
-import { useStore } from '@/app/store';
+
+import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 
 function ApproveAction({ children }: { children: ReactNode }) {
-  const { approve, setApprove, approveCallback } = useStore();
+  const { approve, setApprove, approveCallback } = useApproveAcrtionStore();
   return (
     <>
       {approve && (

@@ -1,13 +1,13 @@
 'use client';
 
 import { getDreams } from '@/app/api/requests';
-import { useStore } from '@/app/store';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import style from './AudiosList.module.scss';
 import Audio from './Audio/Audio';
+import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 
 function AudiosList() {
-  const { files, setFiles } = useStore();
+  const { files, setFiles } = useSavedDreamsStore();
 
   useEffect(() => {
     getDreams().then(({ files }) => {

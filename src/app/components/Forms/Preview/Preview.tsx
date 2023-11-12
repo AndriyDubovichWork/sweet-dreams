@@ -1,10 +1,9 @@
 import createFullName from '@/app/lib/createFullName';
-import { useStore } from '@/app/store';
+import { useNewDreamStore } from '@/app/store/useNewDreamStore';
 import React from 'react';
 
 export default function Preview() {
-  const { blob, name, date } = useStore();
-
+  const { blob, date, name } = useNewDreamStore();
   return (
     <>
       <h1>preview:</h1>
