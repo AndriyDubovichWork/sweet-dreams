@@ -14,7 +14,8 @@ import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 
 function UploadAudio() {
   const { blob, setBlob, name, setName, date, setDate } = useNewDreamStore();
-  const { setFiles, sortBy, sortById } = useSavedDreamsStore();
+  const { setFiles, sortBy, sortById, isSortByReversed } =
+    useSavedDreamsStore();
 
   return (
     <div>
@@ -30,9 +31,11 @@ function UploadAudio() {
         disabled={!blob}
         onClick={() => {
           postDream(blob as Blob, createFullName(name, date)).then(() => {
-            getDreams(sortBy[sortById].value).then(({ files }) => {
-              setFiles(files);
-            });
+            getDreams(sortBy[sortById].value, isSortByReversed).then(
+              ({ files }) => {
+                setFiles(files);
+              }
+            );
           });
           setBlob(null);
           setName('');

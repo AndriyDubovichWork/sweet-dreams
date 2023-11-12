@@ -18,10 +18,13 @@ export async function postDream(blob: Blob, fileName: string) {
 
   return res;
 }
-export async function getDreams(sortBy: OrderByValues) {
+export async function getDreams(
+  sortBy: OrderByValues,
+  isSortByReversed: boolean
+) {
   const res = await axios.get(`http://localhost:3000/api/dream`, {
     params: {
-      sortBy,
+      sortBy: isSortByReversed ? sortBy + ' desc' : sortBy,
     },
   });
 

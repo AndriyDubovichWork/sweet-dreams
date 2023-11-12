@@ -14,7 +14,8 @@ function Audio({ file, id }: { file: File; id: number }) {
   const { name, size, id: fileId, webContentLink, processing } = file;
   const { setApprove } = useApproveAcrtionStore();
 
-  const { files, setFiles, sortBy, sortById } = useSavedDreamsStore();
+  const { files, setFiles, sortBy, sortById, isSortByReversed } =
+    useSavedDreamsStore();
 
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
@@ -23,7 +24,7 @@ function Audio({ file, id }: { file: File; id: number }) {
     setFiles(addProcessingProperty(files, id, true));
     renameDream(fileId, localName).then(() => {
       setEditable(!editable);
-      getDreams(sortBy[sortById].value).then(({ files }) => {
+      getDreams(sortBy[sortById].value, isSortByReversed).then(({ files }) => {
         setFiles(files);
         setFiles(addProcessingProperty(files, id, false));
       });
@@ -34,9 +35,11 @@ function Audio({ file, id }: { file: File; id: number }) {
       approve: 'are you shure you want to delete ' + name,
       approveCallback: () => {
         deleteDream(fileId).then(() => {
-          getDreams(sortBy[sortById].value).then(({ files }) => {
-            setFiles(files);
-          });
+          getDreams(sortBy[sortById].value, isSortByReversed).then(
+            ({ files }) => {
+              setFiles(files);
+            }
+          );
         });
         setFiles(addProcessingProperty(files, id, true));
       },

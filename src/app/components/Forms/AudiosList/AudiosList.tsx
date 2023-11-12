@@ -5,16 +5,19 @@ import React, { useEffect } from 'react';
 import style from './AudiosList.module.scss';
 import Audio from './Audio/Audio';
 import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
+import SortBy from '../../Inputs/SortBy/SortBy';
 
 function AudiosList() {
-  const { files, setFiles, sortBy, sortById } = useSavedDreamsStore();
+  const { files, setFiles, sortBy, sortById, isSortByReversed } =
+    useSavedDreamsStore();
   useEffect(() => {
-    getDreams(sortBy[sortById].value).then(({ files }) => {
+    getDreams(sortBy[sortById].value, isSortByReversed).then(({ files }) => {
       setFiles(files);
     });
   }, []);
   return (
     <div>
+      <SortBy />
       {files.length > 0 ? (
         <>
           {files.map((file, id) => {

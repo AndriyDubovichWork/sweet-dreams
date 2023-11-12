@@ -21,9 +21,10 @@ export type SavedDreamsStore = {
 
   sortBy: SortBy[];
   sortById: number;
-  isSortByReversed: boolean;
-
   setSortById: (sortById: number) => void;
+
+  isSortByReversed: boolean;
+  setIsSortByReversed: (isSortByReversed: boolean) => void;
 };
 const sortBy: SortBy[] = [
   {
@@ -47,12 +48,20 @@ export const useSavedDreamsStore = create<SavedDreamsStore>((set) => ({
       ...state,
       files,
     })),
+
   sortBy,
+
   sortById: 0,
-  isSortByReversed: false,
   setSortById: (sortById) =>
     set((state) => ({
       ...state,
       sortById,
+    })),
+
+  isSortByReversed: false,
+  setIsSortByReversed: (isSortByReversed) =>
+    set((state) => ({
+      ...state,
+      isSortByReversed,
     })),
 }));
