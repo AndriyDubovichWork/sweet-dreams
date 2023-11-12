@@ -5,10 +5,9 @@ import { useStore } from '@/app/store';
 import React, { useEffect, useState } from 'react';
 import style from './AudiosList.module.scss';
 import Audio from './Audio/Audio';
-import EditableAudio from './EditableAudio/EditableAudio';
 
 function AudiosList() {
-  const { files, setFiles, setEditable } = useStore();
+  const { files, setFiles } = useStore();
 
   useEffect(() => {
     getDreams().then(({ files }) => {
@@ -20,24 +19,7 @@ function AudiosList() {
       {files.length > 0 ? (
         <>
           {files.map((file, id) => {
-            if (file.editable) {
-              return (
-                <EditableAudio
-                  file={file}
-                  key={file.id}
-                  close={() => setEditable(id, false, files)}
-                />
-              );
-            } else {
-              return (
-                <Audio
-                  file={file}
-                  id={id}
-                  key={file.id}
-                  edit={() => setEditable(id, true, files)}
-                />
-              );
-            }
+            return <Audio file={file} id={id} key={file.id} />;
           })}
         </>
       ) : (

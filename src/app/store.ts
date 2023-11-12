@@ -5,8 +5,7 @@ export type File = {
   name: string;
   size: number;
   webContentLink: string;
-  deleting?: boolean;
-  editable: boolean;
+  processing?: boolean;
 };
 
 type BlobT = Blob | null;
@@ -22,7 +21,6 @@ export type Store = {
 
   files: File[];
   setFiles: (files: File[]) => void;
-  setEditable: (id: number, isEditable: boolean, files: File[]) => void;
 
   approve: Approve;
   approveCallback: () => void;
@@ -47,23 +45,10 @@ export const useStore = create<Store>((set) => ({
 
   files: [],
   setFiles: (files) =>
-    set((state) => {
-      return {
-        ...state,
-        files: files.map((file) => {
-          return { ...file, editable: false };
-        }),
-      };
-    }),
-  setEditable: (id, isEditable, files) =>
-    set((state) => {
-      return {
-        ...state,
-        files: files.map((file, idx) => {
-          return { ...file, editable: idx === id ? isEditable : file.editable };
-        }),
-      };
-    }),
+    set((state) => ({
+      ...state,
+      files,
+    })),
 
   approve: null,
   approveCallback: () => {},
