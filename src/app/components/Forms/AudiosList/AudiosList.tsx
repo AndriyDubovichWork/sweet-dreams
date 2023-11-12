@@ -7,10 +7,9 @@ import Audio from './Audio/Audio';
 import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 
 function AudiosList() {
-  const { files, setFiles } = useSavedDreamsStore();
-
+  const { files, setFiles, sortBy, sortById } = useSavedDreamsStore();
   useEffect(() => {
-    getDreams().then(({ files }) => {
+    getDreams(sortBy[sortById].value).then(({ files }) => {
       setFiles(files);
     });
   }, []);

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { OrderByValues } from '../store/useSavedDreamsStore';
 
 export async function postDream(blob: Blob, fileName: string) {
   let formData = new FormData();
@@ -17,8 +18,12 @@ export async function postDream(blob: Blob, fileName: string) {
 
   return res;
 }
-export async function getDreams() {
-  const res = await axios.get(`http://localhost:3000/api/dream`);
+export async function getDreams(sortBy: OrderByValues) {
+  const res = await axios.get(`http://localhost:3000/api/dream`, {
+    params: {
+      sortBy,
+    },
+  });
 
   return res.data.res;
 }

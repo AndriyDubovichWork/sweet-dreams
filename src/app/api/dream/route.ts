@@ -3,6 +3,7 @@ import saveFileToDrive from '@/app/api/dream/drive/saveFileToDrive';
 import getFiles from '@/app/api/dream/drive/getFiles';
 import deleteFile from '@/app/api/dream/drive/deleteFile';
 import renameFile from './drive/renameFile';
+import { OrderByValues } from '@/app/store/useSavedDreamsStore';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -19,8 +20,12 @@ export async function PUT(req: Request) {
   }
   return NextResponse.json({ file: savedFile.data });
 }
-export async function GET() {
-  const recivedFiles = await getFiles();
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const sortBy = searchParams.get('sortBy');
+  if (!sortBy)
+    return NextResponse.json({ error: 'missing sortBy' }, { status: 422 });
+  const recivedFiles = await getFiles(sortBy as OrderByValues);
 
   if (recivedFiles.status !== 200) {
     return NextResponse.json(
@@ -34,9 +39,8 @@ export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
   const fileId = searchParams.get('fileId');
 
-  if (!fileId) {
+  if (!fileId)
     return NextResponse.json({ error: 'missing fileId' }, { status: 422 });
-  }
 
   const deletedFile = await deleteFile(fileId);
 
