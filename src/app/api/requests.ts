@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { OrderByValues } from '../store/useSavedDreamsStore';
+import createFullSortBy from '../lib/createFullSortBy';
 
 export async function postDream(blob: Blob, fileName: string) {
   let formData = new FormData();
@@ -20,11 +21,13 @@ export async function postDream(blob: Blob, fileName: string) {
 }
 export async function getDreams(
   sortBy: OrderByValues,
-  isSortByReversed: boolean
+  isSortByReversed: boolean,
+  name?: string
 ) {
   const res = await axios.get(`http://localhost:3000/api/dream`, {
     params: {
-      sortBy: isSortByReversed ? sortBy + ' desc' : sortBy,
+      sortBy: createFullSortBy(sortBy, isSortByReversed),
+      name,
     },
   });
 

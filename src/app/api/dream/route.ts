@@ -4,6 +4,7 @@ import getFiles from '@/app/api/dream/drive/getFiles';
 import deleteFile from '@/app/api/dream/drive/deleteFile';
 import renameFile from './drive/renameFile';
 import { OrderByValues } from '@/app/store/useSavedDreamsStore';
+import searchFileByName from './drive/searchFileByName';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -22,10 +23,19 @@ export async function PUT(req: Request) {
 }
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
+
   const sortBy = searchParams.get('sortBy');
+  const name = searchParams.get('name');
+
   if (!sortBy)
     return NextResponse.json({ error: 'missing sortBy' }, { status: 422 });
-  const recivedFiles = await getFiles(sortBy as OrderByValues);
+
+  let recivedFiles;
+  if (name) {
+    recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
+  } else {
+    recivedFiles = await getFiles(sortBy as OrderByValues);
+  }
 
   if (recivedFiles.status !== 200) {
     return NextResponse.json(

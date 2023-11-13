@@ -20,6 +20,6 @@ export const useNewDreamStore = create<NewDreamStore>((set) => ({
   name: '',
   setName: (name) => set((state) => ({ ...state, name })),
 
-  date: new Date().toLocaleDateString('en-GB'),
+  date: new Date().toLocaleDateString('en-US'),
   setDate: (date) => set((state) => ({ ...state, date })),
 }));

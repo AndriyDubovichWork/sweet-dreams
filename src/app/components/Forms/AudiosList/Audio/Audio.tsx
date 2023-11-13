@@ -9,6 +9,7 @@ import Input from '@/app/components/Inputs/Input/Input';
 import addProcessingProperty from '@/app/lib/addProcessingProperty';
 import { File, useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
+import { useSearchStore } from '@/app/store/useSearchStore';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, size, id: fileId, webContentLink, processing } = file;
@@ -17,6 +18,8 @@ function Audio({ file, id }: { file: File; id: number }) {
   const { files, setFiles, sortBy, sortById, isSortByReversed } =
     useSavedDreamsStore();
 
+  const { search } = useSearchStore();
+
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
 
@@ -24,10 +27,12 @@ function Audio({ file, id }: { file: File; id: number }) {
     setFiles(addProcessingProperty(files, id, true));
     renameDream(fileId, localName).then(() => {
       setEditable(!editable);
-      getDreams(sortBy[sortById].value, isSortByReversed).then(({ files }) => {
-        setFiles(files);
-        setFiles(addProcessingProperty(files, id, false));
-      });
+      getDreams(sortBy[sortById].value, isSortByReversed, search).then(
+        ({ files }) => {
+          setFiles(files);
+          setFiles(addProcessingProperty(files, id, false));
+        }
+      );
     });
   };
   const deleteFile = () =>
@@ -35,7 +40,7 @@ function Audio({ file, id }: { file: File; id: number }) {
       approve: 'are you shure you want to delete ' + name,
       approveCallback: () => {
         deleteDream(fileId).then(() => {
-          getDreams(sortBy[sortById].value, isSortByReversed).then(
+          getDreams(sortBy[sortById].value, isSortByReversed, search).then(
             ({ files }) => {
               setFiles(files);
             }
