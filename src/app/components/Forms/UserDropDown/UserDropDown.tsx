@@ -19,7 +19,6 @@ export default function UserDropDown() {
           <Button onClick={() => signOut()}>log out</Button>
         </>
       );
-      break;
     case 'unauthenticated':
       return (
         <>
@@ -27,13 +26,10 @@ export default function UserDropDown() {
           <Button onClick={() => signIn()}>login</Button>
         </>
       );
-      break;
 
     case 'loading':
       return (
         <AiOutlineLoading className={`${style.loading} ${style.userImg}`} />
       );
-
-      break;
   }
 }
