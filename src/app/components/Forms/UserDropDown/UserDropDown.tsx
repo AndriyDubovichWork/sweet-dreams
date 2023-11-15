@@ -4,6 +4,7 @@ import style from './UserDropDown.module.scss';
 import Button from '../../Inputs/Button/Button';
 import { FaUser } from 'react-icons/fa';
 import { AiOutlineLoading } from 'react-icons/ai';
+import Spinner from '../../OutPuts/Spinner/Spinner';
 
 export default function UserDropDown() {
   const { data: session, status } = useSession();
@@ -28,8 +29,6 @@ export default function UserDropDown() {
       );
 
     case 'loading':
-      return (
-        <AiOutlineLoading className={`${style.loading} ${style.userImg}`} />
-      );
+      return <Spinner className={style.userImg} />;
   }
 }
