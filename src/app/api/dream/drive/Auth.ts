@@ -1,8 +1,8 @@
 import { drive, auth } from '@googleapis/drive';
 
-const key = require('../../../../../pk.json');
-
 export default async function Auth() {
+  const key = JSON.parse(process.env.PK_STRING as string);
+
   return new Promise((resolve, reject) => {
     const jwtClient = new auth.JWT({
       keyFile: key,
