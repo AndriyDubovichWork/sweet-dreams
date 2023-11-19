@@ -13,11 +13,11 @@ function AudiosList() {
     useSavedDreamsStore();
   const { search } = useSearchStore();
   useEffect(() => {
-    getDreams(sortBy[sortById].value, isSortByReversed, search).then(
-      ({ files }) => {
+    getDreams(sortBy[sortById].value, isSortByReversed, search)
+      .then(({ files }) => {
         setFiles(files);
-      }
-    );
+      })
+      .catch(() => {});
   }, []);
   return (
     <div>
@@ -30,7 +30,7 @@ function AudiosList() {
           })}
         </>
       ) : (
-        <h1>empty</h1>
+        <h1>loading</h1>
       )}
     </div>
   );

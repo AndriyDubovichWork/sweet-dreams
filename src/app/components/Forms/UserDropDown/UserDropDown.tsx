@@ -2,8 +2,6 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import style from './UserDropDown.module.scss';
 import Button from '../../Inputs/Button/Button';
-import { FaUser } from 'react-icons/fa';
-import { AiOutlineLoading } from 'react-icons/ai';
 import Spinner from '../../OutPuts/Spinner/Spinner';
 import DropDown from '../../OutPuts/DropDown/DropDown';
 

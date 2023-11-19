@@ -24,7 +24,7 @@ export async function getDreams(
   isSortByReversed: boolean,
   name?: string
 ) {
-  const res = await axios.get(`/api/dream`, {
+  const res: any = await axios.get(`/api/dream`, {
     params: {
       sortBy: createFullSortBy(sortBy, isSortByReversed),
       name,
