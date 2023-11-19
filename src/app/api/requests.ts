@@ -11,7 +11,7 @@ export async function postDream(blob: Blob, fileName: string) {
     fileName.replaceAll('/', 'tokenforslashwithoutitwillcutastring')
   );
 
-  const res = await axios.put(`http://localhost:3000/api/dream`, formData, {
+  const res = await axios.put(`/api/dream`, formData, {
     headers: {
       'Content-Type': `multipart/form-data`,
     },
@@ -24,7 +24,7 @@ export async function getDreams(
   isSortByReversed: boolean,
   name?: string
 ) {
-  const res = await axios.get(`http://localhost:3000/api/dream`, {
+  const res = await axios.get(`/api/dream`, {
     params: {
       sortBy: createFullSortBy(sortBy, isSortByReversed),
       name,
@@ -34,7 +34,7 @@ export async function getDreams(
   return res.data.res;
 }
 export async function deleteDream(fileId: string) {
-  const res = await axios.delete(`http://localhost:3000/api/dream`, {
+  const res = await axios.delete(`/api/dream`, {
     params: {
       fileId,
     },
@@ -42,7 +42,7 @@ export async function deleteDream(fileId: string) {
   return res.data.res;
 }
 export async function renameDream(fileId: string, newName: string) {
-  const res = await axios.patch(`http://localhost:3000/api/dream`, null, {
+  const res = await axios.patch(`/api/dream`, null, {
     params: {
       fileId,
       newName,

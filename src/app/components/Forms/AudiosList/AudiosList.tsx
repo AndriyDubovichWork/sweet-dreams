@@ -2,7 +2,6 @@
 
 import { getDreams } from '@/app/api/requests';
 import React, { useEffect } from 'react';
-import style from './AudiosList.module.scss';
 import Audio from './Audio/Audio';
 import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import SortBy from '../../Inputs/SortBy/SortBy';
