@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { AudioRecorder } from 'react-audio-voice-recorder';
-import { getDreams, postDream } from '../../../api/requests';
+import React from 'react';
+
+import { postDream } from '../../../api/requests';
 import Input from '../../Inputs/Input/Input';
 
 import Button from '../../Inputs/Button/Button';
@@ -12,12 +12,13 @@ import createFullName from '@/app/lib/createFullName';
 import { useNewDreamStore } from '@/app/store/useNewDreamStore';
 import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import { useSearchStore } from '@/app/store/useSearchStore';
+import useUpdateDreams from '@/app/hooks/useUpdateDreams';
 
 function UploadAudio() {
   const { blob, setBlob, name, setName, date, setDate } = useNewDreamStore();
-  const { setFiles, sortBy, sortById, isSortByReversed } =
-    useSavedDreamsStore();
+
   const { search } = useSearchStore();
+  const updateDreams = useUpdateDreams();
 
   return (
     <div>
@@ -32,15 +33,9 @@ function UploadAudio() {
       <Button
         disabled={!blob}
         onClick={() => {
-          postDream(blob as Blob, createFullName(name, date)).then(() => {
-            getDreams(sortBy[sortById].value, isSortByReversed, search).then(
-              ({ files }) => {
-                setFiles(files);
-              }
-            );
-          });
-          setBlob(null);
-          setName('');
+          postDream(blob as Blob, createFullName(name, date)).then(
+            updateDreams
+          );
         }}
       >
         save

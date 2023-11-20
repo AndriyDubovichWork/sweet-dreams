@@ -1,39 +1,32 @@
 'use client';
 
-import { getDreams } from '@/app/api/requests';
 import React, { useEffect } from 'react';
 import Audio from './Audio/Audio';
 import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
-import SortBy from '../../Inputs/SortBy/SortBy';
 import SearchDream from '../SearchDream/SearchDream';
-import { useSearchStore } from '@/app/store/useSearchStore';
+import Spinner from '../../OutPuts/Spinner/Spinner';
+import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
+import useUpdateDreams from '@/app/hooks/useUpdateDreams';
 
 function AudiosList() {
-  const { files, setFiles, sortBy, sortById, isSortByReversed } =
-    useSavedDreamsStore();
-  const { search } = useSearchStore();
+  const { files } = useSavedDreamsStore();
+  const { status, setStatus } = useLoadingStateStore();
+  const updateDream = useUpdateDreams();
   useEffect(() => {
-    getDreams(sortBy[sortById].value, isSortByReversed, search)
-      .then(({ files }) => {
-        setFiles(files);
-      })
-      .catch(() => {});
+    updateDream();
   }, []);
-  return (
-    <div>
-      <SearchDream />
-      <SortBy />
-      {files.length > 0 ? (
+  switch (status) {
+    case 'pending':
+      return <Spinner size={90} />;
+    case 'fullfiled':
+      return (
         <>
           {files.map((file, id) => {
             return <Audio file={file} id={id} key={file.id} />;
           })}
         </>
-      ) : (
-        <h1>loading</h1>
-      )}
-    </div>
-  );
+      );
+  }
 }
 
 export default AudiosList;

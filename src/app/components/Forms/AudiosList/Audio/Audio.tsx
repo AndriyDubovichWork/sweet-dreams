@@ -2,7 +2,7 @@ import { filesize } from 'filesize';
 import React, { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import style from './Audio.module.scss';
-import { deleteDream, getDreams, renameDream } from '@/app/api/requests';
+import { deleteDream, renameDream } from '@/app/api/requests';
 import Button from '@/app/components/Inputs/Button/Button';
 import Processing from '../../Processing/Processing';
 import Input from '@/app/components/Inputs/Input/Input';
@@ -10,29 +10,25 @@ import addProcessingProperty from '@/app/lib/addProcessingProperty';
 import { File, useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 import { useSearchStore } from '@/app/store/useSearchStore';
+import useUpdateDreams from '@/app/hooks/useUpdateDreams';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, size, id: fileId, webContentLink, processing } = file;
   const { setApprove } = useApproveAcrtionStore();
 
-  const { files, setFiles, sortBy, sortById, isSortByReversed } =
-    useSavedDreamsStore();
-
-  const { search } = useSearchStore();
+  const { files, setFiles } = useSavedDreamsStore();
 
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
+  const updateDreams = useUpdateDreams();
 
   const renameFile = () => {
     setFiles(addProcessingProperty(files, id, true));
     renameDream(fileId, localName).then(() => {
       setEditable(!editable);
-      getDreams(sortBy[sortById].value, isSortByReversed, search).then(
-        ({ files }) => {
-          setFiles(files);
-          setFiles(addProcessingProperty(files, id, false));
-        }
-      );
+      updateDreams().then(() => {
+        setFiles(addProcessingProperty(files, id, false));
+      });
     });
   };
   const deleteFile = () =>
@@ -40,11 +36,7 @@ function Audio({ file, id }: { file: File; id: number }) {
       approve: 'are you shure you want to delete ' + name,
       approveCallback: () => {
         deleteDream(fileId).then(() => {
-          getDreams(sortBy[sortById].value, isSortByReversed, search).then(
-            ({ files }) => {
-              setFiles(files);
-            }
-          );
+          updateDreams();
         });
         setFiles(addProcessingProperty(files, id, true));
       },

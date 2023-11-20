@@ -2,26 +2,16 @@ import { useSearchStore } from '@/app/store/useSearchStore';
 import React from 'react';
 import Input from '../../Inputs/Input/Input';
 import Button from '../../Inputs/Button/Button';
-import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
-import { getDreams } from '@/app/api/requests';
+import useUpdateDreams from '@/app/hooks/useUpdateDreams';
 
 export default function SearchDream() {
   const { search, setSearch } = useSearchStore();
-  const { setFiles, sortBy, sortById, isSortByReversed } =
-    useSavedDreamsStore();
+  const updateDreams = useUpdateDreams();
 
   return (
     <div>
       <Input value={search} onChange={(e) => setSearch(e.target.value)} />
-      <Button
-        onClick={() =>
-          getDreams(sortBy[sortById].value, isSortByReversed, search).then(
-            ({ files }) => setFiles(files)
-          )
-        }
-      >
-        search
-      </Button>
+      <Button onClick={updateDreams}>search</Button>
     </div>
   );
 }
