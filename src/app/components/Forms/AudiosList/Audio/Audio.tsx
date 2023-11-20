@@ -11,26 +11,16 @@ import { File, useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 import { useSearchStore } from '@/app/store/useSearchStore';
 import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import EditAudio from '@/app/components/Inputs/EditAudio/EditAudio';
 
 function Audio({ file, id }: { file: File; id: number }) {
-  const { name, size, id: fileId, webContentLink, processing } = file;
+  const { name, id: fileId, webContentLink, processing } = file;
   const { setApprove } = useApproveAcrtionStore();
 
   const { files, setFiles } = useSavedDreamsStore();
 
-  const [editable, setEditable] = useState(false);
-  const [localName, setLocalName] = useState(name);
   const updateDreams = useUpdateDreams();
 
-  const renameFile = () => {
-    setFiles(addProcessingProperty(files, id, true));
-    renameDream(fileId, localName).then(() => {
-      setEditable(!editable);
-      updateDreams().then(() => {
-        setFiles(addProcessingProperty(files, id, false));
-      });
-    });
-  };
   const deleteFile = () =>
     setApprove({
       approve: 'are you shure you want to delete ' + name,
@@ -44,35 +34,17 @@ function Audio({ file, id }: { file: File; id: number }) {
 
   return (
     <Processing isProcessing={file.processing}>
-      <>
-        <audio controls src={webContentLink} />
-        {editable ? (
-          <>
-            <Input
-              value={localName}
-              onChange={(e) => setLocalName(e.target.value)}
-            />
-            <p>{filesize(size)}</p>
-            <Button disabled={processing} onClick={renameFile}>
-              rename
-            </Button>
-          </>
-        ) : (
-          <>
-            {name}
-            <p>{filesize(size)}</p>
-            <Button
-              disabled={processing}
-              onClick={() => setEditable(!editable)}
-            >
-              edit
-            </Button>
-          </>
-        )}
-        <Button disabled={processing} onClick={deleteFile}>
-          <AiOutlineDelete className={style.trashIcon} size={30} />
-        </Button>
-      </>
+      <tr>
+        <td>
+          <audio controls src={webContentLink} />
+        </td>
+        <EditAudio file={file} id={id} />
+        <td>
+          <Button disabled={processing} onClick={deleteFile}>
+            <AiOutlineDelete className={style.trashIcon} size={30} />
+          </Button>
+        </td>
+      </tr>
     </Processing>
   );
 }

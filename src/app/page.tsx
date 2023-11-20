@@ -5,11 +5,11 @@ import './animations.scss';
 import { useSession } from 'next-auth/react';
 
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session }: { data: any } = useSession();
 
   return (
     <main className={style.home}>
-      {session?.user?.email === 'andriydubovichwork@gmail.com' && <></>}
+      {session?.user?.role === 'admin' ? <>admin</> : 'user'}
     </main>
   );
 }

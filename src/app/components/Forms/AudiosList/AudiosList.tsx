@@ -7,6 +7,7 @@ import SearchDream from '../SearchDream/SearchDream';
 import Spinner from '../../OutPuts/Spinner/Spinner';
 import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
 import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import style from './AudiosList.module.scss';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();
@@ -20,11 +21,11 @@ function AudiosList() {
       return <Spinner size={90} />;
     case 'fullfiled':
       return (
-        <>
+        <table className={style.table}>
           {files.map((file, id) => {
             return <Audio file={file} id={id} key={file.id} />;
           })}
-        </>
+        </table>
       );
   }
 }

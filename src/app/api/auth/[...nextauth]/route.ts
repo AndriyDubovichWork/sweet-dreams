@@ -8,6 +8,17 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
+  callbacks: {
+    session({ session }: any) {
+      session.user.role = 'user';
+
+      if (session.user.email === process.env.ADMIN_EMAIL) {
+        session.user.role = 'admin';
+      }
+
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };
