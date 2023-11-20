@@ -7,7 +7,7 @@ export default async function getFiles(orderBy: OrderByValues) {
 
   return await drive.files.list({
     q: `'${process.env.FOLDER_ID}' in parents`,
-    fields: 'files(id, name, size,webContentLink)',
+    fields: 'files(id, name, size,webContentLink,createdTime)',
     orderBy,
   });
 }

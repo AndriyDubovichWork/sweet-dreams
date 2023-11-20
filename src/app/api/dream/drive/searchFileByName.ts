@@ -10,7 +10,7 @@ export default async function searchFileByName(
 
   return await drive.files.list({
     q: `'${process.env.FOLDER_ID}' in parents and name contains '${name}'`,
-    fields: 'files(id, name, size,webContentLink)',
+    fields: 'files(id, name, size,webContentLink,createdTime)',
     orderBy,
   });
 }

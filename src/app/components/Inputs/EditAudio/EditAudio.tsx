@@ -7,9 +7,17 @@ import { filesize } from 'filesize';
 import React, { useState } from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+import stringDateFormater from '@/app/lib/stringDateFormater';
 
 function EditAudio({ file, id }: { file: File; id: number }) {
-  const { name, size, id: fileId, webContentLink, processing } = file;
+  const {
+    name,
+    size,
+    id: fileId,
+    webContentLink,
+    processing,
+    createdTime,
+  } = file;
 
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
@@ -52,6 +60,8 @@ function EditAudio({ file, id }: { file: File; id: number }) {
       <>
         <td>{name}</td>
         <td>{filesize(size)}</td>
+        <td>{stringDateFormater(createdTime)}</td>
+
         <td>
           <Button disabled={processing} onClick={() => setEditable(!editable)}>
             edit

@@ -5,6 +5,7 @@ export type File = {
   name: string;
   size: number;
   webContentLink: string;
+  createdTime: string;
   processing?: boolean;
 };
 export type OrderByValues = 'createdTime' | 'name' | 'modifiedTime';
