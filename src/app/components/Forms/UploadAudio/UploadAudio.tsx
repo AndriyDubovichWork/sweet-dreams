@@ -10,15 +10,14 @@ import Preview from '../Preview/Preview';
 import RecordAudio from '../../Inputs/RecordAudio/RecordAudio';
 import createFullName from '@/app/lib/createFullName';
 import { useNewDreamStore } from '@/app/store/useNewDreamStore';
-import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
-import { useSearchStore } from '@/app/store/useSearchStore';
 import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
 
 function UploadAudio() {
-  const { blob, setBlob, name, setName, date, setDate } = useNewDreamStore();
-
-  const { search } = useSearchStore();
+  const { blob, name, setName, date, setDate } = useNewDreamStore();
   const updateDreams = useUpdateDreams();
+  const { status } = useLoadingStateStore();
+  console.log(blob);
 
   return (
     <div>
@@ -33,8 +32,8 @@ function UploadAudio() {
       <Button
         disabled={!blob}
         onClick={() => {
-          postDream(blob as Blob, createFullName(name, date)).then(
-            updateDreams
+          postDream(blob as Blob, createFullName(name, date)).then(() =>
+            updateDreams()
           );
         }}
       >

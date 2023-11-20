@@ -11,7 +11,7 @@ function RecordAudio() {
       <Input
         accept='audio/mpeg'
         type='file'
-        onChange={async (e) => {
+        onChange={(e) => {
           const file = e.target.files?.[0];
           if (file?.type === 'audio/mpeg') setBlob(file);
         }}
