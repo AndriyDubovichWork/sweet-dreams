@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import React, { ReactNode } from 'react';
 import Spinner from '../components/OutPuts/Spinner/Spinner';
 import Centered from '../components/OutPuts/Centered/Centered';
+import AcessDenied from '../components/OutPuts/AcessDenied/AcessDenied';
 
 export default function AdminsOnly({ children }: { children: ReactNode }) {
   const { data: session }: { data: any } = useSession();
@@ -12,7 +13,11 @@ export default function AdminsOnly({ children }: { children: ReactNode }) {
       return <main>{children}</main>;
 
     case 'user':
-      return 'acess denied';
+      return (
+        <Centered>
+          <AcessDenied />
+        </Centered>
+      );
     default:
       return (
         <Centered>
