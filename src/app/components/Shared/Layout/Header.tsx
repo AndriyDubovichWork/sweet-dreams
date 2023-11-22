@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { AiOutlineUserAdd } from 'react-icons/ai';
-import Button from '../components/Inputs/Button/Button';
+import Button from '../Button/Button';
 import style from './Header.module.scss';
 import Link from 'next/link';
-import UserDropDown from '../components/Forms/UserDropDown/UserDropDown';
+import UserDropDown from '../../user/UserDropDown/UserDropDown';
 
 export default function Header() {
   return (

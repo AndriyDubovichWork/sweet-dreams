@@ -1,9 +1,9 @@
 'use client';
 
-import AdminsOnly from '@/app/HOCs/AdminsOnly';
-import AudiosList from '@/app/components/Forms/AudiosList/AudiosList';
-import SearchDream from '@/app/components/Forms/SearchDream/SearchDream';
-import SortBy from '@/app/components/Inputs/SortBy/SortBy';
+import AdminsOnly from '@/app/HOCs/Shared/AdminsOnly/AdminsOnly';
+import AudiosList from '@/app/components/dream/list/AudiosList/AudiosList';
+import SearchDream from '@/app/components/dream/list/SearchDream/SearchDream';
+import SortBy from '@/app/components/dream/list/SortBy/SortBy';
 import Link from 'next/link';
 import React from 'react';
 

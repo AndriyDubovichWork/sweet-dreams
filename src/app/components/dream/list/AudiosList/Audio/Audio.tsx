@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import style from './Audio.module.scss';
 import { deleteDream, renameDream } from '@/app/api/requests';
-import Button from '@/app/components/Inputs/Button/Button';
-import Processing from '../../Processing/Processing';
-import Input from '@/app/components/Inputs/Input/Input';
-import addProcessingProperty from '@/app/lib/addProcessingProperty';
+import Button from '@/app/components/Shared/Button/Button';
+import Input from '@/app/components/Shared/Input/Input';
+import addProcessingProperty from '@/app/utils/addProcessingProperty';
 import { File, useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 import { useSearchStore } from '@/app/store/useSearchStore';
 import useUpdateDreams from '@/app/hooks/useUpdateDreams';
-import EditAudio from '@/app/components/Inputs/EditAudio/EditAudio';
+import EditAudio from '@/app/components/dream/list/EditAudio/EditAudio';
+import Processing from '@/app/HOCs/Shared/Processing/Processing';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, id: fileId, webContentLink, processing } = file;

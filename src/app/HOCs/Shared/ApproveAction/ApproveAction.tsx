@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import style from './ApproveAction.module.scss';
-import Button from '../../Inputs/Button/Button';
+import Button from '../../../components/Shared/Button/Button';
 
 import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 

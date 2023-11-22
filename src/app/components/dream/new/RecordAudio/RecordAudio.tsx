@@ -1,6 +1,6 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
-import Input from '../Input/Input';
+import Input from '../../../Shared/Input/Input';
 import { useNewDreamStore } from '@/app/store/useNewDreamStore';
 
 function RecordAudio() {

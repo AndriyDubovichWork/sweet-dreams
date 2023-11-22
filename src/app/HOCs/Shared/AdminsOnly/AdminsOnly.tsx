@@ -2,9 +2,9 @@
 
 import { useSession } from 'next-auth/react';
 import React, { ReactNode } from 'react';
-import Spinner from '../components/OutPuts/Spinner/Spinner';
-import Centered from '../components/OutPuts/Centered/Centered';
-import AcessDenied from '../components/OutPuts/AcessDenied/AcessDenied';
+import Spinner from '../../../components/Shared/Spinner/Spinner';
+import Centered from '../Centered/Centered';
+import AcessDenied from '../../../components/Shared/AcessDenied/AcessDenied';
 
 export default function AdminsOnly({ children }: { children: ReactNode }) {
   const { data: session }: { data: any } = useSession();

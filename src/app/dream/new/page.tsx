@@ -1,5 +1,5 @@
-import AdminsOnly from '@/app/HOCs/AdminsOnly';
-import UploadAudio from '@/app/components/Forms/UploadAudio/UploadAudio';
+import AdminsOnly from '@/app/HOCs/Shared/AdminsOnly/AdminsOnly';
+import UploadAudio from '@/app/components/dream/new/UploadAudio/UploadAudio';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 

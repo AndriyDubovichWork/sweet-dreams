@@ -2,13 +2,13 @@
 
 import React, { useRef } from 'react';
 
-import { postDream } from '../../../api/requests';
-import Input from '../../Inputs/Input/Input';
+import { postDream } from '../../../../api/requests';
+import Input from '../../../Shared/Input/Input';
 
-import Button from '../../Inputs/Button/Button';
+import Button from '../../../Shared/Button/Button';
 import Preview from '../Preview/Preview';
-import RecordAudio from '../../Inputs/RecordAudio/RecordAudio';
-import createFullName from '@/app/lib/createFullName';
+import RecordAudio from '../RecordAudio/RecordAudio';
+import createFullName from '@/app/utils/createFullName';
 import { useNewDreamStore } from '@/app/store/useNewDreamStore';
 import useUpdateDreams from '@/app/hooks/useUpdateDreams';
 import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';

@@ -1,9 +1,9 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import style from './UserDropDown.module.scss';
-import Button from '../../Inputs/Button/Button';
-import Spinner from '../../OutPuts/Spinner/Spinner';
-import DropDown from '../../OutPuts/DropDown/DropDown';
+import Button from '../../Shared/Button/Button';
+import Spinner from '../../Shared/Spinner/Spinner';
+import DropDown from '../../Shared/DropDown/DropDown';
 
 export default function UserDropDown() {
   const { data: session, status } = useSession();
