@@ -10,6 +10,6 @@ export type loadingStateStore = {
 };
 
 export const useLoadingStateStore = create<loadingStateStore>((set) => ({
-  status: 'pending',
+  status: 'fullfiled',
   setStatus: (status) => set((state) => ({ ...state, status })),
 }));

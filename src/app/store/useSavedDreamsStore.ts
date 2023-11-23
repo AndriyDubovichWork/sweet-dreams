@@ -52,14 +52,14 @@ export const useSavedDreamsStore = create<SavedDreamsStore>((set) => ({
 
   sortBy,
 
-  sortById: 0,
+  sortById: 1,
   setSortById: (sortById) =>
     set((state) => ({
       ...state,
       sortById,
     })),
 
-  isSortByReversed: false,
+  isSortByReversed: true,
   setIsSortByReversed: (isSortByReversed) =>
     set((state) => ({
       ...state,
