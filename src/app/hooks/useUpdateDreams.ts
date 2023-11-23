@@ -13,17 +13,21 @@ function useUpdateDreams() {
 
   const { setStatus } = useLoadingStateStore();
 
-  return () => {
+  function updateDreams(id?: number, isReversed?: boolean) {
     setStatus('pending');
-    return getDreams(sortBy[sortById].value, isSortByReversed, search).then(
-      ({ files }) => {
-        setFiles(files);
-        setBlob(null);
-        setName('');
-        setStatus('fullfiled');
-      }
-    );
-  };
+    return getDreams(
+      sortBy[id === undefined ? sortById : id].value,
+      isReversed === undefined ? isSortByReversed : isReversed,
+      search
+    ).then(({ files }) => {
+      setFiles(files);
+      setBlob(null);
+      setName('');
+      setStatus('fullfiled');
+    });
+  }
+
+  return updateDreams;
 }
 
 export default useUpdateDreams;
