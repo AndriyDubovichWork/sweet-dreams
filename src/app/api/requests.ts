@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { OrderByValues } from '../store/useSavedDreamsStore';
 import createFullSortBy from '../utils/createFullSortBy';
+import { OrderByValues } from '../types/store/savedDreamsStore';
 
 export async function postDream(blob: Blob, fileName: string) {
   let formData = new FormData();

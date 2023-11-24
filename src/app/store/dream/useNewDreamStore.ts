@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { NewDreamStore } from '../types/store/newDreamStore';
+import { NewDreamStore } from '../../types/store/newDreamStore';
 
 export const useNewDreamStore = create<NewDreamStore>((set) => ({
   blob: null,

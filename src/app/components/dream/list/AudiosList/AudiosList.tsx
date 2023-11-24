@@ -2,9 +2,9 @@
 
 import React, { useEffect } from 'react';
 import Audio from './Audio/Audio';
-import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
-import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
-import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import { useSavedDreamsStore } from '@/app/store/dream/useSavedDreamsStore';
+import { useLoadingStateStore } from '@/app/store/dream/useLoadingStateStore';
+import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import style from './AudiosList.module.scss';
 import Spinner from '@/app/components/Shared/Spinner/Spinner';
 

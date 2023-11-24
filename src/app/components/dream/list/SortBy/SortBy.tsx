@@ -1,7 +1,7 @@
-import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
+import { useSavedDreamsStore } from '@/app/store/dream/useSavedDreamsStore';
 import React from 'react';
 import Button from '../../../Shared/Button/Button';
-import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 
 export default function SortBy() {
   const {

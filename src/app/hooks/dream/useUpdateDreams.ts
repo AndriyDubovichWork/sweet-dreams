@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSearchStore } from '../store/useSearchStore';
-import { useSavedDreamsStore } from '../store/useSavedDreamsStore';
-import { useNewDreamStore } from '../store/useNewDreamStore';
-import { getDreams } from '../api/requests';
-import { useLoadingStateStore } from '../store/useLoadingStateStore';
+import { useSearchStore } from '../../store/dream/useSearchStore';
+import { useSavedDreamsStore } from '../../store/dream/useSavedDreamsStore';
+import { useNewDreamStore } from '../../store/dream/useNewDreamStore';
+import { getDreams } from '../../api/requests';
+import { useLoadingStateStore } from '../../store/dream/useLoadingStateStore';
 
 function useUpdateDreams() {
   const { setBlob, setName } = useNewDreamStore();

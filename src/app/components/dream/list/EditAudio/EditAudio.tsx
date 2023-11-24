@@ -1,8 +1,8 @@
 import { renameDream } from '@/app/api/requests';
-import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import addProcessingProperty from '@/app/utils/addProcessingProperty';
-import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
-import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
+import { useApproveAcrtionStore } from '@/app/store/dream/useApproveAcrtionStore';
+import { useSavedDreamsStore } from '@/app/store/dream/useSavedDreamsStore';
 import { filesize } from 'filesize';
 import React, { useState } from 'react';
 import Input from '../../../Shared/Input/Input';

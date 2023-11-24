@@ -1,5 +1,5 @@
 import createFullName from '@/app/utils/createFullName';
-import { useNewDreamStore } from '@/app/store/useNewDreamStore';
+import { useNewDreamStore } from '@/app/store/dream/useNewDreamStore';
 import React from 'react';
 
 export default function Preview() {

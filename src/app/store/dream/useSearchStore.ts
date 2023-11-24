@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { SearchStore } from '../types/store/searchStore';
+import { SearchStore } from '../../types/store/searchStore';
 
 export const useSearchStore = create<SearchStore>((set) => ({
   search: '',

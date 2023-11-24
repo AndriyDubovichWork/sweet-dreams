@@ -1,8 +1,8 @@
-import { useSearchStore } from '@/app/store/useSearchStore';
+import { useSearchStore } from '@/app/store/dream/useSearchStore';
 import React from 'react';
 import Input from '../../../Shared/Input/Input';
 import Button from '../../../Shared/Button/Button';
-import useUpdateDreams from '@/app/hooks/useUpdateDreams';
+import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 
 export default function SearchDream() {
   const { search, setSearch } = useSearchStore();
