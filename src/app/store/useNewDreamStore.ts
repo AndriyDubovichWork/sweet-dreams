@@ -1,17 +1,5 @@
 import { create } from 'zustand';
-
-type BlobT = Blob | null;
-
-export type NewDreamStore = {
-  blob: BlobT;
-  setBlob: (blob: BlobT) => void;
-
-  name: string;
-  setName: (name: string) => void;
-
-  date: string;
-  setDate: (date: string) => void;
-};
+import { NewDreamStore } from '../types/store/newDreamStore';
 
 export const useNewDreamStore = create<NewDreamStore>((set) => ({
   blob: null,

@@ -1,8 +1,7 @@
 import React from 'react';
 import style from './Processing.module.scss';
 import loadingSvg from './loading.svg';
-
-type processing = { isProcessing: boolean | undefined; children: JSX.Element };
+import { processing } from '@/app/types/components/Shared/Processing';
 
 function Processing({ isProcessing, children }: processing) {
   if (!isProcessing) return children;

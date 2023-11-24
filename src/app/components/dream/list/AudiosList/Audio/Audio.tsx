@@ -6,12 +6,13 @@ import { deleteDream, renameDream } from '@/app/api/requests';
 import Button from '@/app/components/Shared/Button/Button';
 import Input from '@/app/components/Shared/Input/Input';
 import addProcessingProperty from '@/app/utils/addProcessingProperty';
-import { File, useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
+import { useSavedDreamsStore } from '@/app/store/useSavedDreamsStore';
 import { useApproveAcrtionStore } from '@/app/store/useApproveAcrtionStore';
 import { useSearchStore } from '@/app/store/useSearchStore';
 import useUpdateDreams from '@/app/hooks/useUpdateDreams';
 import EditAudio from '@/app/components/dream/list/EditAudio/EditAudio';
 import Processing from '@/app/HOCs/Shared/Processing/Processing';
+import { File } from '@/app/types/store/savedDreamsStore';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, id: fileId, webContentLink, processing } = file;

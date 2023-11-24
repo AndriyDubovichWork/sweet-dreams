@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import style from './DropDown.module.scss';
-
-type dropDown = {
-  thumbnail: JSX.Element;
-  content: JSX.Element;
-};
+import { dropDown } from '@/app/types/components/Shared/DropDown';
 
 export default function DropDown({ thumbnail, content }: dropDown) {
   const [show, setShow] = useState(false);

@@ -1,11 +1,5 @@
 import { create } from 'zustand';
-
-type BlobT = Blob | null;
-
-export type SearchStore = {
-  search: string;
-  setSearch: (search: string) => void;
-};
+import { SearchStore } from '../types/store/searchStore';
 
 export const useSearchStore = create<SearchStore>((set) => ({
   search: '',

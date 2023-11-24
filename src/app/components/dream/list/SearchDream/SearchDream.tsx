@@ -11,7 +11,7 @@ export default function SearchDream() {
   return (
     <div>
       <Input value={search} onChange={(e) => setSearch(e.target.value)} />
-      <Button onClick={updateDreams}>search</Button>
+      <Button onClick={() => updateDreams()}>search</Button>
     </div>
   );
 }

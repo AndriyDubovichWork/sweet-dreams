@@ -3,8 +3,8 @@ import saveFileToDrive from '@/app/api/dream/drive/saveFileToDrive';
 import getFiles from '@/app/api/dream/drive/getFiles';
 import deleteFile from '@/app/api/dream/drive/deleteFile';
 import renameFile from './drive/renameFile';
-import { OrderByValues } from '@/app/store/useSavedDreamsStore';
 import searchFileByName from './drive/searchFileByName';
+import { OrderByValues } from '@/app/types/store/savedDreamsStore';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();

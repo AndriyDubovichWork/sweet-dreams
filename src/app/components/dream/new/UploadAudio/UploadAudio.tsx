@@ -32,8 +32,8 @@ function UploadAudio() {
         disabled={!blob || status !== 'fullfiled'}
         onClick={() => {
           setStatus('pending');
-          postDream(blob as Blob, createFullName(name, date)).then(
-            updateDreams
+          postDream(blob as Blob, createFullName(name, date)).then(() =>
+            updateDreams()
           );
         }}
       >

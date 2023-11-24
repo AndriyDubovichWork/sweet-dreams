@@ -1,4 +1,4 @@
-import { File } from '../store/useSavedDreamsStore';
+import { File } from '../types/store/savedDreamsStore';
 
 export default function addProcessingProperty(
   files: File[],
