@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import style from './ApproveAction.module.scss';
 import Button from '../../../components/Shared/Button/Button';
 
-import { useApproveAcrtionStore } from '@/app/store/dream/useApproveAcrtionStore';
+import { useApproveAcrtionStore } from '@/app/store/dream/Shared/useApproveAcrtionStore';
 
 function ApproveAction({ children }: { children: ReactNode }) {
   const { approve, setApprove, approveCallback } = useApproveAcrtionStore();

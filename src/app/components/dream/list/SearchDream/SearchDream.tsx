@@ -1,4 +1,4 @@
-import { useSearchStore } from '@/app/store/dream/useSearchStore';
+import { useSearchStore } from '@/app/store/dream/list/useSearchStore';
 import React from 'react';
 import Input from '../../../Shared/Input/Input';
 import Button from '../../../Shared/Button/Button';

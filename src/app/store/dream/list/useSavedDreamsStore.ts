@@ -1,5 +1,8 @@
 import { create } from 'zustand';
-import { SavedDreamsStore, SortBy } from '../../types/store/savedDreamsStore';
+import {
+  SavedDreamsStore,
+  SortBy,
+} from '../../../types/store/savedDreamsStore';
 
 const sortBy: SortBy[] = [
   {

@@ -1,7 +1,7 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import Input from '../../../Shared/Input/Input';
-import { useNewDreamStore } from '@/app/store/dream/useNewDreamStore';
+import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 
 function RecordAudio() {
   const { setBlob } = useNewDreamStore();

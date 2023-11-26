@@ -1,4 +1,4 @@
-import { useSavedDreamsStore } from '@/app/store/dream/useSavedDreamsStore';
+import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
 import React from 'react';
 import Button from '../../../Shared/Button/Button';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';

@@ -9,9 +9,9 @@ import Button from '../../../Shared/Button/Button';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../RecordAudio/RecordAudio';
 import createFullName from '@/app/utils/createFullName';
-import { useNewDreamStore } from '@/app/store/dream/useNewDreamStore';
+import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
-import { useLoadingStateStore } from '@/app/store/dream/useLoadingStateStore';
+import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
 
 function UploadAudio() {
   const { blob, name, setName, date, setDate } = useNewDreamStore();
