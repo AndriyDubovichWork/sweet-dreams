@@ -8,7 +8,7 @@ import Input from '../../../Shared/Input/Input';
 import Button from '../../../Shared/Button/Button';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../RecordAudio/RecordAudio';
-import createFullName from '@/app/utils/createFullName';
+import createFullName from '@/app/utils/dream/new/createFullName';
 import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';

@@ -1,4 +1,4 @@
-import createFullName from '@/app/utils/createFullName';
+import createFullName from '@/app/utils/dream/new/createFullName';
 import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 import React from 'react';
 

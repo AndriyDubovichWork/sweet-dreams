@@ -1,13 +1,13 @@
 import { renameDream } from '@/app/api/requests';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
-import addProcessingProperty from '@/app/utils/addProcessingProperty';
+import addProcessingProperty from '@/app/utils/dream/list/addProcessingProperty';
 import { useApproveAcrtionStore } from '@/app/store/dream/Shared/useApproveAcrtionStore';
 import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
 import { filesize } from 'filesize';
 import React, { useState } from 'react';
 import Input from '../../../Shared/Input/Input';
 import Button from '../../../Shared/Button/Button';
-import stringDateFormater from '@/app/utils/stringDateFormater';
+import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
 import { File } from '@/app/types/store/savedDreamsStore';
 
 function EditAudio({ file, id }: { file: File; id: number }) {

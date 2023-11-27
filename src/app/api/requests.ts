@@ -1,5 +1,5 @@
 import axios from 'axios';
-import createFullSortBy from '../utils/createFullSortBy';
+import createFullSortBy from '../utils/dream/list/createFullSortBy';
 import { OrderByValues } from '../types/store/savedDreamsStore';
 
 export async function postDream(blob: Blob, fileName: string) {
