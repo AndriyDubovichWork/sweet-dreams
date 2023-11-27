@@ -7,6 +7,7 @@ import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateSt
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import style from './AudiosList.module.scss';
 import Spinner from '@/app/components/Shared/Spinner/Spinner';
+import { loadingStatus } from '@/app/enums/loadingStatus';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();
@@ -16,9 +17,9 @@ function AudiosList() {
     updateDream();
   }, []);
   switch (status) {
-    case 'pending':
+    case loadingStatus.pending:
       return <Spinner size={90} />;
-    case 'fullfiled':
+    case loadingStatus.fullfiled:
       return (
         <table className={style.table}>
           {files.map((file, id) => {

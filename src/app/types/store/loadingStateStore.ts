@@ -1,4 +1,4 @@
-export type loadingStatus = 'pending' | 'fullfiled' | 'error';
+import { loadingStatus } from '@/app/enums/loadingStatus';
 
 export type loadingStateStore = {
   status: loadingStatus;

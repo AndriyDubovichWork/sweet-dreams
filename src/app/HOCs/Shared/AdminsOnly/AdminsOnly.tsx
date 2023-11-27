@@ -5,14 +5,16 @@ import React, { ReactNode } from 'react';
 import Spinner from '../../../components/Shared/Spinner/Spinner';
 import Centered from '../Centered/Centered';
 import AcessDenied from '../../../components/Shared/AcessDenied/AcessDenied';
+import { UserRights } from '@/app/enums/session';
 
 export default function AdminsOnly({ children }: { children: ReactNode }) {
   const { data: session }: { data: any } = useSession();
-  switch (session?.user?.role) {
-    case 'admin':
+  const role: UserRights = session?.user?.role;
+  switch (role) {
+    case UserRights.admin:
       return <main>{children}</main>;
 
-    case 'user':
+    case UserRights.user:
       return (
         <Centered>
           <AcessDenied />
