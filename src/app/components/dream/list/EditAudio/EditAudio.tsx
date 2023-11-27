@@ -9,16 +9,20 @@ import Input from '../../../Shared/Input/Input';
 import Button from '../../../Shared/Button/Button';
 import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
 import { File } from '@/app/types/store/savedDreamsStore';
+import divideFullName from '@/app/utils/dream/Shared/divideFullName';
+import { MdOutlineCancel } from 'react-icons/md';
+import Centered from '@/app/HOCs/Shared/Centered/Centered';
 
 function EditAudio({ file, id }: { file: File; id: number }) {
   const {
-    name,
+    name: fullName,
     size,
     id: fileId,
     webContentLink,
     processing,
     createdTime,
   } = file;
+  const { date, name } = divideFullName(fullName);
 
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
@@ -47,12 +51,16 @@ function EditAudio({ file, id }: { file: File; id: number }) {
         </td>
         <td>{filesize(size)}</td>
         <td>
-          <Button disabled={processing} onClick={() => setEditable(false)}>
-            cancel
-          </Button>
           <Button disabled={processing} onClick={renameFile}>
             rename
           </Button>
+        </td>
+        <td>
+          <Centered absolute={false}>
+            <Button disabled={processing} onClick={() => setEditable(false)}>
+              <MdOutlineCancel />
+            </Button>
+          </Centered>
         </td>
       </>
     );
@@ -61,7 +69,7 @@ function EditAudio({ file, id }: { file: File; id: number }) {
       <>
         <td>{name}</td>
         <td>{filesize(size)}</td>
-        <td>{stringDateFormater(createdTime)}</td>
+        <td>{date ? date : stringDateFormater(createdTime)}</td>
 
         <td>
           <Button disabled={processing} onClick={() => setEditable(!editable)}>

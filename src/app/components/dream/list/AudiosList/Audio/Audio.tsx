@@ -13,6 +13,7 @@ import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import EditAudio from '@/app/components/dream/list/EditAudio/EditAudio';
 import Processing from '@/app/HOCs/Shared/Processing/Processing';
 import { File } from '@/app/types/store/savedDreamsStore';
+import divideFullName from '@/app/utils/dream/Shared/divideFullName';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, id: fileId, webContentLink, processing } = file;

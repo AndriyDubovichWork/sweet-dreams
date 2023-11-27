@@ -1,6 +1,38 @@
-.centered {
+.absoluteVH {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.absoluteV {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.absoluteH {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.flexVH {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.flexH {
+  display: flex;
+
+  align-items: center;
+  height: 100%;
+}
+
+.flexV {
+  display: flex;
+
+  justify-content: center;
+  width: 100%;
 }
