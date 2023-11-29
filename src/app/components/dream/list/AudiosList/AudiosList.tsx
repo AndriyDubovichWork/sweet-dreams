@@ -11,7 +11,6 @@ import { loadingStatus } from '@/app/enums/loadingStatus';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();
-  const { status, setStatus } = useLoadingStateStore();
   const updateDream = useUpdateDreams();
   useEffect(() => {
     updateDream();
