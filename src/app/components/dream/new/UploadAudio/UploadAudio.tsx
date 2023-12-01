@@ -19,7 +19,6 @@ function UploadAudio() {
   const { blob, name, setName, date, setDate } = useNewDreamStore();
   const updateDreams = useUpdateDreams();
   const { setStatus, status } = useLoadingStateStore();
-  // console.log(date);
 
   return (
     <div>
