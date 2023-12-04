@@ -16,7 +16,6 @@ export async function postDream(blob: Blob, fileName: string) {
       'Content-Type': `multipart/form-data`,
     },
   });
-
   return res;
 }
 export async function getDreams(

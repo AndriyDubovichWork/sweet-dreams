@@ -35,19 +35,21 @@ function Audio({ file, id }: { file: File; id: number }) {
     });
 
   return (
-    <Processing isProcessing={file.processing}>
-      <tr>
-        <td>
-          <audio controls src={webContentLink} />
-        </td>
-        <EditAudio file={file} id={id} />
-        <td>
-          <Button disabled={processing} onClick={deleteFile}>
-            <AiOutlineDelete className={style.trashIcon} size={30} />
-          </Button>
-        </td>
-      </tr>
-    </Processing>
+    <tr>
+      <Processing isProcessing={file.processing}>
+        <>
+          <td>
+            <audio controls src={webContentLink} />
+          </td>
+          <EditAudio file={file} id={id} />
+          <td>
+            <Button disabled={processing} onClick={deleteFile}>
+              <AiOutlineDelete className={style.trashIcon} size={30} />
+            </Button>
+          </td>
+        </>
+      </Processing>
+    </tr>
   );
 }
 

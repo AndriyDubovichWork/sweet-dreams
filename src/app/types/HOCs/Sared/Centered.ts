@@ -4,4 +4,5 @@ export type centeredProps = {
   absolute?: boolean;
   verticaly?: boolean;
   horizzontaly?: boolean;
+  content?: boolean;
 };

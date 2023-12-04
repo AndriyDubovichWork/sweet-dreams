@@ -12,16 +12,17 @@ import createFullName from '@/app/utils/dream/new/createFullName';
 import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
-import { loadingStatus } from '@/app/enums/loadingStatus';
 import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
+import StatusMessage from '@/app/HOCs/Shared/StatusMessage/StatusMessage';
 
 function UploadAudio() {
   const { blob, name, setName, date, setDate } = useNewDreamStore();
   const updateDreams = useUpdateDreams();
   const { setStatus, status } = useLoadingStateStore();
-
+  const isStatusOk = !status || status === 'fullfiled';
+  const isButtonDisabled = !blob || !isStatusOk;
   return (
-    <div>
+    <StatusMessage>
       <RecordAudio />
       <Input
         type='date'
@@ -31,9 +32,9 @@ function UploadAudio() {
       <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Preview />
       <Button
-        disabled={!blob || status !== 'fullfiled'}
+        disabled={isButtonDisabled}
         onClick={() => {
-          setStatus(loadingStatus.pending);
+          setStatus('pending');
           postDream(blob as Blob, createFullName(name, date)).then(() =>
             updateDreams()
           );
@@ -41,7 +42,7 @@ function UploadAudio() {
       >
         save
       </Button>
-    </div>
+    </StatusMessage>
   );
 }
 

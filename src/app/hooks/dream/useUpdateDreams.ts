@@ -4,7 +4,6 @@ import { useSavedDreamsStore } from '../../store/dream/list/useSavedDreamsStore'
 import { useNewDreamStore } from '../../store/dream/new/useNewDreamStore';
 import { getDreams } from '../../api/requests';
 import { useLoadingStateStore } from '../../store/dream/Shared/useLoadingStateStore';
-import { loadingStatus } from '@/app/enums/loadingStatus';
 
 function useUpdateDreams() {
   const { setBlob, setName } = useNewDreamStore();
@@ -15,7 +14,7 @@ function useUpdateDreams() {
   const { setStatus } = useLoadingStateStore();
 
   function updateDreams(id?: number, isReversed?: boolean) {
-    setStatus(loadingStatus.pending);
+    setStatus('pending');
     return getDreams(
       sortBy[id === undefined ? sortById : id].value,
       isReversed === undefined ? isSortByReversed : isReversed,
@@ -24,7 +23,8 @@ function useUpdateDreams() {
       setFiles(files);
       setBlob(null);
       setName('');
-      setStatus(loadingStatus.fullfiled);
+      setStatus('fullfiled');
+      setTimeout(() => setStatus(''), 10_000);
     });
   }
 

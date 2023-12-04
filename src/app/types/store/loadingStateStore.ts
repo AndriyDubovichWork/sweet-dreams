@@ -1,4 +1,4 @@
-import { loadingStatus } from '@/app/enums/loadingStatus';
+import { loadingStatus } from '../Shared/loadingStatus';
 
 export type loadingStateStore = {
   status: loadingStatus;

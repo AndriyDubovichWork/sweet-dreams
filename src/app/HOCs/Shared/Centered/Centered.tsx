@@ -7,6 +7,7 @@ export default function Centered({
   absolute = true,
   verticaly = true,
   horizzontaly = true,
+  content = false,
 }: centeredProps) {
   let centered = style.absoluteVH;
 
@@ -31,6 +32,8 @@ export default function Centered({
       }
     }
   }
-
+  if (content) {
+    centered = `${centered} ${style.content}`;
+  }
   return <div className={centered}>{children}</div>;
 }

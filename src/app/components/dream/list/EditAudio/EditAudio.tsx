@@ -12,16 +12,10 @@ import { File } from '@/app/types/store/savedDreamsStore';
 import divideFullName from '@/app/utils/dream/Shared/divideFullName';
 import { MdOutlineCancel } from 'react-icons/md';
 import Centered from '@/app/HOCs/Shared/Centered/Centered';
+import rename from '@/app/utils/dream/list/rename';
 
 function EditAudio({ file, id }: { file: File; id: number }) {
-  const {
-    name: fullName,
-    size,
-    id: fileId,
-    webContentLink,
-    processing,
-    createdTime,
-  } = file;
+  const { name: fullName, size, id: fileId, processing, createdTime } = file;
   const { date, name } = divideFullName(fullName);
 
   const [editable, setEditable] = useState(false);
@@ -32,10 +26,14 @@ function EditAudio({ file, id }: { file: File; id: number }) {
 
   const renameFile = () => {
     setFiles(addProcessingProperty(files, id, true));
-    renameDream(fileId, localName).then(() => {
-      setEditable(!editable);
+    const fullLocalName = `${localName} ${stringDateFormater(createdTime)}`;
+    renameDream(fileId, fullLocalName).then(() => {
+      setEditable(false);
+
       updateDreams().then(() => {
-        setFiles(addProcessingProperty(files, id, false));
+        setFiles(
+          rename(addProcessingProperty(files, id, false), id, fullLocalName)
+        );
       });
     });
   };
@@ -57,7 +55,13 @@ function EditAudio({ file, id }: { file: File; id: number }) {
         </td>
         <td>
           <Centered absolute={false}>
-            <Button disabled={processing} onClick={() => setEditable(false)}>
+            <Button
+              disabled={processing}
+              onClick={() => {
+                setEditable(false);
+                setLocalName(name);
+              }}
+            >
               <MdOutlineCancel />
             </Button>
           </Centered>
@@ -72,7 +76,7 @@ function EditAudio({ file, id }: { file: File; id: number }) {
         <td>{date ? date : stringDateFormater(createdTime)}</td>
 
         <td>
-          <Button disabled={processing} onClick={() => setEditable(!editable)}>
+          <Button disabled={processing} onClick={() => setEditable(true)}>
             edit
           </Button>
         </td>
