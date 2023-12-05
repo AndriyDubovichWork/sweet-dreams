@@ -17,39 +17,16 @@ import divideFullName from '@/app/utils/dream/Shared/divideFullName';
 
 function Audio({ file, id }: { file: File; id: number }) {
   const { name, id: fileId, webContentLink, processing } = file;
-  const { setApprove } = useApproveAcrtionStore();
-
-  const { files, setFiles } = useSavedDreamsStore();
-
-  const updateDreams = useUpdateDreams();
-
-  const deleteFile = () =>
-    setApprove({
-      approve: 'are you shure you want to delete ' + name,
-      approveCallback: () => {
-        deleteDream(fileId).then(() => {
-          updateDreams();
-        });
-        setFiles(addProcessingProperty(files, id, true));
-      },
-    });
 
   return (
-    <tr>
-      <Processing isProcessing={file.processing}>
-        <>
-          <td>
-            <audio controls src={webContentLink} />
-          </td>
-          <EditAudio file={file} id={id} />
-          <td>
-            <Button disabled={processing} onClick={deleteFile}>
-              <AiOutlineDelete className={style.trashIcon} size={30} />
-            </Button>
-          </td>
-        </>
-      </Processing>
-    </tr>
+    <Processing isProcessing={file.processing}>
+      <tr className={file.processing ? style.processing : ''}>
+        <td>
+          <audio controls src={webContentLink} />
+        </td>
+        <EditAudio file={file} id={id} />
+      </tr>
+    </Processing>
   );
 }
 

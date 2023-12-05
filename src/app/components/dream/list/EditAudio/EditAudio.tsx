@@ -1,4 +1,4 @@
-import { renameDream } from '@/app/api/requests';
+import { deleteDream, renameDream } from '@/app/api/requests';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import addProcessingProperty from '@/app/utils/dream/list/addProcessingProperty';
 import { useApproveAcrtionStore } from '@/app/store/dream/Shared/useApproveAcrtionStore';
@@ -13,30 +13,27 @@ import divideFullName from '@/app/utils/dream/Shared/divideFullName';
 import { MdOutlineCancel } from 'react-icons/md';
 import Centered from '@/app/HOCs/Shared/Centered/Centered';
 import rename from '@/app/utils/dream/list/rename';
+import { AiOutlineDelete } from 'react-icons/ai';
+import style from './EditAudio.module.scss';
+import { MdEdit } from 'react-icons/md';
+import { FaSave } from 'react-icons/fa';
+import Icon from '@/app/components/Shared/Icon/Icon';
+import ButtonIcon from '@/app/components/Shared/ButtonIcon/ButtonIcon';
+import useEditAudioData from '@/app/hooks/dream/useEditAudioData';
 
 function EditAudio({ file, id }: { file: File; id: number }) {
-  const { name: fullName, size, id: fileId, processing, createdTime } = file;
-  const { date, name } = divideFullName(fullName);
+  const { size, processing, createdTime } = file;
 
-  const [editable, setEditable] = useState(false);
-  const [localName, setLocalName] = useState(name);
-
-  const { files, setFiles } = useSavedDreamsStore();
-  const updateDreams = useUpdateDreams();
-
-  const renameFile = () => {
-    setFiles(addProcessingProperty(files, id, true));
-    const fullLocalName = `${localName} ${stringDateFormater(createdTime)}`;
-    renameDream(fileId, fullLocalName).then(() => {
-      setEditable(false);
-
-      updateDreams().then(() => {
-        setFiles(
-          rename(addProcessingProperty(files, id, false), id, fullLocalName)
-        );
-      });
-    });
-  };
+  const {
+    deleteFile,
+    renameFile,
+    editable,
+    setEditable,
+    localName,
+    setLocalName,
+    date,
+    name,
+  } = useEditAudioData({ file, id });
 
   if (editable) {
     return (
@@ -48,23 +45,22 @@ function EditAudio({ file, id }: { file: File; id: number }) {
           />
         </td>
         <td>{filesize(size)}</td>
+        <td>{date ? date : stringDateFormater(createdTime)}</td>
+
         <td>
-          <Button disabled={processing} onClick={renameFile}>
-            rename
-          </Button>
+          <ButtonIcon disabled={processing} onClick={renameFile}>
+            <FaSave />
+          </ButtonIcon>
         </td>
         <td>
-          <Centered absolute={false}>
-            <Button
-              disabled={processing}
-              onClick={() => {
-                setEditable(false);
-                setLocalName(name);
-              }}
-            >
-              <MdOutlineCancel />
-            </Button>
-          </Centered>
+          <ButtonIcon
+            disabled={processing}
+            onClick={() => {
+              setEditable(false);
+              setLocalName(name);
+            }}>
+            <MdOutlineCancel size={30} />
+          </ButtonIcon>
         </td>
       </>
     );
@@ -76,9 +72,14 @@ function EditAudio({ file, id }: { file: File; id: number }) {
         <td>{date ? date : stringDateFormater(createdTime)}</td>
 
         <td>
-          <Button disabled={processing} onClick={() => setEditable(true)}>
-            edit
-          </Button>
+          <ButtonIcon disabled={processing} onClick={() => setEditable(true)}>
+            <MdEdit />
+          </ButtonIcon>
+        </td>
+        <td>
+          <ButtonIcon disabled={processing} onClick={deleteFile}>
+            <AiOutlineDelete />
+          </ButtonIcon>
         </td>
       </>
     );
