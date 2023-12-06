@@ -34,7 +34,7 @@ function UploadAudio() {
         onClick={() => {
           setStatus('pending');
           postDream(blob as Blob, createFullName(name, date)).then(() =>
-            updateDreams()
+            updateDreams({ successfullyMessage: 'saved successfully' })
           );
         }}>
         save

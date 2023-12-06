@@ -6,8 +6,12 @@ export default function Preview() {
   return (
     <>
       <h1>preview:</h1>
-      <h3>{createFullName(name, date)}</h3>
-      {blob && <audio controls src={URL.createObjectURL(blob as Blob)} />}
+      <h3>name: {createFullName(name, date)}</h3>
+      {blob ? (
+        <audio controls src={URL.createObjectURL(blob as Blob)} />
+      ) : (
+        <h3>no audio file</h3>
+      )}
     </>
   );
 }

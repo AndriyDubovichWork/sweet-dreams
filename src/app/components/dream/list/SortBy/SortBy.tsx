@@ -16,7 +16,7 @@ export default function SortBy() {
       <Button
         onClick={() => {
           setIsSortByReversed(!isSortByReversed);
-          updateDreams(undefined, !isSortByReversed);
+          updateDreams({ isReversed: !isSortByReversed });
         }}>
         {isSortByReversed ? 'reversed' : 'not reversed'}
       </Button>
@@ -27,7 +27,7 @@ export default function SortBy() {
             disabled={id === sortById}
             onClick={() => {
               setSortById(id);
-              updateDreams(id);
+              updateDreams({ id });
             }}>
             <h1>{name}</h1>
           </Button>

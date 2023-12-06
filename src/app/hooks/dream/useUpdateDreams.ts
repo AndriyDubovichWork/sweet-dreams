@@ -1,3 +1,4 @@
+import { UpdateDreams } from '@/app/types/hooks/dream/UpdateDreams';
 import { getDreams } from '../../api/requests';
 import { useLoadingStateStore } from '../../store/dream/Shared/useLoadingStateStore';
 import { useSavedDreamsStore } from '../../store/dream/list/useSavedDreamsStore';
@@ -10,9 +11,13 @@ function useUpdateDreams() {
     useSavedDreamsStore();
   const { search } = useSearchStore();
 
-  const { setStatus } = useLoadingStateStore();
+  const { setStatus, setMessage } = useLoadingStateStore();
 
-  function updateDreams(id?: number, isReversed?: boolean) {
+  function updateDreams({
+    id,
+    isReversed,
+    successfullyMessage,
+  }: UpdateDreams = {}) {
     setStatus('pending');
     return getDreams(
       sortBy[id === undefined ? sortById : id].value,
@@ -23,7 +28,8 @@ function useUpdateDreams() {
       setBlob(null);
       setName('');
       setStatus('fullfiled');
-      setTimeout(() => setStatus(''), 10_000);
+      setMessage(successfullyMessage || 'completed successfully');
+      setTimeout(() => setStatus(''), 6_000);
     });
   }
 
