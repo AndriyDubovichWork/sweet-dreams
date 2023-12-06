@@ -1,19 +1,17 @@
 'use client';
 
-import React, { useRef } from 'react';
-
 import { postDream } from '../../../../api/requests';
 import Input from '../../../Shared/Input/Input';
 
+import StatusMessage from '@/app/HOCs/Shared/StatusMessage/StatusMessage';
+import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
+import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
+import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
+import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
+import createFullName from '@/app/utils/dream/new/createFullName';
 import Button from '../../../Shared/Button/Button';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../RecordAudio/RecordAudio';
-import createFullName from '@/app/utils/dream/new/createFullName';
-import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
-import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
-import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
-import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
-import StatusMessage from '@/app/HOCs/Shared/StatusMessage/StatusMessage';
 
 function UploadAudio() {
   const { blob, name, setName, date, setDate } = useNewDreamStore();
@@ -38,8 +36,7 @@ function UploadAudio() {
           postDream(blob as Blob, createFullName(name, date)).then(() =>
             updateDreams()
           );
-        }}
-      >
+        }}>
         save
       </Button>
     </StatusMessage>

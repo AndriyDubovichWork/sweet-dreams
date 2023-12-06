@@ -1,5 +1,5 @@
-import Auth from './Auth';
 import { drive_v3 } from '@googleapis/drive';
+import Auth from './Auth';
 
 export default async function renameFile(fileId: string, newName: string) {
   const drive = (await Auth()) as drive_v3.Drive;

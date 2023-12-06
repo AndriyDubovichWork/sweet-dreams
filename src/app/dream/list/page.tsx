@@ -5,7 +5,6 @@ import AudiosList from '@/app/components/dream/list/AudiosList/AudiosList';
 import SearchDream from '@/app/components/dream/list/SearchDream/SearchDream';
 import SortBy from '@/app/components/dream/list/SortBy/SortBy';
 import Link from 'next/link';
-import React from 'react';
 
 export default function DreamsList() {
   return (

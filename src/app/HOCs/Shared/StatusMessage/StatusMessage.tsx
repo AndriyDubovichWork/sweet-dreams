@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import style from './StatusMessage.module.scss';
-import Button from '../../../components/Shared/Button/Button';
 
 import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
 

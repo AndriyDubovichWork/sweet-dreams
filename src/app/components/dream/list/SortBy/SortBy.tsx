@@ -1,7 +1,6 @@
-import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
-import React from 'react';
-import Button from '../../../Shared/Button/Button';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
+import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
+import Button from '../../../Shared/Button/Button';
 
 export default function SortBy() {
   const {
@@ -18,8 +17,7 @@ export default function SortBy() {
         onClick={() => {
           setIsSortByReversed(!isSortByReversed);
           updateDreams(undefined, !isSortByReversed);
-        }}
-      >
+        }}>
         {isSortByReversed ? 'reversed' : 'not reversed'}
       </Button>
       {sortBy.map(({ name, value }, id) => {
@@ -30,8 +28,7 @@ export default function SortBy() {
             onClick={() => {
               setSortById(id);
               updateDreams(id);
-            }}
-          >
+            }}>
             <h1>{name}</h1>
           </Button>
         );

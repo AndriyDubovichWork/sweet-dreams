@@ -1,6 +1,6 @@
 import { drive_v3 } from '@googleapis/drive';
-import Auth from './Auth';
 import { Readable } from 'stream';
+import Auth from './Auth';
 
 export default async function saveFileToDrive(file: FormData) {
   const drive = (await Auth()) as drive_v3.Drive;

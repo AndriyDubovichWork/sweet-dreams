@@ -1,7 +1,6 @@
-import React, { RefObject, useRef, useState } from 'react';
+import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import Input from '../../../Shared/Input/Input';
-import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
 
 function RecordAudio() {
   const { setBlob } = useNewDreamStore();

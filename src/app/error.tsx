@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import Centered from './HOCs/Shared/Centered/Centered';
 import Button from './components/Shared/Button/Button';
 

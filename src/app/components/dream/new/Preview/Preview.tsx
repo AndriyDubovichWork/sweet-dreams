@@ -1,6 +1,5 @@
-import createFullName from '@/app/utils/dream/new/createFullName';
 import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
-import React from 'react';
+import createFullName from '@/app/utils/dream/new/createFullName';
 
 export default function Preview() {
   const { blob, date, name } = useNewDreamStore();

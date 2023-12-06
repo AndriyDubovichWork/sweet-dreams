@@ -1,7 +1,6 @@
-import React from 'react';
-import style from './Spinner.module.scss';
-import { AiOutlineLoading } from 'react-icons/ai';
 import { IconBaseProps } from 'react-icons';
+import { AiOutlineLoading } from 'react-icons/ai';
+import style from './Spinner.module.scss';
 
 export default function Spinner({ className, ...props }: IconBaseProps) {
   return (

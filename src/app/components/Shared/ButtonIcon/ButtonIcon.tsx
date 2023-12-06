@@ -1,8 +1,7 @@
 import { ButtonProps } from '@/app/types/components/Shared/Button';
 import { IconProps } from '@/app/types/components/Shared/Icon';
-import React from 'react';
-import Icon from '../Icon/Icon';
 import Button from '../Button/Button';
+import Icon from '../Icon/Icon';
 
 function ButtonIcon({
   children,

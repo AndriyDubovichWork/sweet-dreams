@@ -1,12 +1,9 @@
 'use client';
 
-import React from 'react';
-import { AiOutlineUserAdd } from 'react-icons/ai';
-import Button from '../Button/Button';
-import style from './Header.module.scss';
+import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
 import Link from 'next/link';
 import UserDropDown from '../../user/UserDropDown/UserDropDown';
-import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
+import style from './Header.module.scss';
 
 export default function Header() {
   const { setStatus } = useLoadingStateStore();

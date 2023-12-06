@@ -1,4 +1,3 @@
-import React from 'react';
 import style from './AcessDenied.module.scss';
 
 export default function AcessDenied() {

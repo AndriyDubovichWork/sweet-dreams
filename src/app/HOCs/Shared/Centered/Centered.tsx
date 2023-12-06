@@ -1,6 +1,5 @@
-import React from 'react';
-import style from './Centered.module.scss';
 import { centeredProps } from '@/app/types/HOCs/Sared/Centered';
+import style from './Centered.module.scss';
 
 export default function Centered({
   children,

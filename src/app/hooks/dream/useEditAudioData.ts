@@ -1,14 +1,13 @@
-import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
-import useUpdateDreams from './useUpdateDreams';
-import addProcessingProperty from '@/app/utils/dream/list/addProcessingProperty';
-import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
 import { deleteDream, renameDream } from '@/app/api/requests';
-import rename from '@/app/utils/dream/list/rename';
 import { useApproveAcrtionStore } from '@/app/store/dream/Shared/useApproveAcrtionStore';
-import { File } from '@/app/types/store/savedDreamsStore';
-import { useState } from 'react';
+import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
 import { EditAudioData } from '@/app/types/hooks/dream/EditAudioData';
 import divideFullName from '@/app/utils/dream/Shared/divideFullName';
+import stringDateFormater from '@/app/utils/dream/Shared/stringDateFormater';
+import addProcessingProperty from '@/app/utils/dream/list/addProcessingProperty';
+import rename from '@/app/utils/dream/list/rename';
+import { useState } from 'react';
+import useUpdateDreams from './useUpdateDreams';
 
 export default function useEditAudioData({ file, id }: EditAudioData) {
   const { name: fullName, size, id: fileId, processing, createdTime } = file;
