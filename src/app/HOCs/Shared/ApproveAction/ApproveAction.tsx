@@ -2,30 +2,43 @@ import { ReactNode } from 'react';
 import Button from '../../../components/Shared/Button/Button';
 import style from './ApproveAction.module.scss';
 
-import { useApproveAcrtionStore } from '@/app/store/dream/Shared/useApproveAcrtionStore';
+import Input from '@/app/components/Shared/Input/Input';
+import { useApproveActionStore } from '@/app/store/dream/Shared/useApproveActionStore';
+import Centered from '../Centered/Centered';
+import { useDeleteFileStore } from '@/app/store/dream/list/useDeleteFileStore';
 
 function ApproveAction({ children }: { children: ReactNode }) {
-  const { approve, setApprove, approveCallback } = useApproveAcrtionStore();
+  const { approve, type, approveCallback, resetApprove } =
+    useApproveActionStore();
+  const { deletingFileName, localName, setLocalName } = useDeleteFileStore();
   return (
     <>
       {approve && (
-        <div className={style.approveAction}>
+        <Centered className={style.approveAction}>
           <p>{approve}</p>
+          {type === 'deletion' && (
+            <Input
+              onChange={(e) => setLocalName(e.target.value)}
+              value={localName}
+            />
+          )}
           <Button
+            disabled={type === 'deletion' && deletingFileName !== localName}
             onClick={() => {
               approveCallback();
-
-              setApprove({ approve: null, approveCallback: () => {} });
+              setLocalName('');
+              resetApprove();
             }}>
             Yes
           </Button>
           <Button
-            onClick={() =>
-              setApprove({ approve: null, approveCallback: () => {} })
-            }>
+            onClick={() => {
+              resetApprove();
+              setLocalName('');
+            }}>
             No
           </Button>
-        </div>
+        </Centered>
       )}
       {children}
     </>

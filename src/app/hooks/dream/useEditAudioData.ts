@@ -1,5 +1,5 @@
 import { deleteDream, renameDream } from '@/app/api/requests';
-import { useApproveAcrtionStore } from '@/app/store/dream/Shared/useApproveAcrtionStore';
+import { useApproveActionStore } from '@/app/store/dream/Shared/useApproveActionStore';
 import { useSavedDreamsStore } from '@/app/store/dream/list/useSavedDreamsStore';
 import { EditAudioData } from '@/app/types/hooks/dream/EditAudioData';
 import divideFullName from '@/app/utils/dream/Shared/divideFullName';
@@ -8,6 +8,7 @@ import addProcessingProperty from '@/app/utils/dream/list/addProcessingProperty'
 import rename from '@/app/utils/dream/list/rename';
 import { useState } from 'react';
 import useUpdateDreams from './useUpdateDreams';
+import { useDeleteFileStore } from '@/app/store/dream/list/useDeleteFileStore';
 
 export default function useEditAudioData({ file, id }: EditAudioData) {
   const { name: fullName, id: fileId, createdTime } = file;
@@ -16,25 +17,35 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
 
   const { files, setFiles } = useSavedDreamsStore();
   const updateDreams = useUpdateDreams();
-  const { setApprove } = useApproveAcrtionStore();
+  const { setApprove } = useApproveActionStore();
+
+  const { setDeletingFileName } = useDeleteFileStore();
 
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
 
   const renameFile = () => {
-    setFiles(addProcessingProperty(files, id, true));
-    const fullLocalName = `${localName} ${stringDateFormater(createdTime)}`;
-    renameDream(fileId, fullLocalName).then(() => {
-      setEditable(false);
-      updateDreams().then(() => {
-        rename(addProcessingProperty(files, id, false), id, fullLocalName);
-      });
+    setApprove({
+      approve: `are you sure you want to rename "${name}" to "${localName}"`,
+      type: 'rename',
+      approveCallback: () => {
+        setFiles(addProcessingProperty(files, id, true));
+        const fullLocalName = `${localName} ${stringDateFormater(createdTime)}`;
+        renameDream(fileId, fullLocalName).then(() => {
+          setEditable(false);
+          updateDreams().then(() => {
+            rename(addProcessingProperty(files, id, false), id, fullLocalName);
+          });
+        });
+      },
     });
   };
 
-  const deleteFile = () =>
+  const deleteFile = () => {
+    setDeletingFileName(name);
     setApprove({
-      approve: 'are you shure you want to delete ' + name,
+      approve: `to delete ${name} type "${name}" in following input`,
+      type: 'deletion',
       approveCallback: () => {
         deleteDream(fileId).then(() => {
           updateDreams();
@@ -42,7 +53,7 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
         setFiles(addProcessingProperty(files, id, true));
       },
     });
-
+  };
   return {
     deleteFile,
     renameFile,

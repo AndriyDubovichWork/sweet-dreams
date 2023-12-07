@@ -3,6 +3,7 @@ import style from './Centered.module.scss';
 
 export default function Centered({
   children,
+  className,
   absolute = true,
   verticaly = true,
   horizzontaly = true,
@@ -34,5 +35,5 @@ export default function Centered({
   if (content) {
     centered = `${centered} ${style.content}`;
   }
-  return <div className={centered}>{children}</div>;
+  return <div className={`${centered} ${className}`}>{children}</div>;
 }
