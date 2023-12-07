@@ -44,7 +44,7 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
   const deleteFile = () => {
     setDeletingFileName(name);
     setApprove({
-      approve: `to delete ${name} type "${name}" in following input`,
+      approve: `to delete dream type "${name}" in following input`,
       type: 'deletion',
       approveCallback: () => {
         deleteDream(fileId).then(() => {
