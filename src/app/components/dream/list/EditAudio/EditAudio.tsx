@@ -35,7 +35,9 @@ function EditAudio({ file, id }: { file: File; id: number }) {
         <td>{date ? date : stringDateFormater(createdTime)}</td>
 
         <td>
-          <ButtonIcon disabled={processing} onClick={renameFile}>
+          <ButtonIcon
+            disabled={processing || localName === name}
+            onClick={renameFile}>
             <FaSave />
           </ButtonIcon>
         </td>

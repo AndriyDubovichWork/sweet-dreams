@@ -4,8 +4,8 @@ import style from './ApproveAction.module.scss';
 
 import Input from '@/app/components/Shared/Input/Input';
 import { useApproveActionStore } from '@/app/store/dream/Shared/useApproveActionStore';
-import Centered from '../Centered/Centered';
 import { useDeleteFileStore } from '@/app/store/dream/list/useDeleteFileStore';
+import Centered from '../Centered/Centered';
 
 function ApproveAction({ children }: { children: ReactNode }) {
   const { approve, type, approveCallback, resetApprove } =
