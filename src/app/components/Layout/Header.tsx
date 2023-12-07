@@ -2,7 +2,7 @@
 
 import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
 import Link from 'next/link';
-import UserDropDown from '../../user/UserDropDown/UserDropDown';
+import UserDropDown from '../user/UserDropDown/UserDropDown';
 import style from './Header.module.scss';
 
 export default function Header() {

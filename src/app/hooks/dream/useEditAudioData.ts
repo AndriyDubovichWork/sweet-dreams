@@ -10,7 +10,7 @@ import { useState } from 'react';
 import useUpdateDreams from './useUpdateDreams';
 
 export default function useEditAudioData({ file, id }: EditAudioData) {
-  const { name: fullName, size, id: fileId, processing, createdTime } = file;
+  const { name: fullName, id: fileId, createdTime } = file;
 
   const { date, name } = divideFullName(fullName);
 
