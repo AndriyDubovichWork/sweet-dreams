@@ -3,7 +3,6 @@
 import { postDream } from '../../../../api/requests';
 import Input from '../../../Shared/Input/Input';
 
-import StatusMessage from '@/app/HOCs/Shared/StatusMessage/StatusMessage';
 import useUpdateDreams from '@/app/hooks/dream/useUpdateDreams';
 import { useLoadingStateStore } from '@/app/store/dream/Shared/useLoadingStateStore';
 import { useNewDreamStore } from '@/app/store/dream/new/useNewDreamStore';
@@ -12,6 +11,7 @@ import createFullName from '@/app/utils/dream/new/createFullName';
 import Button from '../../../Shared/Button/Button';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../RecordAudio/RecordAudio';
+import StatusMessage from '@/app/HOCs/Shared/StatusMessage/StatusMessage';
 
 function UploadAudio() {
   const { blob, name, setName, date, setDate } = useNewDreamStore();

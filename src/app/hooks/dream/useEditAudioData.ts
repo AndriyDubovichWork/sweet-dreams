@@ -26,16 +26,22 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
 
   const renameFile = () => {
     setApprove({
-      approve: `are you sure you want to rename "${name}" to "${localName}"`,
+      approve: `are you sure you want to change name from "${name}" to "${localName}"`,
       type: 'rename',
       approveCallback: () => {
         setFiles(addProcessingProperty(files, id, true));
         const fullLocalName = `${localName} ${stringDateFormater(createdTime)}`;
         renameDream(fileId, fullLocalName).then(() => {
           setEditable(false);
-          updateDreams().then(() => {
-            rename(addProcessingProperty(files, id, false), id, fullLocalName);
-          });
+          updateDreams({ successfullyMessage: 'renamed successfully' }).then(
+            () => {
+              rename(
+                addProcessingProperty(files, id, false),
+                id,
+                fullLocalName
+              );
+            }
+          );
         });
       },
     });
@@ -48,7 +54,7 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
       type: 'deletion',
       approveCallback: () => {
         deleteDream(fileId).then(() => {
-          updateDreams();
+          updateDreams({ successfullyMessage: 'deleted successfully' });
         });
         setFiles(addProcessingProperty(files, id, true));
       },

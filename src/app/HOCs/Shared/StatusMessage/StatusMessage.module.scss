@@ -1,5 +1,5 @@
 .statusMessage {
-  position: absolute;
+  position: fixed;
   bottom: 2vh;
   right: 1vw;
   padding: 10px 20px;
@@ -14,8 +14,8 @@
   }
 }
 .fullfiled {
-  background-color: rgba(0, 255, 0, 0.3);
+  background-color: rgb(40, 167, 69);
 }
 .error {
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgb(220, 53, 69);
 }

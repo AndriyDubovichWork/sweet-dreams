@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import Header from './components/Layout/Header';
 import Context from './context';
-import './globals.css';
+import './globals.scss';
 
 export const metadata: Metadata = {
   title: 'sweet dreams',

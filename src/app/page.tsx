@@ -1,6 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import './fonts.scss';
 import style from './home.module.scss';
 
 export default function Home() {

@@ -28,8 +28,12 @@ function useUpdateDreams() {
       setBlob(null);
       setName('');
       setStatus('fullfiled');
-      setMessage(successfullyMessage || 'completed successfully');
-      setTimeout(() => setStatus(''), 6_000);
+      successfullyMessage && setMessage(successfullyMessage);
+
+      setTimeout(() => {
+        setStatus('');
+        setMessage('');
+      }, 6_000);
     });
   }
 
