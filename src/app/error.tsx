@@ -1,6 +1,7 @@
 'use client';
-import Centered from './HOCs/Shared/Centered/Centered';
-import Button from './components/Shared/Button/Button';
+
+import Centered from './features/dreams/HOCs/Shared/Centered/Centered';
+import Button from './features/dreams/components/Shared/Button/Button';
 
 export default function Error({
   error,
