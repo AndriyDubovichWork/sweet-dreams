@@ -25,9 +25,9 @@ function UploadAudio() {
       <Input
         type='date'
         value={stringDateFormater(date, 'yyyy-mm-dd')}
-        onChange={(e: any) => setDate(e.target.value)}
+        onChange={(e) => setDate(e.target.value)}
       />
-      <Input value={name} onChange={(e: any) => setName(e.target.value)} />
+      <Input value={name} onChange={(e) => setName(e.target.value)} />
       <Preview />
       <Button
         disabled={isButtonDisabled}

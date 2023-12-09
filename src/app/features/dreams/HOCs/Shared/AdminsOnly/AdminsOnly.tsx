@@ -1,11 +1,11 @@
 'use client';
 
-import { UserRights } from '@/app/types/Shared/session';
 import { useSession } from 'next-auth/react';
 import { ReactNode } from 'react';
 import AcessDenied from '../../../components/Shared/AcessDenied/AcessDenied';
 import Spinner from '../../../components/Shared/Spinner/Spinner';
 import Centered from '../Centered/Centered';
+import { UserRights } from '../../../types/Shared/session';
 
 export default function AdminsOnly({ children }: { children: ReactNode }) {
   const { data: session }: { data: any } = useSession();

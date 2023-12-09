@@ -1,4 +1,4 @@
-import { InputProps } from '@/app/types/components/Shared/Input';
+import { InputProps } from '../../../types/components/Shared/Input';
 import style from './Input.module.scss';
 
 export default function Input(props: InputProps) {

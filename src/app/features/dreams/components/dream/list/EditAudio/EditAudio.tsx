@@ -28,7 +28,7 @@ function EditAudio({ file, id }: { file: File; id: number }) {
         <td>
           <Input
             value={localName}
-            onChange={(e: any) => setLocalName(e.target.value)}
+            onChange={(e) => setLocalName(e.target.value)}
           />
         </td>
         <td>{filesize(size)}</td>

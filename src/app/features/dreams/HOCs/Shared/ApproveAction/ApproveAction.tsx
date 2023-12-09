@@ -18,7 +18,7 @@ function ApproveAction({ children }: { children: ReactNode }) {
           <p>{approve}</p>
           {type === 'deletion' && (
             <Input
-              onChange={(e: any) => setLocalName(e.target.value)}
+              onChange={(e) => setLocalName(e.target.value)}
               value={localName}
             />
           )}

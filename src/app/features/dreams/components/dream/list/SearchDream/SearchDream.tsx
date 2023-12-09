@@ -9,7 +9,7 @@ export default function SearchDream() {
 
   return (
     <div>
-      <Input value={search} onChange={(e: any) => setSearch(e.target.value)} />
+      <Input value={search} onChange={(e) => setSearch(e.target.value)} />
       <Button onClick={() => updateDreams()}>search</Button>
     </div>
   );
