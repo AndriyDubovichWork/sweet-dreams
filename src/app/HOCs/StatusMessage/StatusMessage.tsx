@@ -15,12 +15,14 @@ export default function StatusMessage({ children }: { children: ReactNode }) {
     case 'error':
       return (
         <>
-          <div className={`${style.statusMessage} ${style[status]}`}>
-            <p className={style.message}>{message}</p>
-            <Button onClick={() => setStatus('')}>
-              <IoMdClose />
-            </Button>
-          </div>
+          {message && (
+            <div className={`${style.statusMessage} ${style[status]}`}>
+              <p className={style.message}>{message}</p>
+              <Button onClick={() => setStatus('')}>
+                <IoMdClose />
+              </Button>
+            </div>
+          )}
           {children}
         </>
       );
