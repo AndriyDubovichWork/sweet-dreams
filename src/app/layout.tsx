@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Context from './context';
 import './globals.scss';
-import Header from './features/dreams/components/Layout/Header';
+import Header from './Layout/Header';
 
 export const metadata: Metadata = {
   title: 'sweet dreams',

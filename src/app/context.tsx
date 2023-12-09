@@ -2,7 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 import React from 'react';
-import ApproveAction from './features/dreams/HOCs/Shared/ApproveAction/ApproveAction';
+import ApproveAction from './HOCs/ApproveAction/ApproveAction';
 
 export default function Context({ children }: { children: React.ReactNode }) {
   return (

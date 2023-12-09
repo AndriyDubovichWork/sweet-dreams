@@ -1,0 +1,21 @@
+.statusMessage {
+  position: fixed;
+  bottom: 2vh;
+  right: 1vw;
+  padding: 10px 20px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 12px;
+
+  .message {
+    margin-right: 10px;
+  }
+}
+.fulfilled {
+  background-color: rgb(40, 167, 69);
+}
+.error {
+  background-color: rgb(220, 53, 69);
+}
