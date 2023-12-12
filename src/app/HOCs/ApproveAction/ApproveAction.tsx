@@ -6,8 +6,9 @@ import { useApproveActionStore } from '@/app/store/useApproveActionStore';
 import { useDeleteFileStore } from '@/app/features/dreams/store/list/useDeleteFileStore';
 import Input from '@/app/components/Input/Input';
 import Button from '@/app/components/Button/Button';
+import { ApproveActionProps } from '@/app/types/HOCs/ApproveAction';
 
-function ApproveAction({ children }: { children: ReactNode }) {
+function ApproveAction({ children }: ApproveActionProps) {
   const { approve, type, approveCallback, resetApprove } =
     useApproveActionStore();
   const { deletingFileName, localName, setLocalName } = useDeleteFileStore();

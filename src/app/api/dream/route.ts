@@ -1,10 +1,10 @@
 import deleteFile from '@/app/api/dream/drive/deleteFile';
 import getFiles from '@/app/api/dream/drive/getFiles';
 import saveFileToDrive from '@/app/api/dream/drive/saveFileToDrive';
-import { OrderByValues } from '@/app/types/store/savedDreamsStore';
 import { NextResponse } from 'next/server';
 import renameFile from './drive/renameFile';
 import searchFileByName from './drive/searchFileByName';
+import { OrderByValues } from '@/app/features/dreams/types/store/savedDreamsStore';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -15,7 +15,7 @@ export async function PUT(req: Request) {
   const savedFile = await saveFileToDrive(formData);
   if (savedFile.status !== 200) {
     return NextResponse.json(
-      { error: 'couldnt upload file to drive' },
+      { error: "couldn't upload file to drive" },
       { status: 500 }
     );
   }
@@ -39,7 +39,7 @@ export async function GET(req: Request) {
 
   if (recivedFiles.status !== 200) {
     return NextResponse.json(
-      { error: 'couldnt load files from drive' },
+      { error: "couldn't load files from drive" },
       { status: 500 }
     );
   }
@@ -56,7 +56,7 @@ export async function DELETE(req: Request) {
 
   if (deletedFile.status !== 204) {
     return NextResponse.json(
-      { error: 'couldnt delete file from drive' },
+      { error: "couldn't delete file from drive" },
       { status: 500 }
     );
   }

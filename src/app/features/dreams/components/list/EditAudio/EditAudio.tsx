@@ -7,8 +7,9 @@ import useEditAudioData from '../../../hooks/useEditAudioData';
 import Input from '@/app/components/Input/Input';
 import stringDateFormatter from '@/app/utils/stringDateFormatter';
 import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
+import { EditAudioProps } from '../../../types/components/list/EditAudio';
 
-function EditAudio({ file, id }: { file: File; id: number }) {
+function EditAudio({ file, id }: EditAudioProps) {
   const { size, processing, createdTime } = file;
 
   const {

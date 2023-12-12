@@ -1,4 +1,4 @@
-import { processingProps } from '@/app/types/components/Processing';
+import { processingProps } from '@/app/types/HOCs/Processing';
 import style from './Processing.module.scss';
 import loadingSvg from './loading.svg';
 

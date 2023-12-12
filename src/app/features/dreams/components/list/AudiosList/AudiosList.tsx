@@ -14,9 +14,7 @@ function AudiosList() {
   const updateDreams = useUpdateDreams();
 
   useEffect(() => {
-    if (!files.length) {
-      updateDreams();
-    }
+    if (!files.length) updateDreams();
   }, []);
   switch (status) {
     case 'pending':
