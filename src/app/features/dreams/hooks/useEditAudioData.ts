@@ -1,7 +1,7 @@
 import { deleteDream, renameDream } from '@/app/api/requests';
 import { useState } from 'react';
 import useUpdateDreams from './useUpdateDreams';
-import divideFullName from '@/app/utils/divideFullName';
+import divideFullName from '@/app/features/dreams/utils/Shared/divideFullName';
 import { useSavedDreamsStore } from '../store/list/useSavedDreamsStore';
 import { useApproveActionStore } from '@/app/store/useApproveActionStore';
 import { useDeleteFileStore } from '../store/list/useDeleteFileStore';

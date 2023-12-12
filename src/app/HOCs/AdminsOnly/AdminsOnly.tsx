@@ -10,6 +10,7 @@ import { AdminsOnlyProps } from '@/app/types/HOCs/AdminsOnly';
 export default function AdminsOnly({ children }: AdminsOnlyProps) {
   const { data: session }: { data: any } = useSession();
   const role: UserRights = session?.user?.role;
+
   switch (role) {
     case 'admin':
       return <main>{children}</main>;

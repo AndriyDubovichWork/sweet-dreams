@@ -15,6 +15,7 @@
     "filesize": "^10.1.0",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.5",
     "next": "13.5.6",
     "next-auth": "^4.24.3",
     "pcloud-sdk-js": "^2.0.0",
