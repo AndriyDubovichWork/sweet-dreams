@@ -15,7 +15,8 @@ import createFullName from '../../../utils/new/createFullName';
 function UploadAudio() {
   const { blob, name, setName, date, setDate } = useNewDreamStore();
   const updateDreams = useUpdateDreams();
-  const { setStatus, status } = useLoadingStateStore();
+  const { setStatus, setMessage, status } = useLoadingStateStore();
+
   const isStatusOk = !status || status === 'fulfilled';
   const isButtonDisabled = !blob || !isStatusOk;
   return (
@@ -32,9 +33,18 @@ function UploadAudio() {
         disabled={isButtonDisabled}
         onClick={() => {
           setStatus('pending');
-          postDream(blob as Blob, createFullName(name, date)).then(() =>
-            updateDreams({ successfullyMessage: 'saved successfully' })
-          );
+          postDream(blob as Blob, createFullName(name, date))
+            .then(() =>
+              updateDreams({ successfullyMessage: 'saved successfully' })
+            )
+            .catch((e: Error) => {
+              setStatus('error');
+              setMessage(e.message);
+              setTimeout(() => {
+                setStatus('');
+                setMessage('');
+              }, 6_000);
+            });
         }}>
         save
       </Button>
