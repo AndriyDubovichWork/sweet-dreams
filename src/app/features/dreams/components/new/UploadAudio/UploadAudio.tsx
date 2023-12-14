@@ -39,7 +39,7 @@ function UploadAudio() {
             )
             .catch((e: Error) => {
               setStatus('error');
-              setMessage(e.message);
+              setMessage("couldn't upload dream");
               setTimeout(() => {
                 setStatus('');
                 setMessage('');
