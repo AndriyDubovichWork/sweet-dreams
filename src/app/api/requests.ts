@@ -15,8 +15,6 @@ export async function postDream(blob: Blob, fileName: string) {
     headers: {
       'Content-Type': `multipart/form-data`,
     },
-    // 50mb
-    maxBodyLength: 5_000_000,
   });
   return res;
 }
