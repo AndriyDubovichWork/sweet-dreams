@@ -19,7 +19,7 @@ export default function RegisteredOnly({ children }: RegisteredOnlyProps) {
   const { data: session }: { data: any } = useSession();
 
   if (users?.includes(session?.user?.email)) {
-    return <main>{children}</main>;
+    return children;
   } else {
     return (
       <Centered>

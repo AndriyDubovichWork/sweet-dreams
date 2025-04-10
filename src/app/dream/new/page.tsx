@@ -3,8 +3,10 @@ import UploadAudio from '@/app/features/dreams/components/new/UploadAudio/Upload
 
 export default function NewDream() {
   return (
-    <AcessControll isAdminOnly>
-      <UploadAudio />
-    </AcessControll>
+    <main>
+      <AcessControll isAdminOnly>
+        <UploadAudio />
+      </AcessControll>
+    </main>
   );
 }

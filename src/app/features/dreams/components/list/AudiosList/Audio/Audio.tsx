@@ -10,13 +10,14 @@ function Audio({ file, id }: AudioProps) {
       <tr className={file.processing ? style.processing : ''}>
         <td>
           <audio controls src={file.webContentLink}></audio>
+        </td>
 
+        <EditAudio file={file} id={id} />
+        <td>
           <a href={file.webContentLink} target='_blank'>
             <IoMdCloudDownload size={36} />
           </a>
         </td>
-
-        <EditAudio file={file} id={id} />
       </tr>
     </Processing>
   );

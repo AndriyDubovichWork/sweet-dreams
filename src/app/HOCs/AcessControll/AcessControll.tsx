@@ -18,7 +18,7 @@ export default function AcessControll({
 
   switch (role) {
     case 'admin':
-      return <main>{children}</main>;
+      return children;
     case 'user':
       if (IsregisteredUsersAllowed) {
         return <RegisteredOnly>{children}</RegisteredOnly>;
