@@ -1,6 +1,6 @@
 'use client';
 
-import AdminsOnly from '@/app/HOCs/AdminsOnly/AdminsOnly';
+import AcessControll from '@/app/HOCs/AcessControll/AcessControll';
 import StatusMessage from '@/app/HOCs/StatusMessage/StatusMessage';
 import AudiosList from '@/app/features/dreams/components/list/AudiosList/AudiosList';
 import SearchDream from '@/app/features/dreams/components/list/SearchDream/SearchDream';
@@ -9,13 +9,13 @@ import Link from 'next/link';
 
 export default function DreamsList() {
   return (
-    <AdminsOnly>
+    <AcessControll IsregisteredUsersAllowed isAdminOnly>
       <StatusMessage>
         <Link href='/dream/new'>new</Link>
         <SearchDream />
         <SortBy />
         <AudiosList />
       </StatusMessage>
-    </AdminsOnly>
+    </AcessControll>
   );
 }

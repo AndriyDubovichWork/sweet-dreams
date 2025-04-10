@@ -8,6 +8,7 @@ import Input from '@/app/components/Input/Input';
 import stringDateFormatter from '@/app/utils/stringDateFormatter';
 import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
 import { EditAudioProps } from '../../../types/components/list/EditAudio';
+import AcessControll from '@/app/HOCs/AcessControll/AcessControll';
 
 function EditAudio({ file, id }: EditAudioProps) {
   const { size, processing, createdTime } = file;
@@ -38,7 +39,8 @@ function EditAudio({ file, id }: EditAudioProps) {
         <td>
           <ButtonIcon
             disabled={processing || localName === name}
-            onClick={renameFile}>
+            onClick={renameFile}
+          >
             <FaSave />
           </ButtonIcon>
         </td>
@@ -48,7 +50,8 @@ function EditAudio({ file, id }: EditAudioProps) {
             onClick={() => {
               setEditable(false);
               setLocalName(name);
-            }}>
+            }}
+          >
             <MdOutlineCancel size={30} />
           </ButtonIcon>
         </td>
@@ -60,17 +63,18 @@ function EditAudio({ file, id }: EditAudioProps) {
         <td>{name}</td>
         <td>{filesize(size)}</td>
         <td>{date ? date : stringDateFormatter(createdTime)}</td>
-
-        <td>
-          <ButtonIcon disabled={processing} onClick={() => setEditable(true)}>
-            <MdEdit />
-          </ButtonIcon>
-        </td>
-        <td>
-          <ButtonIcon disabled={processing} onClick={deleteFile}>
-            <AiOutlineDelete />
-          </ButtonIcon>
-        </td>
+        <AcessControll>
+          <td>
+            <ButtonIcon disabled={processing} onClick={() => setEditable(true)}>
+              <MdEdit />
+            </ButtonIcon>
+          </td>
+          <td>
+            <ButtonIcon disabled={processing} onClick={deleteFile}>
+              <AiOutlineDelete />
+            </ButtonIcon>
+          </td>
+        </AcessControll>
       </>
     );
   }

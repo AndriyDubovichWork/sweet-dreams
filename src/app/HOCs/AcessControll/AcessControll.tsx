@@ -5,9 +5,14 @@ import Spinner from '@/app/components/Spinner/Spinner';
 import { UserRights } from '@/app/types/Shared/session';
 import { useSession } from 'next-auth/react';
 import Centered from '../Centered/Centered';
-import { AdminsOnlyProps } from '@/app/types/HOCs/AdminsOnly';
+import { AcessControllProps } from '@/app/types/HOCs/AcessControll';
+import RegisteredOnly from '../RegisteredOnly/RegisteredOnly';
 
-export default function AdminsOnly({ children }: AdminsOnlyProps) {
+export default function AcessControll({
+  children,
+  IsregisteredUsersAllowed,
+  isAdminOnly,
+}: AcessControllProps) {
   const { data: session }: { data: any } = useSession();
   const role: UserRights = session?.user?.role;
 
@@ -15,11 +20,18 @@ export default function AdminsOnly({ children }: AdminsOnlyProps) {
     case 'admin':
       return <main>{children}</main>;
     case 'user':
-      return (
-        <Centered>
-          <AccessDenied />
-        </Centered>
-      );
+      if (IsregisteredUsersAllowed) {
+        return <RegisteredOnly>{children}</RegisteredOnly>;
+      }
+      if (isAdminOnly) {
+        return (
+          <Centered>
+            <AccessDenied />
+          </Centered>
+        );
+      } else {
+        return <></>;
+      }
     default:
       return (
         <Centered>
