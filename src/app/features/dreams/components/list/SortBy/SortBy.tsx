@@ -12,7 +12,7 @@ export default function SortBy() {
   } = useSavedDreamsStore();
   const updateDreams = useUpdateDreams();
   return (
-    <>
+    <div>
       <Button
         onClick={() => {
           setIsSortByReversed(!isSortByReversed);
@@ -35,6 +35,6 @@ export default function SortBy() {
           </Button>
         );
       })}
-    </>
+    </div>
   );
 }

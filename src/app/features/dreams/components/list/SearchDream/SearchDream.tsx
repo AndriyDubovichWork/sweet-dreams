@@ -8,9 +8,9 @@ export default function SearchDream() {
   const updateDreams = useUpdateDreams();
 
   return (
-    <>
+    <div>
       <Input value={search} onChange={(e) => setSearch(e.target.value)} />
       <Button onClick={() => updateDreams()}>search</Button>
-    </>
+    </div>
   );
 }

@@ -5,15 +5,16 @@ import StatusMessage from '@/app/HOCs/StatusMessage/StatusMessage';
 import AudiosList from '@/app/features/dreams/components/list/AudiosList/AudiosList';
 import SearchDream from '@/app/features/dreams/components/list/SearchDream/SearchDream';
 import SortBy from '@/app/features/dreams/components/list/SortBy/SortBy';
-import Link from 'next/link';
 
 export default function DreamsList() {
   return (
     <main>
       <AcessControll IsregisteredUsersAllowed isAdminOnly>
         <StatusMessage>
-          <SearchDream />
-          <SortBy />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <SearchDream />
+            <SortBy />
+          </div>
           <AudiosList />
         </StatusMessage>
       </AcessControll>
