@@ -12,7 +12,6 @@ export default function DreamsList() {
     <main>
       <AcessControll IsregisteredUsersAllowed isAdminOnly>
         <StatusMessage>
-          <Link href='/dream/new'>new</Link>
           <SearchDream />
           <SortBy />
           <AudiosList />

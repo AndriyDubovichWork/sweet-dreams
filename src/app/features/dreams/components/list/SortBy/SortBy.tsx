@@ -17,7 +17,8 @@ export default function SortBy() {
         onClick={() => {
           setIsSortByReversed(!isSortByReversed);
           updateDreams({ isReversed: !isSortByReversed });
-        }}>
+        }}
+      >
         {isSortByReversed ? 'reversed' : 'not reversed'}
       </Button>
       {sortBy.map(({ name, value }, id) => {
@@ -28,7 +29,8 @@ export default function SortBy() {
             onClick={() => {
               setSortById(id);
               updateDreams({ id });
-            }}>
+            }}
+          >
             <h1>{name}</h1>
           </Button>
         );

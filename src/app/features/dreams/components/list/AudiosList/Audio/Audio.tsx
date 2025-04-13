@@ -8,9 +8,11 @@ function Audio({ file, id }: AudioProps) {
   return (
     <Processing isProcessing={file.processing}>
       <tr className={file.processing ? style.processing : ''}>
-        <td>
-          <audio controls src={file.webContentLink}></audio>
-        </td>
+        {/* <td>
+          <audio controls>
+            <source src={file.webContentLink} />
+          </audio>
+        </td> */}
 
         <EditAudio file={file} id={id} />
         <td>

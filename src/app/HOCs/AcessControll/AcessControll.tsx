@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import Centered from '../Centered/Centered';
 import { AcessControllProps } from '@/app/types/HOCs/AcessControll';
 import RegisteredOnly from '../RegisteredOnly/RegisteredOnly';
+import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
 
 export default function AcessControll({
   children,
@@ -15,6 +16,7 @@ export default function AcessControll({
 }: AcessControllProps) {
   const { data: session }: { data: any } = useSession();
   const role: UserRights = session?.user?.role;
+  const { status } = useLoadingStateStore();
 
   switch (role) {
     case 'admin':
@@ -23,7 +25,7 @@ export default function AcessControll({
       if (IsregisteredUsersAllowed) {
         return <RegisteredOnly>{children}</RegisteredOnly>;
       }
-      if (isAdminOnly) {
+      if (isAdminOnly && status !== 'pending') {
         return (
           <Centered>
             <AccessDenied />
