@@ -49,7 +49,3 @@ export async function renameDream(fileId: string, newName: string) {
   });
   return res.data.res;
 }
-export async function getUsers(): Promise<string[]> {
-  const res = await axios.get(`/api/users`);
-  return res.data.res;
-}

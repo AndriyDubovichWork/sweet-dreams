@@ -10,4 +10,7 @@ export const useNewDreamStore = create<NewDreamStore>((set) => ({
 
   date: new Date().toLocaleDateString('en-US'),
   setDate: (date) => set((state) => ({ ...state, date })),
+
+  isPrivate: false,
+  setIsPrivate: (isPrivate) => set((state) => ({ ...state, isPrivate })),
 }));

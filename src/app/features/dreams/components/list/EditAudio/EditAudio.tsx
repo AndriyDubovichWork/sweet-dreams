@@ -10,7 +10,7 @@ import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
 import { EditAudioProps } from '../../../types/components/list/EditAudio';
 import AcessControll from '@/app/HOCs/AcessControll/AcessControll';
 
-function EditAudio({ file, id }: EditAudioProps) {
+function EditAudio({ file, id, isPrivate }: EditAudioProps) {
   const { size, processing, createdTime } = file;
 
   const {
@@ -60,7 +60,7 @@ function EditAudio({ file, id }: EditAudioProps) {
   } else {
     return (
       <>
-        <td>{name}</td>
+        <td>{isPrivate ? name.replaceAll('/private/', '') : name}</td>
         <td>{filesize(size)}</td>
         <td>{date ? date : stringDateFormatter(createdTime)}</td>
         <AcessControll>

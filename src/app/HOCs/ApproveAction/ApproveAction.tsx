@@ -29,14 +29,16 @@ function ApproveAction({ children }: ApproveActionProps) {
               approveCallback();
               setLocalName('');
               resetApprove();
-            }}>
+            }}
+          >
             Yes
           </Button>
           <Button
             onClick={() => {
               resetApprove();
               setLocalName('');
-            }}>
+            }}
+          >
             No
           </Button>
         </Centered>

@@ -9,4 +9,7 @@ export type NewDreamStore = {
 
   date: string;
   setDate: (date: string) => void;
+
+  isPrivate: boolean;
+  setIsPrivate: (isPrivate: boolean) => void;
 };

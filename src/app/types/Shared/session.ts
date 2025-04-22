@@ -1,1 +1,1 @@
-export type UserRights = 'admin' | 'user' | 'notAuthorized';
+export type UserRights = 'admin' | 'user' | 'notAuthorized' | 'superUser';

@@ -15,6 +15,9 @@ const handler = NextAuth({
       if (session.user.email === process.env.ADMIN_EMAIL) {
         session.user.role = 'admin';
       }
+      if (process.env.SUPER_USERS_LIST?.includes(session.user.email)) {
+        session.user.role = 'superUser';
+      }
 
       return session;
     },

@@ -13,12 +13,14 @@ import Button from '@/app/components/Button/Button';
 import createFullName from '../../../utils/new/createFullName';
 
 function UploadAudio() {
-  const { blob, name, setName, date, setDate } = useNewDreamStore();
+  const { blob, name, setName, date, setDate, isPrivate, setIsPrivate } =
+    useNewDreamStore();
   const updateDreams = useUpdateDreams();
   const { setStatus, setMessage, status } = useLoadingStateStore();
 
   const isStatusOk = !status || status === 'fulfilled';
   const isButtonDisabled = !blob || !isStatusOk;
+
   return (
     <StatusMessage>
       <RecordAudio />
@@ -28,12 +30,16 @@ function UploadAudio() {
         onChange={(e) => setDate(e.target.value)}
       />
       <Input value={name} onChange={(e) => setName(e.target.value)} />
+      <div style={{ display: 'flex' }}>
+        <Input type='checkbox' onChange={(e) => setIsPrivate(!isPrivate)} />
+        <h3>is Private</h3>
+      </div>
       <Preview />
       <Button
         disabled={isButtonDisabled}
         onClick={() => {
           setStatus('pending');
-          postDream(blob as Blob, createFullName(name, date))
+          postDream(blob as Blob, createFullName(name, date, isPrivate))
             .then(() =>
               updateDreams({ successfullyMessage: 'saved successfully' })
             )

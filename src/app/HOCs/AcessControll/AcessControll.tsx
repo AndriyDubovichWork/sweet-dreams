@@ -22,6 +22,7 @@ export default function AcessControll({
     case 'admin':
       return children;
     case 'user':
+    case 'superUser':
       if (IsregisteredUsersAllowed) {
         return <RegisteredOnly>{children}</RegisteredOnly>;
       }
