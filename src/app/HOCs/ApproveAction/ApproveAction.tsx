@@ -12,6 +12,7 @@ function ApproveAction({ children }: ApproveActionProps) {
   const { approve, type, approveCallback, resetApprove } =
     useApproveActionStore();
   const { deletingFileName, localName, setLocalName } = useDeleteFileStore();
+
   return (
     <>
       {approve && (

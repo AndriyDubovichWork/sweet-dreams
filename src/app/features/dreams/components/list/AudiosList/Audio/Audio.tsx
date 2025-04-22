@@ -24,7 +24,7 @@ function Audio({ file, id }: AudioProps) {
           </audio>
         </td> */}
 
-          <EditAudio file={file} id={id} isPrivate={isPrivate} />
+          <EditAudio file={file} id={id} />
           <td>
             <a href={file.webContentLink} target='_blank'>
               <IoMdCloudDownload size={36} />

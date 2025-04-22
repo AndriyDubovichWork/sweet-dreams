@@ -10,7 +10,7 @@ import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
 import { EditAudioProps } from '../../../types/components/list/EditAudio';
 import AcessControll from '@/app/HOCs/AcessControll/AcessControll';
 
-function EditAudio({ file, id, isPrivate }: EditAudioProps) {
+function EditAudio({ file, id }: EditAudioProps) {
   const { size, processing, createdTime } = file;
 
   const {
@@ -22,6 +22,8 @@ function EditAudio({ file, id, isPrivate }: EditAudioProps) {
     setLocalName,
     date,
     name,
+    isPrivate,
+    setIsprivate,
   } = useEditAudioData({ file, id });
 
   if (editable) {
@@ -32,7 +34,20 @@ function EditAudio({ file, id, isPrivate }: EditAudioProps) {
             value={localName}
             onChange={(e) => setLocalName(e.target.value)}
           />
+          <Input
+            type='checkbox'
+            checked={isPrivate}
+            onChange={() => {
+              setIsprivate(!isPrivate);
+              setLocalName(
+                isPrivate
+                  ? localName.replaceAll('/private/', '')
+                  : localName.replaceAll('/private/', '') + '/private/'
+              );
+            }}
+          />
         </td>
+
         <td>{filesize(size)}</td>
         <td>{date ? date : stringDateFormatter(createdTime)}</td>
 
@@ -44,6 +59,7 @@ function EditAudio({ file, id, isPrivate }: EditAudioProps) {
             <FaSave />
           </ButtonIcon>
         </td>
+
         <td>
           <ButtonIcon
             disabled={processing}

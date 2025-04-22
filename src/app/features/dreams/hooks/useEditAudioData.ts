@@ -23,16 +23,18 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
 
   const [editable, setEditable] = useState(false);
   const [localName, setLocalName] = useState(name);
-
+  const [isPrivate, setIsprivate] = useState(name.includes('/private/'));
   const renameFile = () => {
     setApprove({
       approve: `are you sure you want to change name from "${name}" to "${localName}"`,
       type: 'rename',
       approveCallback: () => {
         setFiles(addProcessingProperty(files, id, true));
-        const fullLocalName = `${localName} ${stringDateFormatter(
-          createdTime
-        )}`;
+        const fullLocalName = `${
+          isPrivate
+            ? localName.replaceAll('/private/', '')
+            : localName + ' /private/'
+        } ${stringDateFormatter(createdTime)}`;
         renameDream(fileId, fullLocalName).then(() => {
           setEditable(false);
           updateDreams({ successfullyMessage: 'renamed successfully' }).then(
@@ -71,5 +73,7 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
     setLocalName,
     date,
     name,
+    isPrivate,
+    setIsprivate,
   };
 }
