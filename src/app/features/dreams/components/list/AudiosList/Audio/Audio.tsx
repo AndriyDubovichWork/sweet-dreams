@@ -17,7 +17,12 @@ function Audio({ file, id }: AudioProps) {
   )
     return (
       <Processing isProcessing={file.processing}>
-        <tr className={file.processing ? style.processing : ''}>
+        <tr
+          className={`${file.processing ? style.processing : ''} ${
+            isPrivate && style.private
+          }
+          `}
+        >
           {/* <td>
           <audio controls>
             <source src={file.webContentLink} />

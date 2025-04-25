@@ -1,0 +1,30 @@
+.content {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  height: 80vh;
+  .previewContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+    .previewButtons {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+  .uploadAudio {
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    .dateIsPrivate {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .checkBox {
+      display: flex;
+    }
+  }
+}

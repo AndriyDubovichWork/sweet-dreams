@@ -9,6 +9,7 @@ import stringDateFormatter from '@/app/utils/stringDateFormatter';
 import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
 import { EditAudioProps } from '../../../types/components/list/EditAudio';
 import AcessControll from '@/app/HOCs/AcessControll/AcessControll';
+import { useEffect } from 'react';
 
 function EditAudio({ file, id }: EditAudioProps) {
   const { size, processing, createdTime } = file;
@@ -25,7 +26,13 @@ function EditAudio({ file, id }: EditAudioProps) {
     isPrivate,
     setIsprivate,
   } = useEditAudioData({ file, id });
-
+  useEffect(() => {
+    setLocalName(
+      isPrivate
+        ? localName.replaceAll('/private/', '') + '/private/'
+        : localName.replaceAll('/private/', '')
+    );
+  }, [isPrivate, setLocalName]);
   if (editable) {
     return (
       <>
@@ -39,11 +46,6 @@ function EditAudio({ file, id }: EditAudioProps) {
             checked={isPrivate}
             onChange={() => {
               setIsprivate(!isPrivate);
-              setLocalName(
-                isPrivate
-                  ? localName.replaceAll('/private/', '')
-                  : localName.replaceAll('/private/', '') + '/private/'
-              );
             }}
           />
         </td>

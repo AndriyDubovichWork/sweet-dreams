@@ -5,6 +5,6 @@ export default function createFullName(
   date: string,
   isPrivate: boolean
 ) {
-  const fullName = isPrivate ? name + ' /private/' : name;
+  const fullName = isPrivate ? name + '/private/' : name;
   return `${fullName ? fullName + ' ' : ''}${stringDateFormatter(date)}`;
 }

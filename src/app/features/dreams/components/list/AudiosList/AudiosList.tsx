@@ -7,11 +7,15 @@ import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';
 import Audio from './Audio/Audio';
 import style from './AudiosList.module.scss';
+import { useTheme } from '@/app/HOCs/ThemeProvider/ThemeProvider';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();
   const { status } = useLoadingStateStore();
   const updateDreams = useUpdateDreams();
+
+  const { theme, themeName, toggleTheme } = useTheme();
+  console.log(themeName);
 
   useEffect(() => {
     if (!files.length) updateDreams();
@@ -21,6 +25,9 @@ function AudiosList() {
       return <Spinner size={90} />;
     case 'fulfilled':
     case '':
+      if (files.length === 0) {
+        return <>no files found</>;
+      }
       return (
         <table className={style.table}>
           {files.map((file, id) => {
