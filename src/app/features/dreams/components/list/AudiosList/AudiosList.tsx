@@ -15,10 +15,11 @@ function AudiosList() {
   const updateDreams = useUpdateDreams();
 
   const { theme, themeName, toggleTheme } = useTheme();
-  console.log(themeName);
 
   useEffect(() => {
-    if (!files.length) updateDreams();
+    if (!files.length && status === '') {
+      updateDreams();
+    }
   }, []);
   switch (status) {
     case 'pending':

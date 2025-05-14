@@ -5,7 +5,7 @@ export default function Preview() {
   const { blob, date, name, isPrivate } = useNewDreamStore();
   return (
     <>
-      <h1>preview:</h1>
+      {(name || blob) && <h1>preview:</h1>}
       {name && <h3>name: {createFullName(name, date, isPrivate)}</h3>}
       {blob && <audio controls src={URL.createObjectURL(blob as Blob)} />}
     </>

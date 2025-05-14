@@ -1,30 +1,86 @@
 .content {
-  display: grid;
-  place-items: center;
-  margin: 0;
-  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+  gap: 2rem;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  max-width: 800px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+
   .previewContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50vw;
+    gap: 2rem;
+    width: 100%;
+
     .previewButtons {
       display: flex;
-      justify-content: space-around;
-      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1.5rem;
     }
   }
+
   .uploadAudio {
     display: flex;
     flex-direction: column;
-    width: 50vw;
+    gap: 1.5rem;
+    width: 100%;
+
     .dateIsPrivate {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      .checkBox {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        h3 {
+          margin: 0;
+          font-size: 1rem;
+          color: #e0e0e0;
+          font-weight: 500;
+        }
+
+        input[type='checkbox'] {
+          width: 1.2rem;
+          height: 1.2rem;
+          accent-color: #6c5ce7;
+          cursor: pointer;
+        }
+      }
     }
-    .checkBox {
-      display: flex;
+  }
+}
+@media (max-width: 768px) {
+  .content {
+    padding: 1.5rem;
+    min-height: auto;
+    background-color: #1a1a1a;
+
+    .uploadAudio {
+      .dateIsPrivate {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+
+        .checkBox {
+          margin-top: 0.5rem;
+        }
+      }
     }
   }
 }

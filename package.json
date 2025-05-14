@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@googleapis/drive": "^8.4.0",
+    "@neondatabase/serverless": "^1.0.0",
     "@types/react-mic": "^12.4.6",
     "axios": "^1.5.1",
     "dotenv": "^16.4.7",
