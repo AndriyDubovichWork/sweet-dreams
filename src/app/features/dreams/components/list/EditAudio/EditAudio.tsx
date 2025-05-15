@@ -2,7 +2,6 @@ import { filesize } from 'filesize';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaSave } from 'react-icons/fa';
 import { MdEdit, MdOutlineCancel } from 'react-icons/md';
-import { File } from '@/app/features/dreams/types/store/savedDreamsStore';
 import useEditAudioData from '../../../hooks/useEditAudioData';
 import Input from '@/app/components/Input/Input';
 import stringDateFormatter from '@/app/utils/stringDateFormatter';

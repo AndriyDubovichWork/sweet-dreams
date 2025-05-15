@@ -2,8 +2,9 @@ import EditAudio from '../../EditAudio/EditAudio';
 import style from './Audio.module.scss';
 import Processing from '@/app/HOCs/Processing/Processing';
 import { AudioProps } from '@/app/features/dreams/types/components/list/Audio';
-import { IoMdCloudDownload } from 'react-icons/io';
 import { useSession } from 'next-auth/react';
+import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
+import { IoMdDownload } from 'react-icons/io';
 
 function Audio({ file, id }: AudioProps) {
   const isPrivate = file.name.includes('/private/');
@@ -18,7 +19,7 @@ function Audio({ file, id }: AudioProps) {
     return (
       <Processing isProcessing={file.processing}>
         <tr
-          className={`${file.processing ? style.processing : ''} ${
+          className={`${file.processing ? style.processing : style.row} ${
             isPrivate && style.private
           }
           `}
@@ -31,8 +32,14 @@ function Audio({ file, id }: AudioProps) {
 
           <EditAudio file={file} id={id} />
           <td>
-            <a href={file.webContentLink} target='_blank'>
-              <IoMdCloudDownload size={36} />
+            <a
+              href={file.webContentLink}
+              target='_blank'
+              className={style.downloadLink}
+            >
+              <ButtonIcon>
+                <IoMdDownload size={36} />
+              </ButtonIcon>
             </a>
           </td>
         </tr>

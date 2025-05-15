@@ -9,10 +9,10 @@ import { postDream } from '@/app/api/requests';
 import StatusMessage from '@/app/HOCs/StatusMessage/StatusMessage';
 import Input from '@/app/components/Input/Input';
 import stringDateFormatter from '@/app/utils/stringDateFormatter';
-import Button from '@/app/components/Button/Button';
 import createFullName from '../../../utils/new/createFullName';
 import style from './UploadAudio.module.scss';
-import { useState } from 'react';
+import BeautifulButton from '@/app/components/BeautifulButton/BeautifulButton';
+
 function UploadAudio() {
   const { blob, name, setName, date, setDate, isPrivate, setIsPrivate } =
     useNewDreamStore();
@@ -28,25 +28,29 @@ function UploadAudio() {
         <div className={style.uploadAudio}>
           <RecordAudio />
 
-          <Input value={name} onChange={(e) => setName(e.target.value)} />
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder='name'
+          />
           <div className={style.dateIsPrivate}>
             <Input
               type='date'
               value={stringDateFormatter(date, 'yyyy-mm-dd')}
               onChange={(e) => setDate(e.target.value)}
             />
-            <div className={style.checkBox}>
+            <label className={style.checkBox}>
               <Input
                 type='checkbox'
                 onChange={(e) => setIsPrivate(!isPrivate)}
               />
               <h3>is Private</h3>
-            </div>
+            </label>
           </div>
 
           <Preview />
 
-          <Button
+          <BeautifulButton
             disabled={isButtonDisabled}
             onClick={() => {
               setStatus('pending');
@@ -67,7 +71,7 @@ function UploadAudio() {
             }}
           >
             save
-          </Button>
+          </BeautifulButton>
         </div>
       </div>
     </StatusMessage>

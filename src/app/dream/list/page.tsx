@@ -11,7 +11,13 @@ export default function DreamsList() {
     <main>
       <AcessControll IsregisteredUsersAllowed isAdminOnly>
         <StatusMessage>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              margin: '1rem 0',
+            }}
+          >
             <SearchDream />
             <SortBy />
           </div>

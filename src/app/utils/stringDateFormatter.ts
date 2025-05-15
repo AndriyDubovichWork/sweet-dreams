@@ -3,18 +3,33 @@ import { dateFormat } from '../types/utils/stringDateFormatter';
 export default function stringDateFormatter(
   date: string,
   format: dateFormat = 'en-GB'
-) {
-  switch (format) {
-    case 'en-GB':
-      return new Date(date).toLocaleDateString(format);
-    case 'yyyy-mm-dd':
-      const parts = date.split('/');
-      const formattedDate = new Date(+parts[2], +parts[0] - 1, +parts[1]);
+): string {
+  if (format === 'yyyy-mm-dd' && date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return date;
+  }
 
-      const localDate = new Date(
-        formattedDate.getTime() - formattedDate.getTimezoneOffset() * 60000
-      );
+  try {
+    const dateObj = new Date(date);
 
-      return localDate.toISOString().slice(0, 10);
+    if (isNaN(dateObj.getTime())) {
+      throw new Error('Invalid date');
+    }
+
+    switch (format) {
+      case 'en-GB':
+        return dateObj.toLocaleDateString('en-GB');
+
+      case 'yyyy-mm-dd':
+        const correctedDate = new Date(
+          dateObj.getTime() - dateObj.getTimezoneOffset() * 60000
+        );
+        return correctedDate.toISOString().slice(0, 10);
+
+      default:
+        throw new Error('Unsupported date format');
+    }
+  } catch (error) {
+    console.error('Date formatting error:', error);
+    return date;
   }
 }

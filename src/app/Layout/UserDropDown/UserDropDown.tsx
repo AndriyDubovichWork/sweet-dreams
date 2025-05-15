@@ -17,7 +17,11 @@ export default function UserDropDown() {
               alt={session?.user?.name || 'name'}
             />
           }
-          content={<Button onClick={() => signOut()}>log out</Button>}
+          content={
+            <Button onClick={() => signOut()} style={{ zIndex: 10 }}>
+              log out
+            </Button>
+          }
         />
       );
     case 'unauthenticated':

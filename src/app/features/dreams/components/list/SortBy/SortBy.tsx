@@ -1,6 +1,8 @@
 import Button from '@/app/components/Button/Button';
 import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';
+import { AiOutlineSync } from 'react-icons/ai';
+import style from './SortBy.module.scss';
 
 export default function SortBy() {
   const {
@@ -12,14 +14,17 @@ export default function SortBy() {
   } = useSavedDreamsStore();
   const updateDreams = useUpdateDreams();
   return (
-    <div>
+    <div className={style.sortBy}>
       <Button
         onClick={() => {
           setIsSortByReversed(!isSortByReversed);
           updateDreams({ isReversed: !isSortByReversed });
         }}
+        style={{ backgroundColor: isSortByReversed ? '#6c6c6c' : '#ffffff' }}
       >
-        {isSortByReversed ? 'reversed' : 'not reversed'}
+        <AiOutlineSync color={isSortByReversed ? '#5979a6' : '#1e293b'} />
+
+        {/* {isSortByReversed ? 'reversed' : 'not reversed'} */}
       </Button>
       {sortBy.map(({ name, value }, id) => {
         return (

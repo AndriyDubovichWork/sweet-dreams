@@ -8,11 +8,14 @@ import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';
 import Audio from './Audio/Audio';
 import style from './AudiosList.module.scss';
 import { useTheme } from '@/app/HOCs/ThemeProvider/ThemeProvider';
+import { useSession } from 'next-auth/react';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();
   const { status } = useLoadingStateStore();
   const updateDreams = useUpdateDreams();
+
+  const { data: session }: { data: any } = useSession();
 
   const { theme, themeName, toggleTheme } = useTheme();
 
@@ -31,6 +34,19 @@ function AudiosList() {
       }
       return (
         <table className={style.table}>
+          <tr>
+            <th>name</th>
+            <th>file size</th>
+            <th>date</th>
+            {session?.user?.role === 'admin' && (
+              <>
+                <th className={style.minWidth}>edit</th>
+                <th className={style.minWidth}>delete</th>
+              </>
+            )}
+
+            <th className={style.minWidth}>download</th>
+          </tr>
           {files.map((file, id) => {
             return <Audio file={file} id={id} key={file.id} />;
           })}
