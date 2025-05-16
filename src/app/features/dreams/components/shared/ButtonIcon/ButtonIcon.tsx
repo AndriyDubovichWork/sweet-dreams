@@ -1,7 +1,7 @@
-import { IconProps } from '@/app/types/components/Icon';
+import { IconProps } from '@/app/features/dreams/types/components/shared/Icon';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
-import { ButtonProps } from '@/app/types/components/Button';
+import { ButtonProps } from '@/app/features/dreams/types/components/shared/Button';
 
 function ButtonIcon({
   children,

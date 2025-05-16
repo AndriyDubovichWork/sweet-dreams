@@ -1,6 +1,6 @@
 'use client';
 
-import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
+import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
 import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
 import Preview from '../Preview/Preview';

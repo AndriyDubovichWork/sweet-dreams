@@ -1,4 +1,4 @@
-import { InputProps } from '@/app/types/components/Input';
+import { InputProps } from '@/app/features/dreams/types/components/shared/Input';
 import style from './InputWithIcon.module.scss';
 
 export default function InputWithIcon({ children, ...props }: InputProps) {

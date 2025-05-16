@@ -1,4 +1,4 @@
-import { centeredProps } from '@/app/types/HOCs/Centered';
+import { centeredProps } from '@/app/features/dreams/types/HOCs/Centered';
 import style from './Centered.module.scss';
 
 export default function Centered({

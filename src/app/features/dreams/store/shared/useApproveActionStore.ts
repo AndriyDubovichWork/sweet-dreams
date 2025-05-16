@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ApproveActionStore } from '../features/dreams/types/store/approveActionStore';
+import { ApproveActionStore } from '../../types/store/approveActionStore';
 
 export const useApproveActionStore = create<ApproveActionStore>((set) => ({
   type: null,

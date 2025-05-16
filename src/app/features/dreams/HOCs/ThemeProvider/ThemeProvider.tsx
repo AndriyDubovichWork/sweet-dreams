@@ -1,4 +1,8 @@
-import { ThemeContextValue, ThemeName, Themes } from '@/app/types/HOCs/theme';
+import {
+  ThemeContextValue,
+  ThemeName,
+  Themes,
+} from '@/app/features/dreams/types/HOCs/theme';
 import React, { createContext, useContext, useState } from 'react';
 
 const ThemeContext = createContext({});

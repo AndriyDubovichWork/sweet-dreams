@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import style from './ApproveAction.module.scss';
 
 import Centered from '../Centered/Centered';
-import { useApproveActionStore } from '@/app/store/useApproveActionStore';
+import { useApproveActionStore } from '@/app/features/dreams/store/shared/useApproveActionStore';
 import { useDeleteFileStore } from '@/app/features/dreams/store/list/useDeleteFileStore';
 import Input from '@/app/components/Input/Input';
 import Button from '@/app/components/Button/Button';
-import { ApproveActionProps } from '@/app/types/HOCs/ApproveAction';
+import { ApproveActionProps } from '@/app/features/dreams/types/HOCs/ApproveAction';
 
 function ApproveAction({ children }: ApproveActionProps) {
   const { approve, type, approveCallback, resetApprove } =

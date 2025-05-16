@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import style from './StatusMessage.module.scss';
 
 import { IoMdClose } from 'react-icons/io';
-import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
+import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
 import Button from '@/app/components/Button/Button';
 
 export default function StatusMessage({ children }: { children: ReactNode }) {

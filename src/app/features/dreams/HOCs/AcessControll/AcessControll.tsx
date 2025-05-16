@@ -2,12 +2,12 @@
 
 import AccessDenied from '@/app/components/AccessDenied/AccessDenied';
 import Spinner from '@/app/components/Spinner/Spinner';
-import { UserRights } from '@/app/types/Shared/session';
+import { UserRights } from '@/app/features/dreams/types/Shared/session';
 import { useSession } from 'next-auth/react';
 import Centered from '../Centered/Centered';
-import { AcessControllProps } from '@/app/types/HOCs/AcessControll';
+import { AcessControllProps } from '@/app/features/dreams/types/HOCs/AcessControll';
 import RegisteredOnly from '../RegisteredOnly/RegisteredOnly';
-import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
+import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
 
 export default function AcessControll({
   children,

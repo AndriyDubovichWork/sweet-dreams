@@ -2,7 +2,7 @@ import { getDreams } from '@/app/api/requests';
 import { useNewDreamStore } from '../store/new/useNewDreamStore';
 import { useSavedDreamsStore } from '../store/list/useSavedDreamsStore';
 import { useSearchStore } from '../store/list/useSearchStore';
-import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
+import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
 import { UpdateDreams } from '../types/hooks/UpdateDreams';
 
 function useUpdateDreams() {

@@ -1,7 +1,7 @@
 'use client';
 
 import Spinner from '@/app/components/Spinner/Spinner';
-import { useLoadingStateStore } from '@/app/store/useLoadingStateStore';
+import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
 import { useEffect } from 'react';
 import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';

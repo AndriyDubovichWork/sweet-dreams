@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useUpdateDreams from './useUpdateDreams';
 import divideFullName from '@/app/features/dreams/utils/Shared/divideFullName';
 import { useSavedDreamsStore } from '../store/list/useSavedDreamsStore';
-import { useApproveActionStore } from '@/app/store/useApproveActionStore';
+import { useApproveActionStore } from '@/app/features/dreams/store/shared/useApproveActionStore';
 import { useDeleteFileStore } from '../store/list/useDeleteFileStore';
 import stringDateFormatter from '@/app/utils/stringDateFormatter';
 import addProcessingProperty from '../utils/list/addProcessingProperty';

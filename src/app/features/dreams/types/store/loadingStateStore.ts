@@ -1,4 +1,4 @@
-import { loadingStatus } from '../../../../types/Shared/loadingStatus';
+import { loadingStatus } from '../Shared/loadingStatus';
 
 export type loadingStateStore = {
   status: loadingStatus;

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Icon.module.scss';
-import { IconProps } from '@/app/types/components/Icon';
+import { IconProps } from '@/app/features/dreams/types/components/shared/Icon';
 
 export default function Icon({
   children,
