@@ -9,6 +9,7 @@ import Audio from './Audio/Audio';
 import style from './AudiosList.module.scss';
 import { useTheme } from '@/app/HOCs/ThemeProvider/ThemeProvider';
 import { useSession } from 'next-auth/react';
+import NoFilesFound from '../NoFilesFound/NoFilesFound';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();
@@ -27,11 +28,13 @@ function AudiosList() {
   switch (status) {
     case 'pending':
       return <Spinner size={90} />;
+    case 'error':
+      if (files.length === 0) {
+        return <NoFilesFound />;
+      }
+      break;
     case 'fulfilled':
     case '':
-      if (files.length === 0) {
-        return <>no files found</>;
-      }
       return (
         <table className={style.table}>
           <tr>
