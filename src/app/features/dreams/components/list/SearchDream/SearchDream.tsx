@@ -1,10 +1,9 @@
-import Input from '@/app/components/Input/Input';
 import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useSearchStore } from '../../../store/list/useSearchStore';
-import Button from '@/app/components/Button/Button';
+import Button from '../../shared/Button/Button';
+import InputWithIcon from '../../shared/InputWithIcon/InputWithIcon';
 import style from './SearchDream.module.scss';
 import { RxCross2 } from 'react-icons/rx';
-import InputWithIcon from '@/app/components/InputWithIcon/InputWithIcon';
 
 export default function SearchDream() {
   const { search, setSearch } = useSearchStore();

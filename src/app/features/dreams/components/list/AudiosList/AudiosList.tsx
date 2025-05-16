@@ -1,15 +1,15 @@
 'use client';
 
-import Spinner from '@/app/components/Spinner/Spinner';
 import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
 import { useEffect } from 'react';
 import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';
 import Audio from './Audio/Audio';
 import style from './AudiosList.module.scss';
-import { useTheme } from '@/app/HOCs/ThemeProvider/ThemeProvider';
 import { useSession } from 'next-auth/react';
 import NoFilesFound from '../NoFilesFound/NoFilesFound';
+import { useTheme } from '../../../HOCs/ThemeProvider/ThemeProvider';
+import Spinner from '../../shared/Spinner/Spinner';
 
 function AudiosList() {
   const { files } = useSavedDreamsStore();

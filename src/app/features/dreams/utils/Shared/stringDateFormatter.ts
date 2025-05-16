@@ -1,4 +1,4 @@
-import { dateFormat } from '../types/utils/stringDateFormatter';
+import { dateFormat } from '../../types/utils/stringDateFormatter';
 
 export default function stringDateFormatter(
   date: string,

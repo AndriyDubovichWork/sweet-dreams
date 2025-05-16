@@ -1,8 +1,8 @@
-import Button from '@/app/components/Button/Button';
 import useUpdateDreams from '../../../hooks/useUpdateDreams';
 import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';
 import { AiOutlineSync } from 'react-icons/ai';
 import style from './SortBy.module.scss';
+import Button from '../../shared/Button/Button';
 
 export default function SortBy() {
   const {

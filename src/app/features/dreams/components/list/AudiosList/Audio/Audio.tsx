@@ -1,10 +1,10 @@
+import Processing from '@/app/features/dreams/HOCs/Processing/Processing';
 import EditAudio from '../../EditAudio/EditAudio';
 import style from './Audio.module.scss';
-import Processing from '@/app/HOCs/Processing/Processing';
 import { AudioProps } from '@/app/features/dreams/types/components/list/Audio';
 import { useSession } from 'next-auth/react';
-import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
 import { IoMdDownload } from 'react-icons/io';
+import ButtonIcon from '../../../shared/ButtonIcon/ButtonIcon';
 
 function Audio({ file, id }: AudioProps) {
   const isPrivate = file.name.includes('/private/');

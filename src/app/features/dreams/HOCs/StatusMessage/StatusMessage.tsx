@@ -3,7 +3,7 @@ import style from './StatusMessage.module.scss';
 
 import { IoMdClose } from 'react-icons/io';
 import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
-import Button from '@/app/components/Button/Button';
+import Button from '../../components/shared/Button/Button';
 
 export default function StatusMessage({ children }: { children: ReactNode }) {
   const { status, setStatus, message } = useLoadingStateStore();

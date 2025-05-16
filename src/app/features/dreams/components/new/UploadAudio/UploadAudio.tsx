@@ -6,12 +6,12 @@ import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../RecordAudio/RecordAudio';
 import { postDream } from '@/app/api/requests';
-import StatusMessage from '@/app/HOCs/StatusMessage/StatusMessage';
-import Input from '@/app/components/Input/Input';
-import stringDateFormatter from '@/app/utils/stringDateFormatter';
 import createFullName from '../../../utils/new/createFullName';
 import style from './UploadAudio.module.scss';
-import BeautifulButton from '@/app/components/BeautifulButton/BeautifulButton';
+import StatusMessage from '../../../HOCs/StatusMessage/StatusMessage';
+import Input from '../../shared/Input/Input';
+import stringDateFormatter from '../../../utils/Shared/stringDateFormatter';
+import BeautifulButton from '../../shared/BeautifulButton/BeautifulButton';
 
 function UploadAudio() {
   const { blob, name, setName, date, setDate, isPrivate, setIsPrivate } =

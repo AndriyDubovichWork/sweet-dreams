@@ -1,4 +1,4 @@
-import stringDateFormatter from '@/app/utils/stringDateFormatter';
+import stringDateFormatter from '../Shared/stringDateFormatter';
 
 export default function createFullName(
   name: string,

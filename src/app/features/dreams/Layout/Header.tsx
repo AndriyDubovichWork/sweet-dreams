@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useLoadingStateStore } from '../store/useLoadingStateStore';
 import UserDropDown from './UserDropDown/UserDropDown';
 import style from './Header.module.scss';
 import { useSession } from 'next-auth/react';
+import { useLoadingStateStore } from '../store/shared/useLoadingStateStore';
 
 export default function Header() {
   const { setStatus } = useLoadingStateStore();

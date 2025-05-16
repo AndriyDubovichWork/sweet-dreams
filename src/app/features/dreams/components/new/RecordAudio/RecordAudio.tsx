@@ -1,7 +1,7 @@
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
-import Input from '@/app/components/Input/Input';
 import style from './RecordAudio.module.scss';
+import Input from '../../shared/Input/Input';
 
 function RecordAudio() {
   const { setBlob } = useNewDreamStore();

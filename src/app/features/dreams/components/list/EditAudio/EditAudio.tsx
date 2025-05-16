@@ -3,12 +3,12 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { FaSave } from 'react-icons/fa';
 import { MdEdit, MdOutlineCancel } from 'react-icons/md';
 import useEditAudioData from '../../../hooks/useEditAudioData';
-import Input from '@/app/components/Input/Input';
-import stringDateFormatter from '@/app/utils/stringDateFormatter';
-import ButtonIcon from '@/app/components/ButtonIcon/ButtonIcon';
 import { EditAudioProps } from '../../../types/components/list/EditAudio';
-import AcessControll from '@/app/HOCs/AcessControll/AcessControll';
 import { useEffect } from 'react';
+import Input from '../../shared/Input/Input';
+import stringDateFormatter from '../../../utils/Shared/stringDateFormatter';
+import ButtonIcon from '../../shared/ButtonIcon/ButtonIcon';
+import AcessControll from '../../../HOCs/AcessControll/AcessControll';
 
 function EditAudio({ file, id }: EditAudioProps) {
   const { size, processing, createdTime } = file;

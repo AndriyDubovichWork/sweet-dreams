@@ -1,5 +1,5 @@
-import Centered from './HOCs/Centered/Centered';
-import Spinner from './components/Spinner/Spinner';
+import Spinner from './features/dreams/components/shared/Spinner/Spinner';
+import Centered from './features/dreams/HOCs/Centered/Centered';
 
 export default function Loading() {
   return (
