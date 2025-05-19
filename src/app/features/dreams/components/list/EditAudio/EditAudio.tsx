@@ -25,13 +25,7 @@ function EditAudio({ file, id }: EditAudioProps) {
     isPrivate,
     setIsprivate,
   } = useEditAudioData({ file, id });
-  useEffect(() => {
-    setLocalName(
-      isPrivate
-        ? localName.replaceAll('/private/', '') + '/private/'
-        : localName.replaceAll('/private/', '')
-    );
-  }, [isPrivate, setLocalName]);
+
   if (editable) {
     return (
       <>

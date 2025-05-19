@@ -1,30 +1,14 @@
 'use client';
 
-import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
-import { useEffect } from 'react';
-import useUpdateDreams from '../../../hooks/useUpdateDreams';
-import { useSavedDreamsStore } from '../../../store/list/useSavedDreamsStore';
 import Audio from './Audio/Audio';
 import style from './AudiosList.module.scss';
-import { useSession } from 'next-auth/react';
 import NoFilesFound from '../NoFilesFound/NoFilesFound';
-import { useTheme } from '../../../HOCs/ThemeProvider/ThemeProvider';
 import Spinner from '../../shared/Spinner/Spinner';
+import useAudiosListData from '../../../hooks/useAudiosListData';
 
 function AudiosList() {
-  const { files } = useSavedDreamsStore();
-  const { status } = useLoadingStateStore();
-  const updateDreams = useUpdateDreams();
+  const { session, status, files } = useAudiosListData();
 
-  const { data: session }: { data: any } = useSession();
-
-  const { theme, themeName, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    if (!files.length && status === '') {
-      updateDreams();
-    }
-  }, []);
   switch (status) {
     case 'pending':
       return <Spinner size={90} />;

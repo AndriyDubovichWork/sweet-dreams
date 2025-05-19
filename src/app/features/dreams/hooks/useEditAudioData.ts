@@ -1,5 +1,5 @@
 import { deleteDream, renameDream } from '@/app/api/requests';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useUpdateDreams from './useUpdateDreams';
 import divideFullName from '@/app/features/dreams/utils/Shared/divideFullName';
 import { useSavedDreamsStore } from '../store/list/useSavedDreamsStore';
@@ -66,6 +66,13 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
       },
     });
   };
+  useEffect(() => {
+    setLocalName(
+      isPrivate
+        ? localName.replaceAll('/private/', '') + '/private/'
+        : localName.replaceAll('/private/', '')
+    );
+  }, [isPrivate, setLocalName]);
   return {
     deleteFile,
     renameFile,

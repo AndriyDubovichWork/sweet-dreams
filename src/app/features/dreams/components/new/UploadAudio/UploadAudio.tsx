@@ -1,8 +1,5 @@
 'use client';
 
-import { useLoadingStateStore } from '@/app/features/dreams/store/shared/useLoadingStateStore';
-import useUpdateDreams from '../../../hooks/useUpdateDreams';
-import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
 import Preview from '../Preview/Preview';
 import RecordAudio from '../RecordAudio/RecordAudio';
 import { postDream } from '@/app/api/requests';
@@ -12,16 +9,22 @@ import StatusMessage from '../../../HOCs/StatusMessage/StatusMessage';
 import Input from '../../shared/Input/Input';
 import stringDateFormatter from '../../../utils/Shared/stringDateFormatter';
 import BeautifulButton from '../../shared/BeautifulButton/BeautifulButton';
+import useUploadAudioData from './../../../hooks/useUploadAudioData';
 
 function UploadAudio() {
-  const { blob, name, setName, date, setDate, isPrivate, setIsPrivate } =
-    useNewDreamStore();
-  const updateDreams = useUpdateDreams();
-  const { setStatus, setMessage, status } = useLoadingStateStore();
-
-  const isStatusOk = !status || status === 'fulfilled';
-  const isButtonDisabled = !blob || !isStatusOk;
-
+  const {
+    blob,
+    name,
+    setName,
+    date,
+    setDate,
+    isPrivate,
+    setIsPrivate,
+    updateDreams,
+    setStatus,
+    setMessage,
+    isButtonDisabled,
+  } = useUploadAudioData();
   return (
     <StatusMessage>
       <div className={style.content}>
