@@ -1,13 +1,28 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import styles from './Button.module.scss';
+import style from './Button.module.scss';
+import useStylesProvider from '../../../hooks/useStylesProvider';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
+  isPrimary?: boolean;
 }
 
-export default function Button({ children, ...props }: ButtonProps) {
+export default function Button({
+  children,
+  isPrimary = false,
+  ...props
+}: ButtonProps) {
+  const styles = useStylesProvider();
   return (
-    <button className={styles.button} {...props}>
+    <button
+      {...props}
+      style={
+        isPrimary
+          ? (styles.buttonPrimary as React.CSSProperties)
+          : (styles.buttonSecondary as React.CSSProperties)
+      }
+      className={style.button}
+    >
       {children}
     </button>
   );

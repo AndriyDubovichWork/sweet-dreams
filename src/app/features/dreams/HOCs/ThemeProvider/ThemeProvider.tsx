@@ -8,31 +8,45 @@ import React, { createContext, useContext, useState } from 'react';
 const ThemeContext = createContext({});
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeName>('light'); // default theme
+  const [theme, setTheme] = useState<ThemeName>('dark'); // default theme
 
   const themes: Themes = {
     light: {
       colors: {
-        primary: '#6200ee',
-        background: '#ffffff',
-        text: '#000000',
-      },
-      spacing: {
-        small: '8px',
-        medium: '16px',
-        large: '24px',
+        active: {
+          first: '',
+          second: '',
+          third:''
+        },
+        primary: {
+          first: '',
+          second: '',
+          third: '',
+        },
+        text: {
+          first: '',
+          second: '',
+          third:''
+        },
       },
     },
     dark: {
       colors: {
-        primary: '#bb86fc',
-        background: '#121212',
-        text: '#ffffff',
-      },
-      spacing: {
-        small: '8px',
-        medium: '16px',
-        large: '24px',
+        active: {
+          first: '#EB694A',
+          second: '#E06446',
+          third:'#E35937FF'
+        },
+        primary: {
+          first: '#3B3A3A',
+          second: '#363636',
+          third: '#2F2F2F',
+        },
+        text: {
+          first: '#FFFFFF',
+          second: '#D7D7D7',
+          third:'#8B8B8B'
+        },
       },
     },
   };

@@ -26,8 +26,6 @@ function useUpdateDreams() {
       isReversed === undefined ? isSortByReversed : isReversed,
       NoSearch ? '' : search
     ).then(({ files }) => {
-      console.log(NoSearch ? '' : search);
-
       setFiles(files);
       setBlob(null);
       setName('');

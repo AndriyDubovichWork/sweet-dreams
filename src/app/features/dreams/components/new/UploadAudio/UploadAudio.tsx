@@ -8,8 +8,8 @@ import style from './UploadAudio.module.scss';
 import StatusMessage from '../../../HOCs/StatusMessage/StatusMessage';
 import Input from '../../shared/Input/Input';
 import stringDateFormatter from '../../../utils/Shared/stringDateFormatter';
-import BeautifulButton from '../../shared/BeautifulButton/BeautifulButton';
 import useUploadAudioData from './../../../hooks/useUploadAudioData';
+import Button from '../../shared/Button/Button';
 
 function UploadAudio() {
   const {
@@ -53,7 +53,8 @@ function UploadAudio() {
 
           <Preview />
 
-          <BeautifulButton
+          <Button
+              isPrimary
             disabled={isButtonDisabled}
             onClick={() => {
               setStatus('pending');
@@ -74,7 +75,7 @@ function UploadAudio() {
             }}
           >
             save
-          </BeautifulButton>
+          </Button>
         </div>
       </div>
     </StatusMessage>

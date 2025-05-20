@@ -35,7 +35,6 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
             ? localName + '/private/'
             : localName.replaceAll('/private/', '')
         } ${stringDateFormatter(createdTime)}`;
-        console.log(fullLocalName);
 
         renameDream(fileId, fullLocalName).then(() => {
           setEditable(false);

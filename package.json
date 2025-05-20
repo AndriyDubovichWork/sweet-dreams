@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
     "@googleapis/drive": "^8.4.0",
     "@neondatabase/serverless": "^1.0.0",
     "@types/react-mic": "^12.4.6",
@@ -20,6 +21,7 @@
     "encoding": "^0.1.13",
     "filesize": "^10.1.0",
     "fs": "^0.0.1-security",
+    "hex-to-rgb": "^1.0.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.5",
     "next": "13.5.6",

@@ -1,13 +1,22 @@
 export type Theme = {
   colors: {
-    primary: string;
-    background: string;
-    text: string;
-  };
-  spacing: {
-    small: string;
-    medium: string;
-    large: string;
+    active: {
+      first: string;
+      second: string;
+      third: string;
+    };
+
+    primary: {
+      first: string;
+      second: string;
+      third: string;
+    };
+
+    text: {
+      first: string;
+      second: string;
+      third: string;
+    };
   };
 };
 export type ThemeName = 'light' | 'dark';

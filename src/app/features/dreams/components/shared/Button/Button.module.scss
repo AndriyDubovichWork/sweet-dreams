@@ -1,37 +1,7 @@
-@use 'sass:math';
-
 .button {
-  --cloud-white: #ffffff;
-  --cloud-gray: #6c6c6c;
-  --text-dark: #1e293b;
-  --text-gray: #5979a6;
-
-  position: relative;
-  padding: 1rem 1.5rem;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  background: transparent;
-  color: var(--text-dark);
-  overflow: visible;
-  text-align: center;
-  z-index: 1;
-  font-family: 'Nunito', 'Segoe UI', sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-  background: var(--cloud-white);
-  border-radius: 100px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-
   &:disabled {
-    color: var(--text-gray);
-    cursor: not-allowed;
-    background-color: var(--cloud-gray);
-    &::before {
-      background: var(--cloud-gray);
-    }
+    color: var(--disabled-button-text) !important;
+    cursor: not-allowed !important;
+    background-color: var(--disabled-button-background) !important;
   }
 }

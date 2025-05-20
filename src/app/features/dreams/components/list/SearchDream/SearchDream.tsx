@@ -25,7 +25,7 @@ export default function SearchDream() {
           />
         )}
       </InputWithIcon>
-      <Button onClick={() => updateDreams()} disabled={!search}>
+      <Button isPrimary onClick={() => updateDreams()} disabled={!search}>
         search
       </Button>
     </div>
