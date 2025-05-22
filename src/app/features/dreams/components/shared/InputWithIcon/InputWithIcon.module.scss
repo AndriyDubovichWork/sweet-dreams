@@ -9,15 +9,13 @@
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.2s ease;
-    background-color: #2a2a2a;
-    color: #e0e0e0;
 
-    padding-right: 30px;
+    background-color: var(--regular-color);
 
     &:focus {
       outline: none;
-      border-color: #6c5ce7;
-      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.3);
+      border-color: var(--active-color);
+      box-shadow: 0 0 0 3px rgba(var(--active-rgb), 0.3);
     }
 
     &[type='date'] {
@@ -29,7 +27,16 @@
     }
 
     &[type='checkbox'] {
-      background-color: #333;
+      appearance: none;
+      -webkit-appearance: none;
+
+      cursor: pointer;
+
+      padding: 0.75rem;
+
+      &:checked {
+        background-color: var(--active-color);
+      }
     }
   }
 

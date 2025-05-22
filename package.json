@@ -21,6 +21,7 @@
     "encoding": "^0.1.13",
     "filesize": "^10.1.0",
     "fs": "^0.0.1-security",
+    "hex-to-css-filter": "^6.0.0",
     "hex-to-rgb": "^1.0.1",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.5",

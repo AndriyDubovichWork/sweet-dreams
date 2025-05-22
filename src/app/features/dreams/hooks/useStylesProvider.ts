@@ -1,9 +1,11 @@
 import { useTheme } from '../HOCs/ThemeProvider/ThemeProvider';
 const hexToRgb = require('hex-to-rgb');
+import { hexToCSSFilter } from 'hex-to-css-filter';
 
 export default function useStylesProvider() {
   const { theme } = useTheme();
   const activeRgb = hexToRgb(theme.colors.active.first);
+  console.log(theme.colors.primary.first);
 
   const header = {
     backgroundColor: theme.colors.primary.second,
@@ -60,10 +62,19 @@ export default function useStylesProvider() {
     '--disabled-button-background': theme.colors.text.third,
   };
 
+  const recordAudio = {
+    '--main-background-color': theme.colors.primary.third,
+    '--main-icon-color': theme.colors.text.first,
+    '--main-icon-color-filter': hexToCSSFilter(theme.colors.text.first).filter,
+    '--active-color': theme.colors.active.first,
+    '--active-rgb': `${activeRgb[0]}, ${activeRgb[1]}, ${activeRgb[2]}`,
+  };
+
   return {
     header,
     input,
     buttonPrimary,
     buttonSecondary,
+    recordAudio,
   };
 }

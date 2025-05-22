@@ -16,7 +16,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         active: {
           first: '',
           second: '',
-          third:''
+          third: '',
         },
         primary: {
           first: '',
@@ -26,7 +26,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         text: {
           first: '',
           second: '',
-          third:''
+          third: '',
         },
       },
     },
@@ -35,7 +35,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         active: {
           first: '#EB694A',
           second: '#E06446',
-          third:'#E35937FF'
+          third: '#E35937FF',
         },
         primary: {
           first: '#3B3A3A',
@@ -45,7 +45,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         text: {
           first: '#FFFFFF',
           second: '#D7D7D7',
-          third:'#8B8B8B'
+          third: '#8B8B8B',
         },
       },
     },

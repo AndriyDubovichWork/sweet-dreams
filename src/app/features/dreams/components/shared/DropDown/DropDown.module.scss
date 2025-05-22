@@ -1,5 +1,6 @@
 .dropDown {
   position: relative;
+  z-index: 999;
   .content {
     position: absolute;
     top: 50px;
