@@ -5,7 +5,7 @@ import { hexToCSSFilter } from 'hex-to-css-filter';
 export default function useStylesProvider() {
   const { theme } = useTheme();
   const activeRgb = hexToRgb(theme.colors.active.first);
-  console.log(theme.colors.primary.first);
+  const textRgb = hexToRgb(theme.colors.text.first);
 
   const header = {
     backgroundColor: theme.colors.primary.second,
@@ -70,11 +70,28 @@ export default function useStylesProvider() {
     '--active-rgb': `${activeRgb[0]}, ${activeRgb[1]}, ${activeRgb[2]}`,
   };
 
+  const callendar = {
+    color: theme.colors.text.first,
+    '--regular-color': theme.colors.primary.third,
+    '--active-color': theme.colors.active.first,
+    '--active-rgb': `${activeRgb[0]}, ${activeRgb[1]}, ${activeRgb[2]}`,
+    '--main-icon-color-filter': hexToCSSFilter(theme.colors.text.first).filter,
+  };
+
+  const audio = {
+    '--regular-background-color': theme.colors.primary.third,
+    '--regular-text-color': theme.colors.text.first,
+    '--secondary-text-color': theme.colors.text.third,
+    '--progress-bar-color-rgb': `${textRgb[0]}, ${textRgb[1]}, ${textRgb[2]}`,
+  };
+
   return {
     header,
     input,
     buttonPrimary,
     buttonSecondary,
     recordAudio,
+    callendar,
+    audio,
   };
 }

@@ -1,0 +1,47 @@
+// Audio.module.scss
+.container {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  :global {
+    .rhap_container {
+      background: var(--regular-background-color);
+      color: var(--regular-text-color);
+      box-shadow: none;
+
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+    }
+    .rhap_controls-section {
+      margin: 0;
+      flex: none;
+    }
+
+    .rhap_volume-controls,
+    .rhap_volume-button,
+    .rhap_volume-container {
+      display: none;
+    }
+
+    .rhap_additional-controls {
+      flex: 0 !important;
+      width: 0 !important;
+      margin: 0 !important;
+    }
+    .rhap_progress-indicator {
+      background-color: var(--secondary-text-color);
+    }
+    .rhap_progress-bar {
+      background-color: rgba(var(--progress-bar-color-rgb), 0.9);
+    }
+
+    .rhap_time {
+      color: var(--regular-text-color);
+      font-size: 0.75rem;
+    }
+
+    .rhap_play-pause-button {
+      color: var(--regular-text-color);
+    }
+  }
+}

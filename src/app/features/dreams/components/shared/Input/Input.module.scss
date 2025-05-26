@@ -15,10 +15,18 @@
   }
 
   &[type='date'] {
-    max-width: 200px;
+    max-width: 300px;
 
     &::-webkit-calendar-picker-indicator {
-      filter: invert(0.8);
+      filter: var(--main-icon-color-filter);
+      transition: all 0.2s ease;
+      &:hover {
+        transform: scale(1.5);
+        cursor: pointer;
+      }
+    }
+    &::-webkit-datetime-edit-text {
+      color: var(--active-color);
     }
   }
 
@@ -34,9 +42,21 @@
       background-color: var(--active-color);
     }
   }
-}
+  &[type='file'] {
+    &::file-selector-button {
+      padding: 0.05rem 1rem;
+      border: 1px solid #444;
+      border-radius: 0.2em;
 
-// Status message adjustment
-// .statusMessage {
-//   color: #e0e0e0 !important;
-// }
+      color: var(--main-icon-color);
+      background-color: var(--regular-color);
+
+      &:hover {
+        border: 1px solid var(--active-color);
+        box-shadow: 0 0 0 3px rgba(var(--active-rgb), 0.3);
+
+        cursor: pointer;
+      }
+    }
+  }
+}
