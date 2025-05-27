@@ -5,18 +5,17 @@ import SearchDream from '@/app/features/dreams/components/list/SearchDream/Searc
 import SortBy from '@/app/features/dreams/components/list/SortBy/SortBy';
 import AcessControll from '@/app/features/dreams/HOCs/AcessControll/AcessControll';
 import StatusMessage from '@/app/features/dreams/HOCs/StatusMessage/StatusMessage';
+import useStylesProvider from "@/app/features/dreams/hooks/useStylesProvider";
 
 export default function DreamsList() {
+const styles = useStylesProvider()
+
   return (
     <main>
       <AcessControll IsregisteredUsersAllowed isAdminOnly>
         <StatusMessage>
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              margin: '1rem 0',
-            }}
+            style={styles.dreamsList}
           >
             <SearchDream />
             <SortBy />

@@ -9,7 +9,7 @@ export default function Input({ type = 'text', ...props }: InputProps) {
     <input
       type={type}
       className={style.input}
-      style={type === 'date' ? styles.callendar : styles.input}
+      style={type === 'date' ? styles.calendar : styles.input}
       {...props}
     />
   );

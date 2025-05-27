@@ -18,7 +18,7 @@ export default function UserDropDown() {
             />
           }
           content={
-            <Button onClick={() => signOut()} style={{ zIndex: 10 }}>
+            <Button  onClick={() => signOut()} style={{ zIndex: 10 }}>
               log out
             </Button>
           }

@@ -1,6 +1,7 @@
 import { useTheme } from '../HOCs/ThemeProvider/ThemeProvider';
-const hexToRgb = require('hex-to-rgb');
 import { hexToCSSFilter } from 'hex-to-css-filter';
+import DreamsList from "@/app/dream/list/page";
+const hexToRgb = require('hex-to-rgb');
 
 export default function useStylesProvider() {
   const { theme } = useTheme();
@@ -70,7 +71,7 @@ export default function useStylesProvider() {
     '--active-rgb': `${activeRgb[0]}, ${activeRgb[1]}, ${activeRgb[2]}`,
   };
 
-  const callendar = {
+  const calendar = {
     color: theme.colors.text.first,
     '--regular-color': theme.colors.primary.third,
     '--active-color': theme.colors.active.first,
@@ -85,13 +86,39 @@ export default function useStylesProvider() {
     '--progress-bar-color-rgb': `${textRgb[0]}, ${textRgb[1]}, ${textRgb[2]}`,
   };
 
+  const sortBy = {
+    backgroundColor:theme.colors.primary.third,
+    border: '1px solid ' + theme.colors.text.first,
+    borderRadius: '12px',
+  }
+
+  const sortByElement = {
+    enabled: {
+      backgroundColor: theme.colors.primary.third,
+      color: theme.colors.text.first,
+
+    },
+    disabled: {
+      backgroundColor: theme.colors.text.second,
+      color: theme.colors.primary.first,
+    },
+  };
+  const dreamsList ={
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '1rem 1rem',
+  }
+
   return {
     header,
     input,
     buttonPrimary,
     buttonSecondary,
     recordAudio,
-    callendar,
+     calendar,
     audio,
+    sortByElement,
+    sortBy,
+    dreamsList
   };
 }
