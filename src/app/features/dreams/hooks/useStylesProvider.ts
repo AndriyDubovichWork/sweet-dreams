@@ -92,9 +92,10 @@ export default function useStylesProvider() {
     borderRadius: '12px',
   }
 
+
   const sortByElement = {
     enabled: {
-      backgroundColor: theme.colors.primary.third,
+      backgroundColor: theme.colors.primary.second,
       color: theme.colors.text.first,
 
     },
@@ -109,6 +110,18 @@ export default function useStylesProvider() {
     margin: '1rem 1rem',
   }
 
+  const audioListElement = {
+    header:{
+
+      backgroundColor: theme.colors.primary.second,
+    },
+    private:{
+      backgroundColor: theme.colors.active.first,
+    },regular:{
+      backgroundColor: theme.colors.primary.second,
+  }
+  }
+
   return {
     header,
     input,
@@ -119,6 +132,7 @@ export default function useStylesProvider() {
     audio,
     sortByElement,
     sortBy,
-    dreamsList
+    dreamsList,
+    audioListElement
   };
 }

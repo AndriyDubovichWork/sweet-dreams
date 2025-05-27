@@ -5,13 +5,15 @@ import style from './AudiosList.module.scss';
 import NoFilesFound from '../NoFilesFound/NoFilesFound';
 import Spinner from '../../shared/Spinner/Spinner';
 import useAudiosListData from '../../../hooks/useAudiosListData';
+import useStylesProvider from "@/app/features/dreams/hooks/useStylesProvider";
+import Centered from "@/app/features/dreams/HOCs/Centered/Centered";
 
 function AudiosList() {
   const { session, status, files } = useAudiosListData();
-
+const  styles = useStylesProvider()
   switch (status) {
     case 'pending':
-      return <Spinner size={90} />;
+      return <Centered absolute><Spinner size={90} /></Centered>
     case 'error':
       if (files.length === 0) {
         return <NoFilesFound />;
@@ -20,7 +22,7 @@ function AudiosList() {
     case 'fulfilled':
     case '':
       return (
-        <table className={style.table}>
+        <table className={style.table} style={styles.audioListElement.header}>
           <tr>
             <th>name</th>
             <th>file size</th>

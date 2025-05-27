@@ -5,11 +5,14 @@ import { AudioProps } from '@/app/features/dreams/types/components/list/Audio';
 import { useSession } from 'next-auth/react';
 import { IoMdDownload } from 'react-icons/io';
 import ButtonIcon from '../../../shared/ButtonIcon/ButtonIcon';
+import useStylesProvider from "@/app/features/dreams/hooks/useStylesProvider";
 
 function Audio({ file, id }: AudioProps) {
   const isPrivate = file.name.includes('/private/');
 
   const { data: session }: { data: any } = useSession();
+
+  const styles = useStylesProvider()
 
   if (
     !isPrivate ||
@@ -19,10 +22,8 @@ function Audio({ file, id }: AudioProps) {
     return (
       <Processing isProcessing={file.processing}>
         <tr
-          className={`${file.processing ? style.processing : style.row} ${
-            isPrivate && style.private
-          }
-          `}
+            style={isPrivate?styles.audioListElement.private:styles.audioListElement.regular}
+          className={file.processing ? style.processing : style.row}
         >
           {/* <td>
           <audio controls>
