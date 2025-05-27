@@ -2,10 +2,14 @@
   width: 100%;
   table-layout: auto;
 
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px var(--regular-text-color) solid;
+
   td,
   tr,
   th {
-    border: 1px #fff solid;
+    border: 1px var(--regular-text-color) solid;
     padding: 10px;
     // width: 25%;
   }

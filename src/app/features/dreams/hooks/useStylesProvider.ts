@@ -1,6 +1,6 @@
 import { useTheme } from '../HOCs/ThemeProvider/ThemeProvider';
 import { hexToCSSFilter } from 'hex-to-css-filter';
-import DreamsList from "@/app/dream/list/page";
+import DreamsList from '@/app/dream/list/page';
 const hexToRgb = require('hex-to-rgb');
 
 export default function useStylesProvider() {
@@ -87,40 +87,52 @@ export default function useStylesProvider() {
   };
 
   const sortBy = {
-    backgroundColor:theme.colors.primary.third,
+    backgroundColor: theme.colors.primary.third,
     border: '1px solid ' + theme.colors.text.first,
     borderRadius: '12px',
-  }
-
+  };
 
   const sortByElement = {
     enabled: {
       backgroundColor: theme.colors.primary.second,
       color: theme.colors.text.first,
-
     },
     disabled: {
       backgroundColor: theme.colors.text.second,
       color: theme.colors.primary.first,
     },
   };
-  const dreamsList ={
+  const dreamsList = {
     display: 'flex',
     justifyContent: 'space-between',
     margin: '1rem 1rem',
-  }
+  };
 
   const audioListElement = {
-    header:{
-
+    header: {
       backgroundColor: theme.colors.primary.second,
+      '--regular-text-color': theme.colors.text.first,
     },
-    private:{
+    private: {
       backgroundColor: theme.colors.active.first,
-    },regular:{
+      '--regular-text-color': theme.colors.text.first,
+    },
+    regular: {
       backgroundColor: theme.colors.primary.second,
-  }
-  }
+      '--regular-text-color': theme.colors.text.first,
+    },
+  };
+
+  const dropDown = {
+    backgroundColor: theme.colors.primary.third,
+    color: theme.colors.text.first,
+    padding: '0.75rem 1rem',
+    width: 'auto',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    transform: 'translateX(-25%)',
+  };
 
   return {
     header,
@@ -128,11 +140,12 @@ export default function useStylesProvider() {
     buttonPrimary,
     buttonSecondary,
     recordAudio,
-     calendar,
+    calendar,
     audio,
     sortByElement,
     sortBy,
     dreamsList,
-    audioListElement
+    audioListElement,
+    dropDown,
   };
 }
