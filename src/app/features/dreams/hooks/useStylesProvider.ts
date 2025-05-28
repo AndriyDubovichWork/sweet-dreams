@@ -152,6 +152,11 @@ export default function useStylesProvider() {
     iconColor: theme.colors.text.first,
   };
 
+  const uploadAudio: CSSProperties = {
+    backgroundColor: theme.colors.primary.second,
+    color: theme.colors.text.first,
+  };
+
   return {
     header,
     input,
@@ -167,5 +172,6 @@ export default function useStylesProvider() {
     dropDown,
     mainPage,
     themeSlider,
+    uploadAudio,
   };
 }
