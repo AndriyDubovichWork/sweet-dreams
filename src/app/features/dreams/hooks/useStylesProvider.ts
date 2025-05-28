@@ -1,6 +1,7 @@
 import { useTheme } from '../HOCs/ThemeProvider/ThemeProvider';
 import { hexToCSSFilter } from 'hex-to-css-filter';
 import DreamsList from '@/app/dream/list/page';
+import { CSSProperties } from 'react';
 const hexToRgb = require('hex-to-rgb');
 
 export default function useStylesProvider() {
@@ -8,11 +9,13 @@ export default function useStylesProvider() {
   const activeRgb = hexToRgb(theme.colors.active.first);
   const textRgb = hexToRgb(theme.colors.text.first);
 
-  const header = {
+  const header: CSSProperties = {
     backgroundColor: theme.colors.primary.second,
+    color: theme.colors.text.first,
   };
   const input = {
     color: theme.colors.text.first,
+    '--placeholder-color': theme.colors.text.third,
     '--regular-color': theme.colors.primary.third,
     '--active-color': theme.colors.active.first,
     '--active-rgb': `${activeRgb[0]}, ${activeRgb[1]}, ${activeRgb[2]}`,
@@ -86,7 +89,7 @@ export default function useStylesProvider() {
     '--progress-bar-color-rgb': `${textRgb[0]}, ${textRgb[1]}, ${textRgb[2]}`,
   };
 
-  const sortBy = {
+  const sortBy: CSSProperties = {
     backgroundColor: theme.colors.primary.third,
     border: '1px solid ' + theme.colors.text.first,
     borderRadius: '12px',
@@ -102,10 +105,10 @@ export default function useStylesProvider() {
       color: theme.colors.primary.first,
     },
   };
-  const dreamsList = {
+  const dreamsList: CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
-    margin: '1rem 1rem',
+    padding: '1rem',
   };
 
   const audioListElement = {
@@ -123,7 +126,7 @@ export default function useStylesProvider() {
     },
   };
 
-  const dropDown = {
+  const dropDown: CSSProperties = {
     backgroundColor: theme.colors.primary.third,
     color: theme.colors.text.first,
     padding: '0.75rem 1rem',
@@ -133,6 +136,14 @@ export default function useStylesProvider() {
     whiteSpace: 'nowrap',
     transform: 'translateX(-25%)',
   };
+  const mainPage = {
+    backgroundColor: theme.colors.primary.first,
+    color: theme.colors.text.first,
+    height: 'max-content',
+    flex: 1,
+  };
+
+  const themeSlider = {};
 
   return {
     header,
@@ -147,5 +158,6 @@ export default function useStylesProvider() {
     dreamsList,
     audioListElement,
     dropDown,
+    mainPage,
   };
 }

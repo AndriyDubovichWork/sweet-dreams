@@ -3,28 +3,20 @@
 @tailwind utilities;
 
 :root {
-  background-color: #3b3a3a;
+  //--very-main-background-color: red;
+  //--very-main-text-color: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    // --background-start-rgb: 0, 0, 0;
-    // --background-end-rgb: 0, 0, 0;
-  }
-}
 * {
-  font-color: #fff;
+  //color: var(--very-main-text-color);
   font-family: 'Rubik', sans-serif;
-  // font-family: 'Poppins', sans-serif;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  //background-color: var(--very-main-background-color);
+  //color: var(--very-main-text-color);
 }

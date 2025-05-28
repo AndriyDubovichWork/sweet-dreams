@@ -7,7 +7,9 @@
   transition: all 0.2s ease;
 
   background-color: var(--regular-color);
-
+&::-webkit-input-placeholder{
+  color: var(--placeholder-color);
+}
   &:focus {
     outline: none;
     border-color: var(--active-color);

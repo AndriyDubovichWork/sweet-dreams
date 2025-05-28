@@ -10,6 +10,7 @@ import Input from '../../shared/Input/Input';
 import stringDateFormatter from '../../../utils/Shared/stringDateFormatter';
 import useUploadAudioData from './../../../hooks/useUploadAudioData';
 import Button from '../../shared/Button/Button';
+import useStylesProvider from '../../../hooks/useStylesProvider';
 
 function UploadAudio() {
   const {
@@ -25,9 +26,12 @@ function UploadAudio() {
     setMessage,
     isButtonDisabled,
   } = useUploadAudioData();
+
+  const styles = useStylesProvider();
   return (
     <StatusMessage>
-      <div className={style.content}>
+
+      <div className={style.content} >
         <div className={style.uploadAudio}>
           <RecordAudio />
 
@@ -47,14 +51,14 @@ function UploadAudio() {
                 type='checkbox'
                 onChange={(e) => setIsPrivate(!isPrivate)}
               />
-              <h3>is Private</h3>
+              <h3 style={{color:styles.header.color}}>is Private</h3>
             </label>
           </div>
 
           <Preview />
 
           <Button
-              isPrimary
+            isPrimary
             disabled={isButtonDisabled}
             onClick={() => {
               setStatus('pending');

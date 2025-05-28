@@ -6,6 +6,7 @@ import style from './Header.module.scss';
 import { useSession } from 'next-auth/react';
 import { useLoadingStateStore } from '../store/shared/useLoadingStateStore';
 import useStylesProvider from '../hooks/useStylesProvider';
+import ThemeSlider from './ThemeSlider/ThemeSlider';
 
 export default function Header() {
   const { setStatus } = useLoadingStateStore();
@@ -26,6 +27,7 @@ export default function Header() {
       <Link href={'/dream/list'} onClick={resetStatus}>
         list
       </Link>
+      <ThemeSlider />
     </header>
   );
 }

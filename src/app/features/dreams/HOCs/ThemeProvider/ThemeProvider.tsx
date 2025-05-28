@@ -14,19 +14,19 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     light: {
       colors: {
         active: {
-          first: '',
-          second: '',
-          third: '',
+          first: '#EB694A',
+          second: '#E06446',
+          third: '#E35937FF',
         },
         primary: {
-          first: '',
-          second: '',
-          third: '',
+          first: '#FFFFFF',
+          second: '#D7D7D7',
+          third: '#8B8B8B',
         },
         text: {
-          first: '',
-          second: '',
-          third: '',
+          first: '#3B3A3A',
+          second: '#363636',
+          third: '#2F2F2F',
         },
       },
     },

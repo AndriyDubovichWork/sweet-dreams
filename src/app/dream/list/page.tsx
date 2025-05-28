@@ -5,18 +5,16 @@ import SearchDream from '@/app/features/dreams/components/list/SearchDream/Searc
 import SortBy from '@/app/features/dreams/components/list/SortBy/SortBy';
 import AcessControll from '@/app/features/dreams/HOCs/AcessControll/AcessControll';
 import StatusMessage from '@/app/features/dreams/HOCs/StatusMessage/StatusMessage';
-import useStylesProvider from "@/app/features/dreams/hooks/useStylesProvider";
+import useStylesProvider from '@/app/features/dreams/hooks/useStylesProvider';
 
 export default function DreamsList() {
-const styles = useStylesProvider()
+  const styles = useStylesProvider();
 
   return (
-    <main>
+    <main style={styles.mainPage }>
       <AcessControll IsregisteredUsersAllowed isAdminOnly>
         <StatusMessage>
-          <div
-            style={styles.dreamsList}
-          >
+          <div style={styles.dreamsList} >
             <SearchDream />
             <SortBy />
           </div>
