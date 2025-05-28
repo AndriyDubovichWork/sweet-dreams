@@ -143,7 +143,14 @@ export default function useStylesProvider() {
     flex: 1,
   };
 
-  const themeSlider = {};
+  const themeSlider = {
+    offColor: theme.colors.text.first,
+    onColor: theme.colors.text.first,
+    offHandleColor: theme.colors.primary.first,
+    onHandleColor: theme.colors.primary.first,
+    activeBoxShadow: `0 0 0 3px rgba(${activeRgb[0]}, ${activeRgb[1]}, ${activeRgb[2]}, 0.75)`,
+    iconColor: theme.colors.text.first,
+  };
 
   return {
     header,
@@ -159,5 +166,6 @@ export default function useStylesProvider() {
     audioListElement,
     dropDown,
     mainPage,
+    themeSlider,
   };
 }
