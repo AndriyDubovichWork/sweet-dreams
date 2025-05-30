@@ -4,11 +4,14 @@ import {
   Themes,
 } from '@/app/features/dreams/types/HOCs/theme';
 import React, { createContext, useContext, useState } from 'react';
+import Cookies from 'js-cookie';
 
 const ThemeContext = createContext({});
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<ThemeName>('dark'); // default theme
+  const [theme, setTheme] = useState<ThemeName>(
+    (Cookies.get('theme') as ThemeName) || 'dark'
+  );
 
   const themes: Themes = {
     light: {
@@ -50,9 +53,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       },
     },
   };
-
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      Cookies.set('theme', newTheme);
+
+      return newTheme;
+    });
   };
 
   return (
