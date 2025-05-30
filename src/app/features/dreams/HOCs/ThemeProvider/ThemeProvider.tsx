@@ -20,13 +20,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         },
         primary: {
           first: '#FFFFFF',
-          second: '#D7D7D7',
-          third: '#8B8B8B',
+          second: '#EBEBEB',
+          third: '#C6C6C6',
         },
         text: {
-          first: '#3B3A3A',
-          second: '#363636',
-          third: '#2F2F2F',
+          first: '#000000',
+          second: '#171717',
+          third: '#222222',
         },
       },
     },

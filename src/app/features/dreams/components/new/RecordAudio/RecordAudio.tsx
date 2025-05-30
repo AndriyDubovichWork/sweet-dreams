@@ -3,10 +3,13 @@ import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
 import style from './RecordAudio.module.scss';
 import Input from '../../shared/Input/Input';
 import useStylesProvider from '../../../hooks/useStylesProvider';
+import NoSleep from 'nosleep.js';
 
 function RecordAudio() {
   const { setBlob } = useNewDreamStore();
   const { recordAudio } = useStylesProvider();
+  const noSleep = new NoSleep();
+  noSleep.enable();
 
   return (
     <div
@@ -15,7 +18,10 @@ function RecordAudio() {
     >
       <div>
         <AudioRecorder
-          onRecordingComplete={(blob) => setBlob(blob)}
+          onRecordingComplete={(blob) => {
+            setBlob(blob);
+            noSleep.disable();
+          }}
           classes={{
             AudioRecorderClass: style.recorderStyles,
             AudioRecorderStartSaveClass: style.recorderIcon,
