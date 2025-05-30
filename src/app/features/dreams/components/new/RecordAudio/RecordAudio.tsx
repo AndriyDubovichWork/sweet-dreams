@@ -3,27 +3,24 @@ import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
 import style from './RecordAudio.module.scss';
 import Input from '../../shared/Input/Input';
 import useStylesProvider from '../../../hooks/useStylesProvider';
-import { useWakeLock } from 'react-screen-wake-lock';
 import { useEffect } from 'react';
+import { useWakeLock } from 'react-screen-wake-lock';
 
 function RecordAudio() {
   const { setBlob } = useNewDreamStore();
   const { recordAudio } = useStylesProvider();
 
-  const { isSupported, request, release } = useWakeLock();
+  const { request, release, isSupported } = useWakeLock();
 
   useEffect(() => {
     if (isSupported) {
-      request(); // Request wake lock
-
-      // Return cleanup function that handles the Promise properly
+      request('screen');
       return () => {
-        release().catch((err) => {
-          console.error('Failed to release wake lock:', err);
-        });
+        void release();
       };
     }
   }, [isSupported, request, release]);
+
   return (
     <div
       className={style.recordAudio}
