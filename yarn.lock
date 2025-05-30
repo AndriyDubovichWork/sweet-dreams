@@ -3929,11 +3929,6 @@ normalize-range@^0.1.2:
   resolved "https://registry.npmjs.org/normalize-range/-/normalize-range-0.1.2.tgz"
   integrity sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==
 
-nosleep.js@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/nosleep.js/-/nosleep.js-0.12.0.tgz#a01fddab2c13af357d673928b1f40a9013a4dc08"
-  integrity sha512-9d1HbpKLh3sdWlhXMhU6MMH+wQzKkrgfRkYV0EBdvt99YJfj0ilCJrWRDYG2130Tm4GXbEoTCx5b34JSaP+HhA==
-
 oauth@^0.9.15:
   version "0.9.15"
   resolved "https://registry.npmjs.org/oauth/-/oauth-0.9.15.tgz"
@@ -4390,6 +4385,11 @@ react-modern-audio-player@^1.4.0-rc.2:
     react-icons "^4.4.0"
     styled-components "^5.3.5"
     wavesurfer.js "^6.2.0"
+
+react-screen-wake-lock@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-screen-wake-lock/-/react-screen-wake-lock-3.1.1.tgz#d5011be60dd9904bdcf3c81f65e2d27192554900"
+  integrity sha512-aZqFSh1uHhdeeNHknvCuw9pZO9hP1Ul7Z1Cc26WJaOH52ZbnLSPS01GEeHarARSmOIdLwJoSMRyfSAW0a946bA==
 
 react-switch@^7.1.0:
   version "7.1.0"

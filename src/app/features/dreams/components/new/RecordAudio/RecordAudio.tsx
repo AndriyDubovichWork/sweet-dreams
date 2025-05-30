@@ -3,13 +3,23 @@ import { useNewDreamStore } from '../../../store/new/useNewDreamStore';
 import style from './RecordAudio.module.scss';
 import Input from '../../shared/Input/Input';
 import useStylesProvider from '../../../hooks/useStylesProvider';
-import NoSleep from 'nosleep.js';
+import { useWakeLock } from 'react-screen-wake-lock';
+import { useEffect } from 'react';
 
 function RecordAudio() {
   const { setBlob } = useNewDreamStore();
   const { recordAudio } = useStylesProvider();
-  const noSleep = new NoSleep();
-  noSleep.enable();
+
+  const { isSupported, request, release } = useWakeLock();
+
+  useEffect(() => {
+    console.log(isSupported);
+
+    if (isSupported) {
+      request();
+      return () => release();
+    }
+  }, [isSupported, request, release]);
 
   return (
     <div
@@ -18,10 +28,7 @@ function RecordAudio() {
     >
       <div>
         <AudioRecorder
-          onRecordingComplete={(blob) => {
-            setBlob(blob);
-            noSleep.disable();
-          }}
+          onRecordingComplete={(blob) => setBlob(blob)}
           classes={{
             AudioRecorderClass: style.recorderStyles,
             AudioRecorderStartSaveClass: style.recorderIcon,
