@@ -13,14 +13,17 @@ function RecordAudio() {
   const { isSupported, request, release } = useWakeLock();
 
   useEffect(() => {
-    console.log(isSupported);
-
     if (isSupported) {
-      request();
-      return () => release();
+      request(); // Request wake lock
+
+      // Return cleanup function that handles the Promise properly
+      return () => {
+        release().catch((err) => {
+          console.error('Failed to release wake lock:', err);
+        });
+      };
     }
   }, [isSupported, request, release]);
-
   return (
     <div
       className={style.recordAudio}
