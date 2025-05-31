@@ -1,11 +1,10 @@
 import { useTheme } from '../HOCs/ThemeProvider/ThemeProvider';
 import { hexToCSSFilter } from 'hex-to-css-filter';
-import DreamsList from '@/app/dream/list/page';
 import { CSSProperties } from 'react';
 const hexToRgb = require('hex-to-rgb');
 
 export default function useStylesProvider() {
-  const { theme } = useTheme();
+  const { theme, themeName } = useTheme();
   const activeRgb = hexToRgb(theme.colors.active.first);
   const textRgb = hexToRgb(theme.colors.text.first);
 
@@ -173,5 +172,6 @@ export default function useStylesProvider() {
     mainPage,
     themeSlider,
     uploadAudio,
+    themeName,
   };
 }
