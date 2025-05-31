@@ -1,0 +1,55 @@
+.table {
+  width: 100%;
+  table-layout: auto;
+
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px var(--regular-text-color) solid;
+
+  td,
+  tr,
+  th {
+    border: 1px var(--regular-text-color) solid;
+    padding: 10px;
+    // width: 25%;
+  }
+  th:not(.minWidth),
+  tr:not(.minWidth),
+  td:not(.minWidth) {
+    width: 100%;
+  }
+}
+
+.skeletonRow {
+  td {
+    padding: 1rem;
+  }
+}
+
+.skeletonText {
+  height: 1rem;
+  background-color: var(--regular-text-color);
+  border-radius: 4px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeletonButton {
+  width: 36px;
+  height: 36px;
+  background-color: var(--regular-text-color);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite ease-in-out;
+  margin: 0 auto;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
