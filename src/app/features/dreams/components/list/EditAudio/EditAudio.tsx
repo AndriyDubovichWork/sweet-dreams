@@ -72,6 +72,13 @@ function EditAudio({ file, id }: EditAudioProps) {
     return (
       <>
         <td>{isPrivate ? name.replaceAll('/private/', '') : name}</td>
+        <td>
+          <iframe
+            src={`https://drive.google.com/file/d/${file.id}/preview`}
+            height='50'
+            allow='autoplay'
+          ></iframe>
+        </td>
         <td>{filesize(size)}</td>
         <td>{date ? date : stringDateFormatter(createdTime)}</td>
         <AcessControll>

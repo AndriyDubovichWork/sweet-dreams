@@ -30,14 +30,6 @@ function Audio({ file, id }: AudioProps) {
           }
           className={file.processing ? style.processing : style.row}
         >
-          <td>
-            <iframe
-              src={`https://drive.google.com/file/d/${file.id}/preview`}
-              height='50'
-              allow='autoplay'
-            ></iframe>
-          </td>
-
           <EditAudio file={file} id={id} />
           <td>
             <a

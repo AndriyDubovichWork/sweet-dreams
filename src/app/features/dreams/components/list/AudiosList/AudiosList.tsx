@@ -30,6 +30,7 @@ function AudiosList() {
           <table className={style.table} style={styles.audioListElement.header}>
             <tr>
               <th>name</th>
+              <th>audio</th>
               <th>file size</th>
               <th>date</th>
               {session?.user?.role === 'admin' && (

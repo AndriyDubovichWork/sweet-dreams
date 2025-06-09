@@ -7,6 +7,7 @@ export default function Paginator() {
 
   return (
     <div className={style.paginator} onClick={() => updateDreams()}>
-next page    </div>
+      next page
+    </div>
   );
 }
