@@ -15,11 +15,11 @@ export default async function saveFileToDrive(file: FormData) {
   const createdFile = await drive.files.create({
     requestBody: {
       name: blob.name.replaceAll('tokenforslashwithoutitwillcutastring', '/'),
-      mimeType: 'audio/mpeg',
+      mimeType: 'audio-generator/mpeg',
       parents: [process.env.FOLDER_ID as string],
     },
     media: {
-      mimeType: 'audio/mpeg',
+      mimeType: 'audio-generator/mpeg',
       body: stream,
     },
   });

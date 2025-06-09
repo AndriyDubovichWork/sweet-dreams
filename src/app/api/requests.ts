@@ -21,12 +21,14 @@ export async function postDream(blob: Blob, fileName: string) {
 export async function getDreams(
   sortBy: OrderByValues,
   isSortByReversed: boolean,
-  name?: string
+  name?: string,
+  pageToken?: string
 ) {
   const res: any = await axios.get(`/api/dream`, {
     params: {
       sortBy: createFullSortBy(sortBy, isSortByReversed),
       name,
+      pageToken,
     },
   });
 
@@ -46,6 +48,13 @@ export async function renameDream(fileId: string, newName: string) {
       fileId,
       newName,
     },
+  });
+  return res.data.res;
+}
+
+export async function generateAudioBolbByUrl(url: string) {
+  const res = await axios.get(`/api/audio-generator`, {
+    params: { url },
   });
   return res.data.res;
 }

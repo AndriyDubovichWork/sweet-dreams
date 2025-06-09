@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { IoMdDownload } from 'react-icons/io';
 import ButtonIcon from '../../../shared/ButtonIcon/ButtonIcon';
 import useStylesProvider from '@/app/features/dreams/hooks/useStylesProvider';
-import AudioPlayer from '../../../shared/AudioPlayer/AudioPlayer';
+import { useState } from 'react';
 
 function Audio({ file, id }: AudioProps) {
   const isPrivate = file.name.includes('/private/');
@@ -14,7 +14,6 @@ function Audio({ file, id }: AudioProps) {
   const { data: session }: { data: any } = useSession();
 
   const styles = useStylesProvider();
-  console.log(file.webContentLink);
 
   if (
     !isPrivate ||
@@ -31,9 +30,13 @@ function Audio({ file, id }: AudioProps) {
           }
           className={file.processing ? style.processing : style.row}
         >
-          {/* <td>
-            <AudioPlayer src={file.webContentLink} />
-          </td> */}
+          <td>
+            <iframe
+              src={`https://drive.google.com/file/d/${file.id}/preview`}
+              height='50'
+              allow='autoplay'
+            ></iframe>
+          </td>
 
           <EditAudio file={file} id={id} />
           <td>

@@ -26,6 +26,7 @@ export async function GET(req: Request) {
 
   const sortBy = searchParams.get('sortBy');
   const name = searchParams.get('name');
+  const pageToken = searchParams.get('pageToken');
 
   if (!sortBy)
     return NextResponse.json({ error: 'missing sortBy' }, { status: 422 });
@@ -34,7 +35,7 @@ export async function GET(req: Request) {
   if (name) {
     recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
   } else {
-    recivedFiles = await getFiles(sortBy as OrderByValues);
+    recivedFiles = await getFiles(sortBy as OrderByValues, pageToken as string);
   }
 
   if (recivedFiles.status !== 200) {

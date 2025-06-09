@@ -45,7 +45,7 @@ function RecordAudio() {
         onChange={(e) => {
           const file = e.target.files?.[0];
 
-          if (file?.type === 'audio/mpeg') {
+          if (file?.type === 'audio-generator/mpeg') {
             setBlob(file);
             e.target.value = '';
           }

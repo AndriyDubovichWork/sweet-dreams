@@ -15,7 +15,6 @@ export default function Header() {
   const { data: session }: { data: any } = useSession();
 
   const styles = useStylesProvider();
-  console.log('header',styles.themeName);
 
   return (
     <header className={style.header} style={styles.header}>
