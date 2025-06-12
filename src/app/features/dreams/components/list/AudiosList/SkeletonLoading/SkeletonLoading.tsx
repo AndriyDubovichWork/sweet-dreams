@@ -9,6 +9,7 @@ const SkeletonLoading = ({ role }: { role: string }) => {
     <table className={style.table} style={styles.audioListElement.header}>
       <tr>
         <th>name</th>
+        <th>audio</th>
         <th>file size</th>
         <th>date</th>
         {role === 'admin' && (
@@ -25,7 +26,10 @@ const SkeletonLoading = ({ role }: { role: string }) => {
         {[...Array(10)].map((_, index) => (
           <tr key={index} className={style.skeletonRow}>
             <td>
-              <div className={style.skeletonText} style={{ width: '70%' }} />
+              <div className={style.skeletonText} style={{ width: '35%' }} />
+            </td>
+            <td>
+              <div className={style.skeletonText} style={{ width: '350%' }} />
             </td>
             <td>
               <div className={style.skeletonText} style={{ width: '50%' }} />

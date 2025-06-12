@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/react';
 import { IoMdDownload } from 'react-icons/io';
 import ButtonIcon from '../../../shared/ButtonIcon/ButtonIcon';
 import useStylesProvider from '@/app/features/dreams/hooks/useStylesProvider';
-import { useState } from 'react';
 
 function Audio({ file, id }: AudioProps) {
   const isPrivate = file.name.includes('/private/');

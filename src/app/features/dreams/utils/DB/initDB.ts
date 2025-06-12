@@ -5,49 +5,48 @@ const sql = neon(process.env.DATABASE_URL!);
 
 export async function initializeDatabase() {
   try {
-    // Create users table
     await sql`
-        CREATE TABLE IF NOT EXISTS users (
-            user_id SERIAL PRIMARY KEY,
-            username VARCHAR(50) NOT NULL UNIQUE,
-            email VARCHAR(100) NOT NULL UNIQUE,
-            password_hash VARCHAR(255) NOT NULL,
-            status VARCHAR(20) CHECK (status IN ('admin', 'super_user', 'regular_user')) NOT NULL DEFAULT 'regular_user',
+        CREATE TABLE IF NOT EXISTS users(
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            status  VARCHAR(20) CHECK (status IN ('admin', 'super_user', 'regular_user')) NOT NULL DEFAULT 'regular_user',
+            email LINESTRING NOT NULL,
+            dreamsWatched TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             last_login TIMESTAMP NULL,
             is_active BOOLEAN DEFAULT TRUE
+
         );
         `;
 
-    // Create files table
     await sql`
-        CREATE TABLE IF NOT EXISTS files (
-            file_id SERIAL PRIMARY KEY,
-            unique_id VARCHAR(36) NOT NULL UNIQUE,
-            file_name VARCHAR(255) NOT NULL,
-            file_url VARCHAR(512) NOT NULL,
-            file_size BIGINT NOT NULL,
-            file_type VARCHAR(100),
-            created_by INTEGER NOT NULL REFERENCES users(user_id),
-            is_private BOOLEAN DEFAULT FALSE,
-            allowed_users JSONB DEFAULT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            last_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            last_viewed TIMESTAMP NULL,
-            view_count INTEGER DEFAULT 0,
-            last_viewed_by INTEGER REFERENCES users(user_id),
-            properties JSONB DEFAULT '{}'::jsonb
+        CREATE TABLE IF NOT EXISTS dreams(
+            id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            name LINESTRING NOT NULL,
+            createdTime DATE NOT NULL,
+            lastUpdatedTime DATE NOT NULL,
+            fileId LINESTRING NOT NULL,
+            size BIGINT NOT NULL,
+            webContentLink LINESTRING NOT NULL,
+            playableUrl LINESTRING NOT NULL,
+            isPrivate BOOLEAN NOT NULL
         );
-        `;
-
-    // Create indexes
-    await sql`
-        CREATE INDEX IF NOT EXISTS idx_files_created_by ON files(created_by);
-        CREATE INDEX IF NOT EXISTS idx_files_is_private ON files(is_private);
-        CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
         `;
 
     console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  }
+}
+
+export async function dropTables() {
+  try {
+    await sql`
+        DROP TABLE dreams
+        DROP TABLE users
+        `;
+
+    console.log('Database dropped successfully');
   } catch (error) {
     console.error('Error initializing database:', error);
     throw error;
