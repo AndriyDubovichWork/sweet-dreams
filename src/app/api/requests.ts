@@ -2,7 +2,11 @@ import axios from 'axios';
 import { OrderByValues } from '../features/dreams/types/store/savedDreamsStore';
 import createFullSortBy from '../features/dreams/utils/list/createFullSortBy';
 
-export async function postDream(blob: Blob, fileName: string) {
+export async function postDream(
+  blob: Blob,
+  fileName: string,
+  isPrivate: boolean
+) {
   let formData = new FormData();
 
   formData.append(
@@ -15,6 +19,9 @@ export async function postDream(blob: Blob, fileName: string) {
     headers: {
       'Content-Type': `multipart/form-data`,
     },
+    params: {
+      isPrivate,
+    },
   });
   return res;
 }
@@ -26,7 +33,8 @@ export async function getDreams(
 ) {
   const res: any = await axios.get(`/api/dream`, {
     params: {
-      sortBy: createFullSortBy(sortBy, isSortByReversed),
+      sortBy,
+      isSortByReversed,
       name,
       pageToken,
     },
@@ -40,6 +48,7 @@ export async function deleteDream(fileId: string) {
       fileId,
     },
   });
+
   return res.data.res;
 }
 export async function renameDream(fileId: string, newName: string) {
@@ -48,13 +57,6 @@ export async function renameDream(fileId: string, newName: string) {
       fileId,
       newName,
     },
-  });
-  return res.data.res;
-}
-
-export async function generateAudioBolbByUrl(url: string) {
-  const res = await axios.get(`/api/audio-generator`, {
-    params: { url },
   });
   return res.data.res;
 }

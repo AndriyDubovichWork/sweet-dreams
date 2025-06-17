@@ -1,4 +1,4 @@
-type UserStatus = 'admin' | 'super_user' | 'regular_user';
+export type UserStatus = 'admin' | 'superUser' | 'user';
 
 export interface User {
   id: bigint | number;

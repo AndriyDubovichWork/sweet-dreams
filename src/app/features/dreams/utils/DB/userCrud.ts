@@ -1,6 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import 'dotenv/config';
-import { Dream, User } from './types';
+import { User, UserStatus } from './types';
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -15,7 +15,7 @@ export async function createUser(userData: User) {
         is_active
       )
       VALUES (
-        ${userData.status || 'regular_user'},
+        ${userData.status || 'user'},
         ${userData.email},
         ${userData.dreamsWatched || JSON.stringify([])},
         ${userData.last_login || null},
@@ -87,6 +87,39 @@ export async function updateUser(userId: number, updateData: User) {
     throw error;
   }
 }
+
+export async function updateLastLoginUserToNow(userId: number) {
+  try {
+    const result = await sql`
+      UPDATE users
+      SET 
+        last_login = ${new Date()}
+      WHERE id = ${userId}
+      RETURNING *;
+    `;
+    return result[0];
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
+}
+
+export async function changUserStatus(userId: number, status: UserStatus) {
+  try {
+    const result = await sql`
+      UPDATE users
+      SET 
+        status = ${status}
+      WHERE id = ${userId}
+      RETURNING *;
+    `;
+    return result[0];
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
+}
+
 export async function deleteUser(userId: number) {
   try {
     const result = await sql`

@@ -4,13 +4,14 @@ import { OrderByValues } from '@/app/features/dreams/types/store/savedDreamsStor
 
 export default async function getFiles(
   orderBy: OrderByValues,
-  pageToken: string
+  pageToken: string,
+  pageSize = 10
 ) {
   const drive = (await Auth()) as drive_v3.Drive;
 
   const params = {
     ...(pageToken && { pageToken }),
-    pageSize: 10,
+    pageSize,
     q: `'${process.env.FOLDER_ID}' in parents`,
     fields:
       'files(id, name, size, webContentLink, createdTime, mimeType) , nextPageToken',

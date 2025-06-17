@@ -61,7 +61,7 @@ function UploadAudio() {
             disabled={isButtonDisabled}
             onClick={() => {
               setStatus('pending');
-              postDream(blob as Blob, createFullName(name, date, isPrivate))
+              postDream(blob as Blob, createFullName(name, date), isPrivate)
                 .then(() =>
                   updateDreams({
                     successfullyMessage: 'saved successfully',

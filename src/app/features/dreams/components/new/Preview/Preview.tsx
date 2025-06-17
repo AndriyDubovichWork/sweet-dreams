@@ -7,7 +7,7 @@ export default function Preview() {
   return (
     <>
       {(name || blob) && <h1>preview:</h1>}
-      {name && <h3>name: {createFullName(name, date, isPrivate)}</h3>}
+      {name && <h3>name: {createFullName(name, date)}</h3>}
       {blob && <AudioPlayer src={URL.createObjectURL(blob as Blob)} />}
     </>
   );

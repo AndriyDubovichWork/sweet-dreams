@@ -5,14 +5,25 @@ import { NextResponse } from 'next/server';
 import renameFile from './drive/renameFile';
 import searchFileByName from './drive/searchFileByName';
 import { OrderByValues } from '@/app/features/dreams/types/store/savedDreamsStore';
+import { getAllDreams } from '@/app/features/dreams/utils/DB/dreamCrud';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
+  const { searchParams } = new URL(req.url);
+
+  const isPrivateStr = searchParams.get('isPrivate');
   if (!formData) {
     return NextResponse.json({ error: 'missing file' }, { status: 422 });
   }
+  if (!isPrivateStr) {
+    return NextResponse.json(
+      { error: 'missing isPrivate search param' },
+      { status: 422 }
+    );
+  }
+  const isPrivate = JSON.parse(isPrivateStr.toLowerCase()) as boolean;
+  const savedFile = await saveFileToDrive(formData, isPrivate);
 
-  const savedFile = await saveFileToDrive(formData);
   if (savedFile.status !== 200) {
     return NextResponse.json(
       { error: "couldn't upload file to drive" },
@@ -25,11 +36,17 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
   const sortBy = searchParams.get('sortBy');
+  const isSortByReversed = searchParams.get('isSortByReversed');
   const name = searchParams.get('name');
   const pageToken = searchParams.get('pageToken');
 
   if (!sortBy)
     return NextResponse.json({ error: 'missing sortBy' }, { status: 422 });
+  if (!isSortByReversed)
+    return NextResponse.json(
+      { error: 'missing isSortByReversed' },
+      { status: 422 }
+    );
 
   let recivedFiles;
   if (name) {
@@ -37,6 +54,15 @@ export async function GET(req: Request) {
   } else {
     recivedFiles = await getFiles(sortBy as OrderByValues, pageToken as string);
   }
+
+  // console.log('====================================');
+  // console.log(
+  // );
+  // console.log('====================================');
+
+  console.log(await getAllDreams('name', Boolean(isSortByReversed)));
+
+  // console.log(recivedFiles.data.files);
 
   if (recivedFiles.status !== 200) {
     return NextResponse.json(

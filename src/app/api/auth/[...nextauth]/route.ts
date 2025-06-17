@@ -1,3 +1,13 @@
+import {
+  copyAllDreamsFromDriveToDB,
+  getAllDreams,
+} from '@/app/features/dreams/utils/DB/dreamCrud';
+import { initializeDatabase } from '@/app/features/dreams/utils/DB/initDB';
+import {
+  getAllUsers,
+  getUserByEmail,
+  updateLastLoginUserToNow,
+} from '@/app/features/dreams/utils/DB/userCrud';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -9,15 +19,21 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    session({ session }: any) {
-      session.user.role = 'user';
+    async session({ session }: any) {
+      initializeDatabase();
 
-      if (session.user.email === process.env.ADMIN_EMAIL) {
-        session.user.role = 'admin';
+      const user = await getUserByEmail(session.user.email);
+      if (user) {
+        updateLastLoginUserToNow(user.id);
       }
-      if (process.env.SUPER_USERS_LIST?.includes(session.user.email)) {
-        session.user.role = 'superUser';
-      }
+
+      // if (!user) {
+      //   createUser(session.user);
+      // }
+      // console.log(await getAllDreams());
+      // console.log(await getAllUsers());
+
+      session.user.role = user.status;
 
       return session;
     },

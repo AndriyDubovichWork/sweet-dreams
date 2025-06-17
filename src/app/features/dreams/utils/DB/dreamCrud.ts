@@ -2,10 +2,12 @@ import { neon } from '@neondatabase/serverless';
 import 'dotenv/config';
 import { Dream } from './types';
 import { getUserById } from './userCrud';
+import getFiles from '@/app/api/dream/drive/getFiles';
+import { OrderByValues } from '../../types/store/savedDreamsStore';
 
 const sql = neon(process.env.DATABASE_URL!);
 
-export async function createDream(dreamData: Dream) {
+export async function createDream(dreamData: Omit<Dream, 'id'>) {
   try {
     const result = await sql`
       INSERT INTO dreams (
@@ -50,10 +52,27 @@ export async function getDreamById(dreamId: number) {
   }
 }
 
-export async function getAllDreams() {
+type OrderBy = 'name' | 'created_at' | 'updated_at';
+type Direction = 'ASC' | 'DESC';
+export async function getAllDreams(sortBy = 'name', isReversed = false) {
+  let localSortBy: OrderBy = 'name';
+  const localDirection: Direction = isReversed ? 'DESC' : 'ASC';
+  switch (sortBy) {
+    case 'name':
+      localSortBy = 'name';
+      break;
+    case 'createdTime':
+      localSortBy = 'created_at';
+      break;
+    case 'modifiedTime':
+      localSortBy = 'updated_at';
+      break;
+  }
+
   try {
     const result = await sql`
       SELECT * FROM dreams
+      ORDER BY ${sql.unsafe(localSortBy)} ${sql.unsafe(localDirection)}
     `;
     return result;
   } catch (error) {
@@ -61,7 +80,41 @@ export async function getAllDreams() {
     throw error;
   }
 }
+export async function copyAllDreamsFromDriveToDB() {
+  try {
+    const driveDreams = await getFiles('createdTime', '', 1000).then(
+      (res) => res.data.files
+    );
+    const DBdreams = await getAllDreams();
 
+    // console.log('driveDreams', driveDreams);
+    // console.log('DBdreams', DBdreams);
+
+    driveDreams?.map((driveDream) => {
+      // console.log('drive', driveDream.id);
+      DBdreams.map((Dbdream) => {
+        if (driveDream.id === Dbdream.fileid) {
+          console.log('already exists');
+        } else {
+          createDream({
+            createdTime: new Date(driveDream.createdTime as string),
+            fileId: driveDream.id as string,
+            isPrivate: driveDream.name?.includes('/private/') as boolean,
+            lastUpdatedTime: new Date(),
+            name: driveDream?.name?.replaceAll('/private/', '') as string,
+            playableUrl: `https://drive.google.com/file/d/${driveDream.id}/preview`,
+            webContentLink: `https://drive.google.com/uc?id=${driveDream.id}&export=download`,
+            size: Number(driveDream.size),
+          });
+          console.log('coppied');
+        }
+      });
+    });
+  } catch (error) {
+    console.error('Error getting all dreams:', error);
+    throw error;
+  }
+}
 export async function getPublicDreams() {
   try {
     const result = await sql`
