@@ -60,7 +60,6 @@ export async function GET(req: Request) {
   // );
   // console.log('====================================');
 
-  console.log(await getAllDreams('name', Boolean(isSortByReversed)));
 
   // console.log(recivedFiles.data.files);
 
@@ -70,7 +69,9 @@ export async function GET(req: Request) {
       { status: 500 }
     );
   }
-  return NextResponse.json({ res: recivedFiles.data });
+  return NextResponse.json({
+    res: await getAllDreams('name', Boolean(isSortByReversed)),
+  });
 }
 export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);

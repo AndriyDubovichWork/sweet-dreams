@@ -43,7 +43,7 @@ function AudiosList() {
               <th className={style.minWidth}>download</th>
             </tr>
             {files.map((file, id) => {
-              return <Audio file={file} id={id} key={file.id} />;
+              if (id <= 10) return <Audio file={file} id={id} key={file.id} />;
             })}
           </table>
         </>

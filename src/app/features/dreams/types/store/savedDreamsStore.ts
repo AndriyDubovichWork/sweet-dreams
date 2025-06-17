@@ -3,6 +3,7 @@ export type File = {
   name: string;
   size: number;
   webContentLink: string;
+  playableurl: string;
   createdTime: string;
   nextPageToken: string;
   processing?: boolean;

@@ -13,7 +13,9 @@ function Audio({ file, id }: AudioProps) {
   const { data: session }: { data: any } = useSession();
 
   const styles = useStylesProvider();
-
+  if (id === 0) {
+    console.log(file);
+  }
   if (
     !isPrivate ||
     session?.user?.role === 'admin' ||

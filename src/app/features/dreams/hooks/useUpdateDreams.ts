@@ -32,9 +32,11 @@ function useUpdateDreams() {
       isReversed === undefined ? isSortByReversed : isReversed,
       NoSearch ? '' : search,
       nextPageToken
-    ).then(({ files, nextPageToken }) => {
+    ).then((files: any) => {
       setNextPageToken(nextPageToken);
+
       setFiles(files);
+      console.log('files', files);
       setBlob(null);
       setName('');
       setStatus('fulfilled');
