@@ -1,7 +1,7 @@
 import { drive_v3 } from '@googleapis/drive';
 import { Readable } from 'stream';
 import Auth from './Auth';
-import { createDream } from '@/app/features/dreams/utils/DB/dreamCrud';
+import { createDream } from '@/app/common/DB/dreamCrud';
 type responseFile = {
   kind: string;
   id: string;

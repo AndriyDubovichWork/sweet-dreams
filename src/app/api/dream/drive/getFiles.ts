@@ -1,6 +1,6 @@
 import { drive_v3 } from '@googleapis/drive';
 import Auth from './Auth';
-import { OrderByValues } from '@/app/features/dreams/types/store/savedDreamsStore';
+import { OrderByValues } from '@/app/common/store/types/savedDreamsStore';
 
 export default async function getFiles(
   orderBy: OrderByValues,

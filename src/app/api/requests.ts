@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { OrderByValues } from '../features/dreams/types/store/savedDreamsStore';
-import createFullSortBy from '../features/dreams/utils/list/createFullSortBy';
+import { OrderByValues } from '../common/store/types/savedDreamsStore';
+import createFullSortBy from '../features/listDreams/utils/createFullSortBy';
 
 export async function postDream(
   blob: Blob,

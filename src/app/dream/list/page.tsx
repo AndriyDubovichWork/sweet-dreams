@@ -1,20 +1,20 @@
 'use client';
 
-import AudiosList from '@/app/features/dreams/components/list/AudiosList/AudiosList';
-import SearchDream from '@/app/features/dreams/components/list/SearchDream/SearchDream';
-import SortBy from '@/app/features/dreams/components/list/SortBy/SortBy';
-import AcessControll from '@/app/features/dreams/HOCs/AcessControll/AcessControll';
-import StatusMessage from '@/app/features/dreams/HOCs/StatusMessage/StatusMessage';
-import useStylesProvider from '@/app/features/dreams/hooks/useStylesProvider';
+import AcessControll from '@/app/common/hocs/AcessControll/AcessControll';
+import StatusMessage from '@/app/common/hocs/StatusMessage/StatusMessage';
+import useStylesProvider from '@/app/common/hooks/useStylesProvider';
+import AudiosList from '@/app/features/listDreams/components/AudiosList/AudiosList';
+import SearchDream from '@/app/features/listDreams/components/SearchDream/SearchDream';
+import SortBy from '@/app/features/listDreams/components/SortBy/SortBy';
 
 export default function DreamsList() {
   const styles = useStylesProvider();
 
   return (
-    <main style={styles.mainPage }>
+    <main style={styles.mainPage}>
       <AcessControll IsregisteredUsersAllowed isAdminOnly>
         <StatusMessage>
-          <div style={styles.dreamsList} >
+          <div style={styles.dreamsList}>
             <SearchDream />
             <SortBy />
           </div>

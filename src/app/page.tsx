@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import './fonts.scss';
 import style from './home.module.scss';
-import useStylesProvider from './features/dreams/hooks/useStylesProvider';
+import useStylesProvider from './common/hooks/useStylesProvider';
 
 export default function Home() {
   const { data: session }: { data: any } = useSession();

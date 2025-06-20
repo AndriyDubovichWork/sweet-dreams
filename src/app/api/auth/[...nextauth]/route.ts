@@ -1,13 +1,8 @@
+import { initializeDatabase } from '@/app/common/DB/initDB';
 import {
-  copyAllDreamsFromDriveToDB,
-  getAllDreams,
-} from '@/app/features/dreams/utils/DB/dreamCrud';
-import { initializeDatabase } from '@/app/features/dreams/utils/DB/initDB';
-import {
-  getAllUsers,
   getUserByEmail,
   updateLastLoginUserToNow,
-} from '@/app/features/dreams/utils/DB/userCrud';
+} from '@/app/common/DB/userCrud';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -30,8 +25,6 @@ const handler = NextAuth({
       // if (!user) {
       //   createUser(session.user);
       // }
-      // console.log(await getAllDreams());
-      // console.log(await getAllUsers());
 
       session.user.role = user.status;
 

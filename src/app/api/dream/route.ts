@@ -4,8 +4,8 @@ import saveFileToDrive from '@/app/api/dream/drive/saveFileToDrive';
 import { NextResponse } from 'next/server';
 import renameFile from './drive/renameFile';
 import searchFileByName from './drive/searchFileByName';
-import { OrderByValues } from '@/app/features/dreams/types/store/savedDreamsStore';
-import { getAllDreams } from '@/app/features/dreams/utils/DB/dreamCrud';
+import { OrderByValues } from '@/app/common/store/types/savedDreamsStore';
+import { getAllDreams } from '@/app/common/DB/dreamCrud';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -54,14 +54,6 @@ export async function GET(req: Request) {
   } else {
     recivedFiles = await getFiles(sortBy as OrderByValues, pageToken as string);
   }
-
-  // console.log('====================================');
-  // console.log(
-  // );
-  // console.log('====================================');
-
-
-  // console.log(recivedFiles.data.files);
 
   if (recivedFiles.status !== 200) {
     return NextResponse.json(
