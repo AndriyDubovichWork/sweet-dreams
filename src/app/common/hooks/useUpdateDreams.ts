@@ -7,14 +7,8 @@ import { UpdateDreams } from './types/UpdateDreams';
 
 function useUpdateDreams() {
   const { setBlob, setName } = useNewDreamStore();
-  const {
-    setFiles,
-    sortBy,
-    sortById,
-    isSortByReversed,
-    nextPageToken,
-    setNextPageToken,
-  } = useSavedDreamsStore();
+  const { setFiles, sortBy, sortById, isSortByReversed } =
+    useSavedDreamsStore();
   const { search } = useSearchStore();
 
   const { setStatus, setMessage } = useLoadingStateStore();
@@ -30,11 +24,8 @@ function useUpdateDreams() {
     return getDreams(
       sortBy[id === undefined ? sortById : id].value,
       isReversed === undefined ? isSortByReversed : isReversed,
-      NoSearch ? '' : search,
-      nextPageToken
+      NoSearch ? '' : search
     ).then((files: any) => {
-      setNextPageToken(nextPageToken);
-
       setFiles(files);
       setBlob(null);
       setName('');

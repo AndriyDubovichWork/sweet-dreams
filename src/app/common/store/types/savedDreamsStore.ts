@@ -5,7 +5,6 @@ export type File = {
   webContentLink: string;
   playableurl: string;
   createdTime: string;
-  nextPageToken: string;
   processing?: boolean;
 };
 export type OrderByValues = 'createdTime' | 'name' | 'modifiedTime';
@@ -19,9 +18,6 @@ export type SortBy = {
 export type SavedDreamsStore = {
   files: File[];
   setFiles: (files: File[]) => void;
-
-  nextPageToken: string;
-  setNextPageToken: (nextPageToken: string) => void;
 
   sortBy: SortBy[];
   sortById: number;

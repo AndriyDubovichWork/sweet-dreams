@@ -27,13 +27,6 @@ export const useSavedDreamsStore = create<SavedDreamsStore>((set) => ({
       files,
     })),
 
-  nextPageToken: '',
-  setNextPageToken: (nextPageToken) =>
-    set((state) => ({
-      ...state,
-      nextPageToken,
-    })),
-
   sortBy,
 
   sortById: 1,

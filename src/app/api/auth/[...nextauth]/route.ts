@@ -1,5 +1,7 @@
-import { initializeDatabase } from '@/app/common/DB/initDB';
+import { dropTables, initializeDatabase } from '@/app/common/DB/initDB';
 import {
+  changeUserStatus,
+  createUser,
   getUserByEmail,
   updateLastLoginUserToNow,
 } from '@/app/common/DB/userCrud';

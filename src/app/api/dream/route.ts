@@ -38,7 +38,6 @@ export async function GET(req: Request) {
   const sortBy = searchParams.get('sortBy');
   const isSortByReversed = searchParams.get('isSortByReversed');
   const name = searchParams.get('name');
-  const pageToken = searchParams.get('pageToken');
 
   if (!sortBy)
     return NextResponse.json({ error: 'missing sortBy' }, { status: 422 });
@@ -52,7 +51,7 @@ export async function GET(req: Request) {
   if (name) {
     recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
   } else {
-    recivedFiles = await getFiles(sortBy as OrderByValues, pageToken as string);
+    recivedFiles = await getFiles(sortBy as OrderByValues);
   }
 
   if (recivedFiles.status !== 200) {
@@ -62,7 +61,7 @@ export async function GET(req: Request) {
     );
   }
   return NextResponse.json({
-    res: await getAllDreams('name', Boolean(isSortByReversed)),
+    res: await getAllDreams(sortBy, Boolean(isSortByReversed)),
   });
 }
 export async function DELETE(req: Request) {

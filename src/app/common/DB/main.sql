@@ -1,12 +1,13 @@
-CREATE TABLE IF NOT EXISTS `dreams`(
+CREATE TABLE IF NOT EXISTS dreams(
     id SERIAL,
-    name LINESTRING NOT NULL,
-    createdTime DATE NOT NULL,
+    name TEXT NOT NULL,
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
     lastUpdatedTime DATE NOT NULL,
-    fileId LINESTRING NOT NULL,
+    fileId TEXT NOT NULL,
     size BIGINT NOT NULL,
-    webContentLink LINESTRING NOT NULL,
-    playableUrl LINESTRING NOT NULL,
+    webContentLink TEXT NOT NULL,
+    playableUrl TEXT NOT NULL,
     isPrivate BOOLEAN NOT NULL
 );
 CREATE TABLE IF NOT EXISTS users(

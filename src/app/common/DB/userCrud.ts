@@ -104,7 +104,7 @@ export async function updateLastLoginUserToNow(userId: number) {
   }
 }
 
-export async function changUserStatus(userId: number, status: UserStatus) {
+export async function changeUserStatus(userId: number, status: UserStatus) {
   try {
     const result = await sql`
       UPDATE users

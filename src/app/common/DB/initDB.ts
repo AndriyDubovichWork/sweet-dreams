@@ -20,16 +20,17 @@ export async function initializeDatabase() {
 
     await sql`
         CREATE TABLE IF NOT EXISTS dreams(
-            id SERIAL,
-            name TEXT NOT NULL,
-            createdTime DATE NOT NULL,
-            lastUpdatedTime DATE NOT NULL,
-            fileId TEXT NOT NULL,
-            size BIGINT NOT NULL,
-            webContentLink TEXT NOT NULL,
-            playableUrl TEXT NOT NULL,
-            isPrivate BOOLEAN NOT NULL
-        );
+    id SERIAL,
+    name TEXT NOT NULL,
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
+    lastUpdatedTime DATE NOT NULL,
+    fileId TEXT NOT NULL,
+    size BIGINT NOT NULL,
+    webContentLink TEXT NOT NULL,
+    playableUrl TEXT NOT NULL,
+    isPrivate BOOLEAN NOT NULL
+);
         `;
   } catch (error) {
     console.error('Error initializing database:', error);

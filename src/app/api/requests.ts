@@ -28,15 +28,13 @@ export async function postDream(
 export async function getDreams(
   sortBy: OrderByValues,
   isSortByReversed: boolean,
-  name?: string,
-  pageToken?: string
+  name?: string
 ) {
   const res: any = await axios.get(`/api/dream`, {
     params: {
       sortBy,
       isSortByReversed,
       name,
-      pageToken,
     },
   });
 

@@ -3,7 +3,6 @@ import 'dotenv/config';
 import { Dream } from './types';
 import { getUserById } from './userCrud';
 import getFiles from '@/app/api/dream/drive/getFiles';
-import { OrderByValues } from '../../types/store/savedDreamsStore';
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -68,6 +67,7 @@ export async function getAllDreams(sortBy = 'name', isReversed = false) {
       localSortBy = 'updated_at';
       break;
   }
+  console.log(sortBy);
 
   try {
     const result = await sql`
