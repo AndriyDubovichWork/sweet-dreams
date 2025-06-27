@@ -6,24 +6,24 @@ const sql = neon(process.env.DATABASE_URL!);
 export async function initializeDatabase() {
   try {
     await sql`
-        CREATE TABLE IF NOT EXISTS users(
+CREATE TABLE IF NOT EXISTS users(
             id SERIAL,
             status  VARCHAR(20) CHECK (status IN ('admin', 'superUser', 'user')) NOT NULL DEFAULT 'user',
             email TEXT NOT NULL,
             dreamsWatched TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            last_login TIMESTAMP NULL,
-            is_active BOOLEAN DEFAULT TRUE
+            createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            lastLogin TIMESTAMP NULL,
+            isActive BOOLEAN DEFAULT TRUE
 
         );
         `;
 
     await sql`
-        CREATE TABLE IF NOT EXISTS dreams(
+  CREATE TABLE IF NOT EXISTS dreams(
     id SERIAL,
     name TEXT NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    createdTime DATE NOT NULL,
+    modifiedTime DATE NOT NULL,
     lastUpdatedTime DATE NOT NULL,
     fileId TEXT NOT NULL,
     size BIGINT NOT NULL,
@@ -44,6 +44,16 @@ export async function dropTables() {
     await sql`DROP TABLE IF EXISTS users`;
 
     console.log('Database dropped successfully');
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  }
+}
+export async function dropDreamsTable() {
+  try {
+    await sql`DROP TABLE IF EXISTS dreams`;
+
+    console.log('dreams dropped successfully');
   } catch (error) {
     console.error('Error initializing database:', error);
     throw error;

@@ -156,6 +156,22 @@ export default function useStylesProvider() {
     color: theme.colors.text.first,
   };
 
+  const approveAction: { container: CSSProperties; cross: CSSProperties } = {
+    container: {
+      backgroundColor: theme.colors.primary.second,
+      color: theme.colors.text.first,
+      padding: '8%',
+      zIndex: '999',
+      position: 'fixed',
+    },
+    cross: {
+      position: 'absolute',
+      top: '10px',
+      right: '10px',
+      cursor: 'pointer',
+    },
+  };
+
   return {
     header,
     input,
@@ -173,5 +189,6 @@ export default function useStylesProvider() {
     themeSlider,
     uploadAudio,
     themeName,
+    approveAction,
   };
 }

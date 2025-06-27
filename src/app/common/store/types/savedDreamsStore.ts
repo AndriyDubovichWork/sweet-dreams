@@ -7,7 +7,9 @@ export type File = {
   createdTime: string;
   processing?: boolean;
 };
-export type OrderByValues = 'createdTime' | 'name' | 'modifiedTime';
+
+export type OrderByDirection = 'ASC' | 'DESC';
+export type OrderByValues = 'name' | 'createdTime' | 'modifiedTime';
 export type OrderByNames = 'created time' | 'name' | 'modified time';
 
 export type SortBy = {

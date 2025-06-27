@@ -3,6 +3,11 @@ import 'dotenv/config';
 import { Dream } from './types';
 import { getUserById } from './userCrud';
 import getFiles from '@/app/api/dream/drive/getFiles';
+import {
+  OrderByDirection,
+  OrderByValues,
+} from '../store/types/savedDreamsStore';
+import { log } from 'console';
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -12,6 +17,7 @@ export async function createDream(dreamData: Omit<Dream, 'id'>) {
       INSERT INTO dreams (
         name, 
         createdTime, 
+        modifiedTime, 
         lastUpdatedTime, 
         fileId, 
         size, 
@@ -22,6 +28,7 @@ export async function createDream(dreamData: Omit<Dream, 'id'>) {
       VALUES (
         ${dreamData.name},
         ${dreamData.createdTime || new Date()},
+        ${dreamData.modifiedTime || new Date()},
         ${dreamData.lastUpdatedTime || new Date()},
         ${dreamData.fileId},
         ${dreamData.size},
@@ -51,28 +58,16 @@ export async function getDreamById(dreamId: number) {
   }
 }
 
-type OrderBy = 'name' | 'created_at' | 'updated_at';
-type Direction = 'ASC' | 'DESC';
-export async function getAllDreams(sortBy = 'name', isReversed = false) {
-  let localSortBy: OrderBy = 'name';
-  const localDirection: Direction = isReversed ? 'DESC' : 'ASC';
-  switch (sortBy) {
-    case 'name':
-      localSortBy = 'name';
-      break;
-    case 'createdTime':
-      localSortBy = 'created_at';
-      break;
-    case 'modifiedTime':
-      localSortBy = 'updated_at';
-      break;
-  }
-  console.log(sortBy);
+export async function getAllDreams(
+  sortBy: OrderByValues = 'name',
+  isReversed = false
+) {
+  const localDirection: OrderByDirection = isReversed ? 'DESC' : 'ASC';
 
   try {
     const result = await sql`
       SELECT * FROM dreams
-      ORDER BY ${sql.unsafe(localSortBy)} ${sql.unsafe(localDirection)}
+      ORDER BY ${sql.unsafe(sortBy)} ${sql.unsafe(localDirection)}
     `;
     return result;
   } catch (error) {
@@ -80,37 +75,126 @@ export async function getAllDreams(sortBy = 'name', isReversed = false) {
     throw error;
   }
 }
-export async function copyAllDreamsFromDriveToDB() {
-  try {
-    const driveDreams = await getFiles('createdTime', '', 1000).then(
-      (res) => res.data.files
-    );
-    const DBdreams = await getAllDreams();
 
-    driveDreams?.map((driveDream) => {
-      DBdreams.map((Dbdream) => {
-        if (driveDream.id === Dbdream.fileid) {
-          console.log('already exists');
-        } else {
-          createDream({
-            createdTime: new Date(driveDream.createdTime as string),
-            fileId: driveDream.id as string,
-            isPrivate: driveDream.name?.includes('/private/') as boolean,
-            lastUpdatedTime: new Date(),
-            name: driveDream?.name?.replaceAll('/private/', '') as string,
-            playableUrl: `https://drive.google.com/file/d/${driveDream.id}/preview`,
-            webContentLink: `https://drive.google.com/uc?id=${driveDream.id}&export=download`,
-            size: Number(driveDream.size),
-          });
-          console.log('coppied');
-        }
-      });
+export function findDuplicateDreams(
+  DBdreams: any[],
+  checkFields: string[] = ['fileId']
+): any {
+  const results: any = {};
+
+  checkFields.forEach((field) => {
+    const fieldMap: any = new Map<string, any[]>();
+
+    DBdreams.forEach((dream) => {
+      const fieldValue = dream[field]?.toString().toLowerCase().trim();
+      if (!fieldValue) return;
+
+      if (!fieldMap.has(fieldValue)) {
+        fieldMap.set(fieldValue, []);
+      }
+      fieldMap.get(fieldValue).push(dream);
     });
+
+    results[field] = [];
+    fieldMap.forEach((items: any, value: any) => {
+      if (items.length > 1) {
+        results[field].push({
+          field,
+          value,
+          count: items.length,
+          items,
+        });
+      }
+    });
+  });
+
+  return results;
+}
+
+export async function copyAllDreamsFromDriveToDB(): Promise<{
+  created: number;
+  skipped: number;
+  errors: number;
+}> {
+  try {
+    const DBdreams = await getAllDreams();
+    const existingIds = new Set(
+      DBdreams.map((d) => {
+        const id = d.fileid?.toLowerCase().trim();
+        return id;
+      }).filter(Boolean)
+    );
+
+    // 2. Get Drive files
+    const driveResponse = await getFiles('createdTime', 1000);
+    const driveDreams = driveResponse?.data?.files || [];
+
+    let created = 0;
+    let skipped = 0;
+    let errors = 0;
+
+    // 3. Process with validation
+    for (const driveDream of driveDreams) {
+      const driveId = driveDream.id?.toLowerCase().trim();
+
+      if (!driveId) {
+        skipped++;
+        continue;
+      }
+
+      if (existingIds.has(driveId)) {
+        skipped++;
+        continue;
+      }
+
+      try {
+        if (
+          !driveDream.id ||
+          !driveDream.name ||
+          driveDream.size === undefined
+        ) {
+          throw new Error('Missing required fields');
+        }
+
+        const dreamData = {
+          name: driveDream.name.replace('/private/', ''),
+          fileId: driveDream.id,
+          size: Number(driveDream.size),
+          createdTime: new Date(driveDream.createdTime || Date.now()),
+          modifiedTime: new Date(
+            driveDream.modifiedTime || driveDream.createdTime || Date.now()
+          ),
+          lastUpdatedTime: new Date(),
+          webContentLink: `https://drive.google.com/uc?id=${driveDream.id}&export=download`,
+          playableUrl: `https://drive.google.com/file/d/${driveDream.id}/preview`,
+          isPrivate: driveDream.name.includes('/private/'),
+        };
+
+        await createDream(dreamData);
+        existingIds.add(driveId);
+        created++;
+      } catch (error) {
+        errors++;
+        console.error('Failed to create dream:', {
+          id: driveDream.id,
+          // Log the problematic dream for debugging
+          dreamData: {
+            id: driveDream.id,
+            name: driveDream.name,
+            size: driveDream.size,
+            hasWebContent: !!driveDream.webContentLink,
+          },
+        });
+      }
+    }
+
+    return { created, skipped, errors };
   } catch (error) {
-    console.error('Error getting all dreams:', error);
+    console.error('Critical error:', error);
     throw error;
   }
 }
+
 export async function getPublicDreams() {
   try {
     const result = await sql`
@@ -124,13 +208,15 @@ export async function getPublicDreams() {
   }
 }
 
-export async function updateDream(dreamId: number, updateData: Dream) {
+export async function updateDream(dreamId: number, updateData: Partial<Dream>) {
   try {
     const result = await sql`
       UPDATE dreams
       SET 
         name = ${updateData.name},
-        lastUpdatedTime = ${updateData.lastUpdatedTime || new Date()},
+        createdTime = ${updateData.createdTime || new Date()},
+        modifiedTime = ${updateData.modifiedTime || new Date()},
+        lastUpdatedTime = ${new Date()},
         fileId = ${updateData.fileId},
         size = ${updateData.size},
         webContentLink = ${updateData.webContentLink},
@@ -145,6 +231,7 @@ export async function updateDream(dreamId: number, updateData: Dream) {
     throw error;
   }
 }
+
 export async function deleteDream(dreamId: number) {
   try {
     const result = await sql`
@@ -158,12 +245,19 @@ export async function deleteDream(dreamId: number) {
     throw error;
   }
 }
+
 export async function addDreamToWatched(userId: number, dreamId: number) {
   try {
     const user = await getUserById(userId);
     if (!user) throw new Error('User not found');
 
-    const watchedDreams = JSON.parse(user.dreamsWatched || '[]');
+    let watchedDreams: number[] = [];
+    try {
+      watchedDreams = user.dreamsWatched ? JSON.parse(user.dreamsWatched) : [];
+    } catch (e) {
+      watchedDreams = [];
+    }
+
     if (!watchedDreams.includes(dreamId)) {
       watchedDreams.push(dreamId);
     }

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { OrderByValues } from '../common/store/types/savedDreamsStore';
-import createFullSortBy from '../features/listDreams/utils/createFullSortBy';
 
 export async function postDream(
   blob: Blob,
@@ -37,7 +36,6 @@ export async function getDreams(
       name,
     },
   });
-
   return res.data.res;
 }
 export async function deleteDream(fileId: string) {

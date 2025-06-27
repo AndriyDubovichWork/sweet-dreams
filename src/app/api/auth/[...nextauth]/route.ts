@@ -1,4 +1,9 @@
-import { dropTables, initializeDatabase } from '@/app/common/DB/initDB';
+import { copyAllDreamsFromDriveToDB } from '@/app/common/DB/dreamCrud';
+import {
+  dropDreamsTable,
+  dropTables,
+  initializeDatabase,
+} from '@/app/common/DB/initDB';
 import {
   changeUserStatus,
   createUser,
@@ -17,18 +22,15 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }: any) {
+      // dropDreamsTable();
       initializeDatabase();
+      copyAllDreamsFromDriveToDB();
 
       const user = await getUserByEmail(session.user.email);
       if (user) {
         updateLastLoginUserToNow(user.id);
       }
-
-      // if (!user) {
-      //   createUser(session.user);
-      // }
-
-      session.user.role = user.status;
+      session.user.role = user?.status;
 
       return session;
     },

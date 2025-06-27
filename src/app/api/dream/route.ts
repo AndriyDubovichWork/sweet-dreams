@@ -47,21 +47,26 @@ export async function GET(req: Request) {
       { status: 422 }
     );
 
-  let recivedFiles;
-  if (name) {
-    recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
-  } else {
-    recivedFiles = await getFiles(sortBy as OrderByValues);
-  }
+  // let recivedFiles;
+  // if (name) {
+  //   recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
+  // } else {
+  //   recivedFiles = await getFiles(sortBy as OrderByValues);
+  // }
+  // if (recivedFiles.status !== 200) {
+  //   return NextResponse.json(
+  //     { error: "couldn't load files from drive" },
+  //     { status: 500 }
+  //   );
+  // }
 
-  if (recivedFiles.status !== 200) {
-    return NextResponse.json(
-      { error: "couldn't load files from drive" },
-      { status: 500 }
-    );
-  }
+  const recivedFIles = await getAllDreams(
+    sortBy as OrderByValues,
+    Boolean(isSortByReversed)
+  );
+
   return NextResponse.json({
-    res: await getAllDreams(sortBy, Boolean(isSortByReversed)),
+    res: recivedFIles,
   });
 }
 export async function DELETE(req: Request) {

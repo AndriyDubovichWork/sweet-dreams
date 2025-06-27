@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS dreams(
     id SERIAL,
     name TEXT NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    createdTime DATE NOT NULL,
+    modifiedTime DATE NOT NULL,
     lastUpdatedTime DATE NOT NULL,
     fileId TEXT NOT NULL,
     size BIGINT NOT NULL,
@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS users(
             status  VARCHAR(20) CHECK (status IN ('admin', 'superUser', 'user')) NOT NULL DEFAULT 'user',
             email TEXT NOT NULL,
             dreamsWatched TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            last_login TIMESTAMP NULL,
-            is_active BOOLEAN DEFAULT TRUE
+            createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            lastLogin TIMESTAMP NULL,
+            isActive BOOLEAN DEFAULT TRUE
 
         );
 

@@ -11,9 +11,10 @@ export interface User {
 }
 
 export interface Dream {
-  id: bigint | number;
+  id?: number;
   name: string;
   createdTime: Date;
+  modifiedTime: Date;
   lastUpdatedTime: Date;
   fileId: string;
   size: number;
