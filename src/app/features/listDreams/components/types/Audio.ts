@@ -1,3 +1,3 @@
 import { File } from '../../../../common/store/types/savedDreamsStore';
 
-export type AudioProps = { file: File; id: number };
+export type AudioProps = { file: File; renderId: number };

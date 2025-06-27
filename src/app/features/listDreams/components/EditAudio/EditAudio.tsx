@@ -10,7 +10,7 @@ import stringDateFormatter from '@/app/common/utils/stringDateFormatter';
 import ButtonIcon from '@/app/common/components/ui/ButtonIcon/ButtonIcon';
 import AcessControll from '@/app/common/hocs/AcessControll/AcessControll';
 
-function EditAudio({ file, id }: EditAudioProps) {
+function EditAudio({ file, renderId }: EditAudioProps) {
   const { size, processing, createdTime } = file;
 
   const {
@@ -24,7 +24,7 @@ function EditAudio({ file, id }: EditAudioProps) {
     name,
     isPrivate,
     setIsprivate,
-  } = useEditAudioData({ file, id });
+  } = useEditAudioData({ file, renderId });
   if (editable) {
     return (
       <>

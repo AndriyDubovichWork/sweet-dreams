@@ -1,5 +1,6 @@
 export type File = {
   id: string;
+  fileid: string;
   name: string;
   size: number;
   webContentLink: string;

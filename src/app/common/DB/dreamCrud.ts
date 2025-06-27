@@ -232,11 +232,11 @@ export async function updateDream(dreamId: number, updateData: Partial<Dream>) {
   }
 }
 
-export async function deleteDream(dreamId: number) {
+export async function deleteDream(dreamId: string) {
   try {
     const result = await sql`
       DELETE FROM dreams
-      WHERE id = ${dreamId}
+      WHERE fileId = ${dreamId}
       RETURNING *;
     `;
     return result[0];

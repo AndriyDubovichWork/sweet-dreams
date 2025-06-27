@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import renameFile from './drive/renameFile';
 import searchFileByName from './drive/searchFileByName';
 import { OrderByValues } from '@/app/common/store/types/savedDreamsStore';
-import { getAllDreams } from '@/app/common/DB/dreamCrud';
+import { deleteDream, getAllDreams } from '@/app/common/DB/dreamCrud';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -72,12 +72,13 @@ export async function GET(req: Request) {
 export async function DELETE(req: Request) {
   const { searchParams } = new URL(req.url);
   const fileId = searchParams.get('fileId');
+  const DBfileId = searchParams.get('DBfileId');
 
   if (!fileId)
     return NextResponse.json({ error: 'missing fileId' }, { status: 422 });
 
   const deletedFile = await deleteFile(fileId);
-
+  await deleteDream(fileId);
   if (deletedFile.status !== 204) {
     return NextResponse.json(
       { error: "couldn't delete file from drive" },

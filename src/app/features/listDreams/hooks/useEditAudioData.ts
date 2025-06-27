@@ -10,8 +10,8 @@ import { EditAudioData } from '../../../common/hooks/types/EditAudioData';
 import rename from '../utils/rename';
 import stringDateFormatter from '../../../common/utils/stringDateFormatter';
 
-export default function useEditAudioData({ file, id }: EditAudioData) {
-  const { name: fullName, id: fileId, createdTime } = file;
+export default function useEditAudioData({ file, renderId }: EditAudioData) {
+  const { name: fullName, fileid, createdTime } = file;
 
   const { date, name } = divideFullName(fullName);
 
@@ -29,20 +29,20 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
       approve: `are you sure you want to change name from "${name}" to "${localName}"`,
       type: 'rename',
       approveCallback: () => {
-        setFiles(addProcessingProperty(files, id, true));
+        setFiles(addProcessingProperty(files, renderId, true));
         const fullLocalName = `${
           isPrivate
             ? localName + '/private/'
             : localName.replaceAll('/private/', '')
         } ${stringDateFormatter(createdTime)}`;
 
-        renameDream(fileId, fullLocalName).then(() => {
+        renameDream(fileid, fullLocalName).then(() => {
           setEditable(false);
           updateDreams({ successfullyMessage: 'renamed successfully' }).then(
             () => {
               rename(
-                addProcessingProperty(files, id, false),
-                id,
+                addProcessingProperty(files, renderId, false),
+                renderId,
                 fullLocalName
               );
             }
@@ -58,10 +58,10 @@ export default function useEditAudioData({ file, id }: EditAudioData) {
       approve: `to delete dream type "${name}" in following input`,
       type: 'deletion',
       approveCallback: () => {
-        deleteDream(fileId).then(() => {
+        deleteDream(fileid).then(() => {
           updateDreams({ successfullyMessage: 'deleted successfully' });
         });
-        setFiles(addProcessingProperty(files, id, true));
+        setFiles(addProcessingProperty(files, renderId, true));
       },
     });
   };

@@ -7,7 +7,7 @@ import { IoMdDownload } from 'react-icons/io';
 import useStylesProvider from '@/app/common/hooks/useStylesProvider';
 import ButtonIcon from '@/app/common/components/ui/ButtonIcon/ButtonIcon';
 
-function Audio({ file, id }: AudioProps) {
+function Audio({ file, renderId }: AudioProps) {
   const isPrivate = file.name.includes('/private/');
 
   const { data: session }: { data: any } = useSession();
@@ -29,7 +29,7 @@ function Audio({ file, id }: AudioProps) {
           }
           className={file.processing ? style.processing : style.row}
         >
-          <EditAudio file={file} id={id} />
+          <EditAudio file={file} renderId={renderId} />
           <td>
             <a
               href={file.webContentLink}
