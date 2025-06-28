@@ -1,4 +1,7 @@
-import { copyAllDreamsFromDriveToDB } from '@/app/common/DB/dreamCrud';
+import {
+  copyAllDreamsFromDriveToDB,
+  removeDuplicateDreams,
+} from '@/app/common/DB/dreamCrud';
 import {
   dropDreamsTable,
   dropTables,
@@ -25,6 +28,7 @@ const handler = NextAuth({
       // dropDreamsTable();
       initializeDatabase();
       copyAllDreamsFromDriveToDB();
+      removeDuplicateDreams();
 
       const user = await getUserByEmail(session.user.email);
       if (user) {

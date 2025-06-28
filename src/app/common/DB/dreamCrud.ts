@@ -195,6 +195,69 @@ export async function copyAllDreamsFromDriveToDB(): Promise<{
   }
 }
 
+export async function removeDuplicateDreams(): Promise<{
+  totalDuplicates: number;
+  removed: number;
+  errors: number;
+}> {
+  try {
+    // Get all dreams from the database
+    const allDreams = await getAllDreams();
+
+    // Find duplicates by fileId
+    const duplicates = findDuplicateDreams(allDreams, ['fileid']);
+    const fileIdDuplicates = duplicates.fileid || [];
+
+    // console.log('duplicates', duplicates);
+    // console.log('ids', fileIdDuplicates);
+
+    let removed = 0;
+    let errors = 0;
+
+    // Process each group of duplicates
+    for (const group of fileIdDuplicates) {
+      // console.log('group', group);
+
+      // Keep the first dream (oldest by ID or creation time) and remove the rest
+      const dreamsToKeep = group.items
+        .sort(
+          (a: Dream, b: Dream) =>
+            (a.id || 0) - (b.id || 0) ||
+            new Date(a.createdTime).getTime() -
+              new Date(b.createdTime).getTime()
+        )
+        .slice(0, 1);
+
+      const dreamsToRemove = group.items.filter(
+        (dream: Dream) => !dreamsToKeep.some((k: Dream) => k.id === dream.id)
+      );
+
+      // Remove duplicates
+      for (const dream of dreamsToRemove) {
+        try {
+          await deleteDream(dream.fileid);
+          removed++;
+        } catch (error) {
+          errors++;
+          console.error(`Error removing duplicate dream ${dream.id}:`, error);
+        }
+      }
+    }
+
+    return {
+      totalDuplicates: fileIdDuplicates.reduce(
+        (sum: number, group: any) => sum + group.count - 1,
+        0
+      ),
+      removed,
+      errors,
+    };
+  } catch (error) {
+    console.error('Error in removeDuplicateDreams:', error);
+    throw error;
+  }
+}
+
 export async function getPublicDreams() {
   try {
     const result = await sql`

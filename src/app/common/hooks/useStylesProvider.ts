@@ -171,7 +171,11 @@ export default function useStylesProvider() {
       cursor: 'pointer',
     },
   };
-
+  const errorPage: CSSProperties = {
+    backgroundColor: theme.colors.primary.first,
+    color: theme.colors.text.first,
+    flex: 1,
+  };
   return {
     header,
     input,
@@ -190,5 +194,6 @@ export default function useStylesProvider() {
     uploadAudio,
     themeName,
     approveAction,
+    errorPage,
   };
 }
