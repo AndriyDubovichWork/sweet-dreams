@@ -37,6 +37,7 @@ export default async function saveFileToDrive(
 
   const responseFile = createdFile.data as responseFile;
   createDream({
+    modifiedTime: new Date(),
     fileId: responseFile.id,
     size: blob.size,
     name: responseFile.name,
