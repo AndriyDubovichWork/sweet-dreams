@@ -28,7 +28,6 @@ const handler = NextAuth({
       // dropDreamsTable();
       initializeDatabase();
       copyAllDreamsFromDriveToDB();
-      removeDuplicateDreams();
 
       const user = await getUserByEmail(session.user.email);
       if (user) {

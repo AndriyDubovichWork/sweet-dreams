@@ -40,8 +40,11 @@ export async function createDream(dreamData: Omit<Dream, 'id'>) {
     `;
     return result[0];
   } catch (error) {
-    console.error('Error creating dream:', error);
-    throw error;
+    if (error instanceof Error && 'code' in error && error.code === '23505') {
+    } else {
+      console.error('Error creating dream:', error);
+      throw error;
+    }
   }
 }
 
@@ -208,16 +211,11 @@ export async function removeDuplicateDreams(): Promise<{
     const duplicates = findDuplicateDreams(allDreams, ['fileid']);
     const fileIdDuplicates = duplicates.fileid || [];
 
-    // console.log('duplicates', duplicates);
-    // console.log('ids', fileIdDuplicates);
-
     let removed = 0;
     let errors = 0;
 
     // Process each group of duplicates
     for (const group of fileIdDuplicates) {
-      // console.log('group', group);
-
       // Keep the first dream (oldest by ID or creation time) and remove the rest
       const dreamsToKeep = group.items
         .sort(
@@ -231,7 +229,6 @@ export async function removeDuplicateDreams(): Promise<{
       const dreamsToRemove = group.items.filter(
         (dream: Dream) => !dreamsToKeep.some((k: Dream) => k.id === dream.id)
       );
-
       // Remove duplicates
       for (const dream of dreamsToRemove) {
         try {

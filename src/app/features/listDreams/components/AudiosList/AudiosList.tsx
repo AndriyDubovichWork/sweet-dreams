@@ -43,8 +43,7 @@ function AudiosList() {
               <th className={style.minWidth}>download</th>
             </tr>
             {files.map((file, renderId) => {
-              if (renderId <= 10)
-                return <Audio file={file} renderId={renderId} key={file.id} />;
+              return <Audio file={file} renderId={renderId} key={file.id} />
             })}
           </table>
         </>

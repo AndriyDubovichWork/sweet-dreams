@@ -72,7 +72,8 @@ function EditAudio({ file, renderId }: EditAudioProps) {
       <>
         <td>{isPrivate ? name.replaceAll('/private/', '') : name}</td>
         <td>
-          <iframe src={file.playableurl} height='50' allow='autoplay'></iframe>
+          123
+          {/* <iframe src={file.playableurl} height='50' allow='autoplay'></iframe> */}
         </td>
         <td>{filesize(size)}</td>
         <td>{date ? date : stringDateFormatter(createdTime)}</td>

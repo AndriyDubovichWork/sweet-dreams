@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS dreams(
     createdTime DATE NOT NULL,
     modifiedTime DATE NOT NULL,
     lastUpdatedTime DATE NOT NULL,
-    fileId TEXT NOT NULL,
+    fileId TEXT NOT NULL UNIQUE,
     size BIGINT NOT NULL,
     webContentLink TEXT NOT NULL,
     playableUrl TEXT NOT NULL,
