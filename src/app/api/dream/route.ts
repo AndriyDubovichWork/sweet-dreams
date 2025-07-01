@@ -59,6 +59,9 @@ export async function GET(req: Request) {
   //     { status: 500 }
   //   );
   // }
+  console.log('====================================');
+  console.log(Boolean(isSortByReversed));
+  console.log('====================================');
 
   const recivedFIles = await getAllDreams(
     sortBy as OrderByValues,

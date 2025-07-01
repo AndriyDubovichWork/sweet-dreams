@@ -7,11 +7,12 @@ import SkeletonLoading from './SkeletonLoading/SkeletonLoading';
 import Paginator from '../Paginator/Paginator';
 import useStylesProvider from '@/app/common/hooks/useStylesProvider';
 import useAudiosListData from '../../hooks/useAudiosListData';
+import { usePaginatorStore } from '@/app/common/hooks/usePaginatorStore';
 
 function AudiosList() {
   const { session, status, files } = useAudiosListData();
   const styles = useStylesProvider();
-
+  const { offset, pageSize } = usePaginatorStore();
   switch (status) {
     case 'pending':
       return <SkeletonLoading role={session?.user?.role} />;
@@ -43,7 +44,8 @@ function AudiosList() {
               <th className={style.minWidth}>download</th>
             </tr>
             {files.map((file, renderId) => {
-              return <Audio file={file} renderId={renderId} key={file.id} />
+              if (renderId <= offset() + pageSize && renderId >= offset())
+                return <Audio file={file} renderId={renderId} key={file.id} />;
             })}
           </table>
         </>

@@ -7,7 +7,6 @@ import {
   OrderByDirection,
   OrderByValues,
 } from '../store/types/savedDreamsStore';
-import { log } from 'console';
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -65,13 +64,13 @@ export async function getAllDreams(
   sortBy: OrderByValues = 'name',
   isReversed = false
 ) {
-  const localDirection: OrderByDirection = isReversed ? 'DESC' : 'ASC';
+  const localDirection: OrderByDirection = isReversed ? 'DESC' : `ASC`;
 
   try {
     const result = await sql`
       SELECT * FROM dreams
-      ORDER BY ${sql.unsafe(sortBy)} ${sql.unsafe(localDirection)}
-    `;
+      ORDER BY ${sql.unsafe(sortBy)} ${sql.unsafe(localDirection)} 
+      `;
     return result;
   } catch (error) {
     console.error('Error getting all dreams:', error);
