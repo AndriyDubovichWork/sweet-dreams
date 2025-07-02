@@ -22,18 +22,11 @@ CREATE TABLE IF NOT EXISTS users(
         );
 
 
-CREATE TABLE IF NOT EXISTS invitations(
-             id SERIAL PRIMARY KEY,
-  token TEXT NOT NULL UNIQUE,
-    created_by INTEGER REFERENCES users(id),
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  expires_at TIMESTAMP GENERATED ALWAYS AS (created_at + INTERVAL '7 days') STORED,
-  used BOOLEAN DEFAULT FALSE,
- 
-
-        );
-
-
+ CREATE TABLE IF NOT EXISTS invitations(
+      id SERIAL PRIMARY KEY,
+      token TEXT NOT NULL UNIQUE,
+      used BOOLEAN DEFAULT FALSE
+      );
 
 DROP TABLE IF EXISTS dreams
 DROP TABLE IF EXISTS users
