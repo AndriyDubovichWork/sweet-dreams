@@ -1,7 +1,7 @@
 import Processing from '@/app/common/hocs/Processing/Processing';
 import EditAudio from '../../EditAudio/EditAudio';
 import style from './Audio.module.scss';
-import { AudioProps } from '@/app/features/listDreams/components/types/Audio';
+import type { AudioProps } from '@/app/features/listDreams/components/types/Audio';
 import { useSession } from 'next-auth/react';
 import { IoMdDownload } from 'react-icons/io';
 import useStylesProvider from '@/app/common/hooks/useStylesProvider';
@@ -13,7 +13,6 @@ function Audio({ file, renderId }: AudioProps) {
   const { data: session }: { data: any } = useSession();
 
   const styles = useStylesProvider();
-
   if (
     !isPrivate ||
     session?.user?.role === 'admin' ||
@@ -32,7 +31,7 @@ function Audio({ file, renderId }: AudioProps) {
           <EditAudio file={file} renderId={renderId} />
           <td>
             <a
-              href={file.webContentLink}
+              href={file.webcontentlink}
               target='_blank'
               className={style.downloadLink}
             >

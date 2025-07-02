@@ -8,11 +8,18 @@ import Paginator from '../Paginator/Paginator';
 import useStylesProvider from '@/app/common/hooks/useStylesProvider';
 import useAudiosListData from '../../hooks/useAudiosListData';
 import { usePaginatorStore } from '@/app/common/hooks/usePaginatorStore';
+import { useEffect } from 'react';
 
 function AudiosList() {
   const { session, status, files } = useAudiosListData();
   const styles = useStylesProvider();
-  const { offset, pageSize } = usePaginatorStore();
+  const { offset, pageSize, setTotalItems } = usePaginatorStore();
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    setTotalItems(files.length);
+  }, []);
+
   switch (status) {
     case 'pending':
       return <SkeletonLoading role={session?.user?.role} />;
@@ -26,8 +33,6 @@ function AudiosList() {
     case '':
       return (
         <>
-          <Paginator />
-
           <table className={style.table} style={styles.audioListElement.header}>
             <tr>
               <th>name</th>
@@ -44,10 +49,11 @@ function AudiosList() {
               <th className={style.minWidth}>download</th>
             </tr>
             {files.map((file, renderId) => {
-              if (renderId <= offset() + pageSize && renderId >= offset())
+              if (renderId >= offset() && renderId < offset() + pageSize)
                 return <Audio file={file} renderId={renderId} key={file.id} />;
             })}
           </table>
+          <Paginator />
         </>
       );
   }

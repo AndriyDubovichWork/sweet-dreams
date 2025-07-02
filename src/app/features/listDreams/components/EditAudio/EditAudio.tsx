@@ -2,8 +2,7 @@ import { filesize } from 'filesize';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { FaSave } from 'react-icons/fa';
 import { MdEdit, MdOutlineCancel } from 'react-icons/md';
-import { useEffect } from 'react';
-import { EditAudioProps } from '@/app/features/listDreams/components/types/EditAudio';
+import type { EditAudioProps } from '@/app/features/listDreams/components/types/EditAudio';
 import useEditAudioData from '../../hooks/useEditAudioData';
 import Input from '@/app/common/components/ui/Input/Input';
 import stringDateFormatter from '@/app/common/utils/stringDateFormatter';
@@ -72,8 +71,12 @@ function EditAudio({ file, renderId }: EditAudioProps) {
       <>
         <td>{isPrivate ? name.replaceAll('/private/', '') : name}</td>
         <td>
-          123
-          {/* <iframe src={file.playableurl} height='50' allow='autoplay'></iframe> */}
+          <iframe
+            src={file.playableurl}
+            height='50'
+            allow='autoplay'
+            title='audio'
+          ></iframe>
         </td>
         <td>{filesize(size)}</td>
         <td>{date ? date : stringDateFormatter(createdTime)}</td>

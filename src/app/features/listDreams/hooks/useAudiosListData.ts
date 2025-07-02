@@ -11,6 +11,7 @@ export default function useAudiosListData() {
 
   const { data: session }: { data: any } = useSession();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!files.length && status === '') {
       updateDreams();

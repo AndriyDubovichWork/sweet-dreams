@@ -4,6 +4,7 @@ export type File = {
   name: string;
   size: number;
   webContentLink: string;
+  webcontentlink?: string;
   playableurl: string;
   createdTime: string;
   processing?: boolean;

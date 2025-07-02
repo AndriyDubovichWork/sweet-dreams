@@ -5,7 +5,11 @@ import { NextResponse } from 'next/server';
 import renameFile from './drive/renameFile';
 import searchFileByName from './drive/searchFileByName';
 import { OrderByValues } from '@/app/common/store/types/savedDreamsStore';
-import { deleteDream, getAllDreams } from '@/app/common/DB/dreamCrud';
+import {
+  deleteDream,
+  getAllDreams,
+  searchDreamsByName,
+} from '@/app/common/DB/dreamCrud';
 
 export async function PUT(req: Request) {
   const formData = await req.formData();
@@ -46,7 +50,6 @@ export async function GET(req: Request) {
       { error: 'missing isSortByReversed' },
       { status: 422 }
     );
-
   // let recivedFiles;
   // if (name) {
   //   recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
@@ -59,17 +62,32 @@ export async function GET(req: Request) {
   //     { status: 500 }
   //   );
   // }
-  console.log('====================================');
-  console.log(Boolean(isSortByReversed));
-  console.log('====================================');
 
-  const recivedFIles = await getAllDreams(
-    sortBy as OrderByValues,
-    Boolean(isSortByReversed)
-  );
+  // biome-ignore lint/suspicious/noExplicitAny: <empty on start>
+  let recivedFiles: any;
+
+  if (name) {
+    recivedFiles = await searchDreamsByName(
+      sortBy as OrderByValues,
+      Boolean(isSortByReversed),
+      name
+    );
+  } else {
+    recivedFiles = await getAllDreams(
+      sortBy as OrderByValues,
+      Boolean(isSortByReversed)
+    );
+  }
+
+  if (!recivedFiles) {
+    return NextResponse.json(
+      { error: "couldn't load files from drive" },
+      { status: 500 }
+    );
+  }
 
   return NextResponse.json({
-    res: recivedFIles,
+    res: recivedFiles,
   });
 }
 export async function DELETE(req: Request) {

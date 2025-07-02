@@ -176,6 +176,64 @@ export default function useStylesProvider() {
     color: theme.colors.text.first,
     flex: 1,
   };
+  const paginator = {
+    container: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '0.5rem',
+      padding: '1rem 0',
+    },
+    navButton: {
+      padding: '0.5rem 1rem',
+      border: 'none',
+      borderRadius: '100px',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease-in-out',
+      color: theme.colors.text.first,
+      backgroundColor: theme.colors.primary.third,
+      boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+
+      '&:disabled': {
+        color: theme.colors.text.third,
+        backgroundColor: theme.colors.primary.second,
+        cursor: 'not-allowed',
+      },
+    },
+    pagesContainer: {
+      display: 'flex',
+      gap: '0.25rem',
+    },
+    pageButton: {
+      padding: '0.5rem 1rem',
+      minWidth: '2.5rem',
+      border: 'none',
+      borderRadius: '100px',
+      cursor: 'pointer',
+      transition: 'all 0.3s ease-in-out',
+      color: theme.colors.text.first,
+      backgroundColor: theme.colors.primary.third,
+
+      '&:hover': {
+        backgroundColor: theme.colors.primary.second,
+        transform: 'translateY(-1px)',
+      },
+
+      '&.active': {
+        color: theme.colors.text.first,
+        backgroundColor: theme.colors.active.first,
+        boxShadow: `0 0 0 2px ${theme.colors.active.first}`,
+        fontWeight: '600',
+      },
+    },
+    ellipsis: {
+      padding: '0.5rem',
+      display: 'flex',
+      alignItems: 'center',
+      color: theme.colors.text.first,
+    },
+  };
+
   return {
     header,
     input,
@@ -195,5 +253,6 @@ export default function useStylesProvider() {
     themeName,
     approveAction,
     errorPage,
+    paginator,
   };
 }

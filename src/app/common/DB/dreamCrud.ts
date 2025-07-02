@@ -78,6 +78,25 @@ export async function getAllDreams(
   }
 }
 
+export async function searchDreamsByName(
+  sortBy: OrderByValues = 'name',
+  isReversed = false,
+  name: string
+) {
+  const localDirection: OrderByDirection = isReversed ? 'DESC' : `ASC`;
+
+  try {
+    const result = await sql`
+      SELECT * FROM dreams
+      WHERE name ILIKE ${'%' + name + '%'}
+      ORDER BY ${sql.unsafe(sortBy)} ${sql.unsafe(localDirection)} 
+      `;
+    return result;
+  } catch (error) {
+    console.error('Error getting all dreams:', error);
+    throw error;
+  }
+}
 export function findDuplicateDreams(
   DBdreams: any[],
   checkFields: string[] = ['fileId']
