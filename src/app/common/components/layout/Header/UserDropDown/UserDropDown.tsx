@@ -18,14 +18,14 @@ export default function UserDropDown() {
 						/>
 					}
 					content={
-						<div
+						<button
 							type="button"
 							onClick={() => signOut()}
 							style={{ zIndex: 10 }}
 							className={style.dropDown}
 						>
 							log out
-						</div>
+						</button>
 					}
 				/>
 			);
