@@ -238,6 +238,9 @@ export default function useStylesProvider() {
 		backgroundColor: theme.colors.primary.first,
 		color: theme.colors.text.first,
 		flex: 1,
+		textTransform: "uppercase",
+		fontWeight: 700,
+		fontSize: "3rem",
 	};
 	return {
 		header,

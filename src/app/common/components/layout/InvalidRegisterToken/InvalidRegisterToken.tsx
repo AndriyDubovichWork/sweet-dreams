@@ -6,7 +6,7 @@ export default function InvalidRegisterToken() {
 	const { invalidRegisterToken } = useStylesProvider();
 	return (
 		<Centered absolute={false} content styles={invalidRegisterToken}>
-			sorry but you are not welcome here
+			you are not welcome here
 		</Centered>
 	);
 }
