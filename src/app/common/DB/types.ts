@@ -9,7 +9,10 @@ export interface User {
   last_login: Date | null;
   is_active: boolean;
 }
-
+export interface CreateUser {
+  status: UserStatus;
+  email: string;
+}
 export interface Dream {
   id?: number;
   name: string;

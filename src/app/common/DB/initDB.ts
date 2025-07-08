@@ -9,13 +9,14 @@ export async function initializeDatabase() {
 CREATE TABLE IF NOT EXISTS users(
             id SERIAL,
             status  VARCHAR(20) CHECK (status IN ('admin', 'superUser', 'user')) NOT NULL DEFAULT 'user',
-            email TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
             dreamsWatched TEXT NOT NULL,
             createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             lastLogin TIMESTAMP NULL,
             isActive BOOLEAN DEFAULT TRUE
 
         );
+
         `;
 
 		await sql`

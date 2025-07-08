@@ -1,12 +1,13 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import {
-	createInvitationRequest,
 	getAllInvitationsRequest,
 	validateInvitationRequest,
 } from "../api/requests";
+import { createUser } from "../common/DB/userCrud";
+import InvalidRegisterToken from "../common/components/layout/InvalidRegisterToken/InvalidRegisterToken";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function RegisterPage() {
@@ -14,16 +15,20 @@ export default async function RegisterPage() {
 
 	const token = searchParams.get("token");
 
+	// const { data: session }: { data: any } = useSession();
 	const handleGoogleLogin = () => {
 		signIn("google", {
-			callbackUrl: "/",
+			callbackUrl: `/register?token=${token}`,
 			token,
 		});
 	};
 
-	console.log(await getAllInvitationsRequest());
-	const isTokenValid = await validateInvitationRequest(token as string);
+	// await getAllInvitationsRequest();
+	const isTokenValid = await validateInvitationRequest(token);
 
+	// if (session?.user && isTokenValid) {
+	// 	createUser({ email: session?.user?.email as string, status: "user" });
+	// }
 	if (isTokenValid) {
 		return (
 			<button onClick={handleGoogleLogin} type="button">
@@ -31,6 +36,6 @@ export default async function RegisterPage() {
 			</button>
 		);
 	} else {
-		return <div>invalid token</div>;
+		return <InvalidRegisterToken />;
 	}
 }

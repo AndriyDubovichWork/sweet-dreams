@@ -10,6 +10,7 @@ import {
 import {
 	changeUserStatus,
 	createUser,
+	getAllUsers,
 	getUserByEmail,
 	updateLastLoginUserToNow,
 } from "@/app/common/DB/userCrud";
@@ -29,6 +30,8 @@ const handler = NextAuth({
 			// dropDreamsTable();
 			initializeDatabase();
 			copyAllDreamsFromDriveToDB();
+
+			await getAllUsers();
 
 			const user = await getUserByEmail(session.user.email);
 			if (user) {

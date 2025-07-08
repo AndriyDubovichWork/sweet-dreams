@@ -68,14 +68,17 @@ export async function createInvitationRequest() {
 }
 
 // Validate an invitation token
-export async function validateInvitationRequest(token: string) {
+export async function validateInvitationRequest(
+	token: string | undefined | null,
+) {
+	if (!token) return false;
 	const res = await axios.get("/api/invitations", {
 		params: {
 			action: "validate",
 			token,
 		},
 	});
-	return res.data.valid; // { valid: boolean }
+	return res.data.valid; // boolean
 }
 
 // Mark an invitation as used

@@ -1,25 +1,19 @@
 import { neon } from '@neondatabase/serverless';
 import 'dotenv/config';
-import { User, UserStatus } from './types';
+import { CreateUser, User, UserStatus } from './types';
 
 const sql = neon(process.env.DATABASE_URL!);
 
-export async function createUser(userData: User) {
+export async function createUser(userData: CreateUser) {
   try {
     const result = await sql`
       INSERT INTO users (
         status, 
         email, 
-        dreamsWatched, 
-        last_login, 
-        is_active
       )
       VALUES (
         ${userData.status || 'user'},
         ${userData.email},
-        ${userData.dreamsWatched || JSON.stringify([])},
-        ${userData.last_login || null},
-        ${userData.is_active !== undefined ? userData.is_active : true}
       )
       RETURNING *;
     `;
