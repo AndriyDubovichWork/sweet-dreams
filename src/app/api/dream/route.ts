@@ -41,16 +41,10 @@ export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
 
 	const sortBy = searchParams.get("sortBy");
-	const isSortByReversed = searchParams.get("isSortByReversed");
 	const name = searchParams.get("name");
 
 	if (!sortBy)
 		return NextResponse.json({ error: "missing sortBy" }, { status: 422 });
-	if (!isSortByReversed)
-		return NextResponse.json(
-			{ error: "missing isSortByReversed" },
-			{ status: 422 },
-		);
 	// let recivedFiles;
 	// if (name) {
 	//   recivedFiles = await searchFileByName(sortBy as OrderByValues, name);
@@ -68,16 +62,9 @@ export async function GET(req: Request) {
 	let recivedFiles: any;
 
 	if (name) {
-		recivedFiles = await searchDreamsByName(
-			sortBy as OrderByValues,
-			Boolean(isSortByReversed),
-			name,
-		);
+		recivedFiles = await searchDreamsByName(sortBy as OrderByValues, name);
 	} else {
-		recivedFiles = await getAllDreams(
-			sortBy as OrderByValues,
-			Boolean(isSortByReversed),
-		);
+		recivedFiles = await getAllDreams(sortBy as OrderByValues);
 	}
 
 	if (!recivedFiles) {
@@ -119,7 +106,6 @@ export async function PATCH(req: Request) {
 			{ status: 422 },
 		);
 	}
-	// console.log(newName);
 
 	const renamedFile = await renameFile(fileId, newName);
 	await renameDream(fileId, newName);

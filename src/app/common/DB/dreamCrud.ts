@@ -60,17 +60,12 @@ export async function getDreamById(dreamId: number) {
 	}
 }
 
-export async function getAllDreams(
-	sortBy: OrderByValues = "name",
-	isReversed = false,
-) {
-	const localDirection: OrderByDirection = isReversed ? "DESC" : `ASC`;
-
+export async function getAllDreams(sortBy: OrderByValues = "name") {
 	try {
 		const result = await sql`
-      SELECT * FROM dreams
-      ORDER BY ${sql.unsafe(sortBy)} ${sql.unsafe(localDirection)} 
-      `;
+          SELECT * FROM dreams
+          ORDER BY ${sql.unsafe(sortBy)}
+        `;
 		return result;
 	} catch (error) {
 		console.error("Error getting all dreams:", error);
@@ -80,16 +75,13 @@ export async function getAllDreams(
 
 export async function searchDreamsByName(
 	sortBy: OrderByValues = "name",
-	isReversed = false,
 	name: string,
 ) {
-	const localDirection: OrderByDirection = isReversed ? "DESC" : `ASC`;
-
 	try {
 		const result = await sql`
       SELECT * FROM dreams
       WHERE name ILIKE ${"%" + name + "%"}
-      ORDER BY ${sql.unsafe(sortBy)} ${sql.unsafe(localDirection)} 
+      ORDER BY ${sql.unsafe(sortBy)} 
       `;
 		return result;
 	} catch (error) {
