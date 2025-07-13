@@ -1,4 +1,5 @@
 export type File = {
+	isprivate?: boolean;
 	id: string;
 	fileid: string;
 	name: string;
