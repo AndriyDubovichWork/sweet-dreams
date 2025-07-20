@@ -84,6 +84,21 @@ export async function getAllInvitations() {
 		return await sql`
       SELECT id, token, used
       FROM invitations
+	  WHERE used = FALSE
+      ORDER BY id DESC
+    `;
+	} catch (error) {
+		console.error("Error fetching invitations:", error);
+		throw error;
+	}
+}
+
+export async function getAllUsedInvitations() {
+	try {
+		return await sql`
+      SELECT id, token, used
+      FROM invitations
+	  WHERE used = TRUE
       ORDER BY id DESC
     `;
 	} catch (error) {

@@ -1,9 +1,6 @@
-import { ReactNode } from "react";
-import style from "./ApproveAction.module.scss";
-
 import Centered from "../Centered/Centered";
 import { useDeleteFileStore } from "@/app/features/listDreams/store/useDeleteFileStore";
-import { ApproveActionProps } from "@/app/common/hocs/types/ApproveAction";
+import type { ApproveActionProps } from "@/app/common/hocs/types/ApproveAction";
 import Input from "../../components/ui/Input/Input";
 import Button from "@/app/common/components/ui/Button/Button";
 import { useApproveActionStore } from "@/app/common/hooks/useApproveActionStore";
