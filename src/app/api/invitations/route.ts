@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
 	// const users = await getAllUsers();
 
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-	if (emailRegex.test(email)) return badRequest("invalid email");
+	if (!emailRegex.test(email)) return badRequest("invalid email");
 
 	// return NextResponse.json(invitaions);
 	if (valid) {
