@@ -12,6 +12,11 @@ import AcessControll from "@/app/common/hocs/AcessControll/AcessControll";
 function EditAudio({ file, renderId }: EditAudioProps) {
 	const { size, processing, createdTime } = file;
 
+	if (renderId === 0) {
+		console.log("====================================");
+		console.log(file);
+		console.log("====================================");
+	}
 	const {
 		deleteFile,
 		renameFile,

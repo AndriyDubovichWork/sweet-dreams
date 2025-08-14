@@ -61,10 +61,20 @@ export async function getDreamById(dreamId: number) {
 }
 
 export async function getAllDreams(sortBy: OrderByValues = "name") {
+	let localSortBy = "name";
+
+	switch (sortBy) {
+		case "createdTime":
+			localSortBy = "created_time";
+			break;
+		case "modifiedTime":
+			localSortBy = "modified_time";
+			break;
+	}
 	try {
 		const result = await sql`
           SELECT * FROM dreams
-          ORDER BY ${sql.unsafe(sortBy)}
+          ORDER BY ${sql.unsafe(localSortBy)}
         `;
 		return result;
 	} catch (error) {

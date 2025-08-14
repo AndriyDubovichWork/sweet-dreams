@@ -28,10 +28,10 @@ const handler = NextAuth({
 	callbacks: {
 		async session({ session }: any) {
 			// dropDreamsTable();
-			initializeDatabase();
-			copyAllDreamsFromDriveToDB();
+			// initializeDatabase();
+			// copyAllDreamsFromDriveToDB();
 
-			await getAllUsers();
+			// console.log(await getAllUsers());
 
 			const user = await getUserByEmail(session.user.email);
 			if (user) {
