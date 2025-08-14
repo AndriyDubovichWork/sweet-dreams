@@ -43,52 +43,6 @@ export async function GET(request: NextRequest) {
 	}
 }
 
-// POST: use invitation
-export async function POST(request: NextRequest) {
-	const searchParams = request.nextUrl.searchParams;
-	const action = searchParams.get("action");
-	const token = searchParams.get("token");
-
-	if (action === "use") {
-		if (!token) return badRequest("Missing token");
-
-		try {
-			const result = await markInvitationUsed(token);
-			return NextResponse.json(result);
-		} catch (error) {
-			return serverError("Failed to mark invitation as used", error);
-		}
-	}
-
-	return badRequest("Invalid action for POST");
-}
-
-// DELETE: delete invitation
-export async function DELETE(request: NextRequest) {
-	const searchParams = request.nextUrl.searchParams;
-	const action = searchParams.get("action");
-	const token = searchParams.get("token");
-
-	if (action === "delete") {
-		if (!token) return badRequest("Missing token");
-
-		try {
-			const result = await deleteInvitation(token);
-			return NextResponse.json(result);
-		} catch (error) {
-			return serverError("Failed to delete invitation", error);
-		}
-	}
-
-	return badRequest("Invalid action for DELETE");
-}
-
-// Helpers
 function badRequest(message: string) {
 	return NextResponse.json({ success: false, error: message }, { status: 400 });
-}
-
-function serverError(message: string, error: unknown) {
-	console.error(`${message}:`, error);
-	return NextResponse.json({ success: false, error: message }, { status: 500 });
 }

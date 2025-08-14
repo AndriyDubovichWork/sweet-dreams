@@ -3,6 +3,7 @@ import {
 	removeDuplicateDreams,
 } from "@/app/common/DB/dreamCrud";
 import {
+	checkTableStructure,
 	dropDreamsTable,
 	dropTables,
 	initializeDatabase,
@@ -28,14 +29,19 @@ const handler = NextAuth({
 	callbacks: {
 		async session({ session }: any) {
 			// dropDreamsTable();
-			initializeDatabase();
-			copyAllDreamsFromDriveToDB();
+			// dropTables();
 
-			await getAllUsers();
+			// initializeDatabase();
+			// copyAllDreamsFromDriveToDB();
 
+			// console.log(await getAllUsers());
+			// createUser({ email: session.user.email, status: "admin" });
+			// checkTableStructure();
 			const user = await getUserByEmail(session.user.email);
 			if (user) {
 				updateLastLoginUserToNow(user.id);
+			} else {
+				return null;
 			}
 			session.user.role = user?.status;
 

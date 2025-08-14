@@ -1,12 +1,9 @@
 import { neon } from "@neondatabase/serverless";
 import "dotenv/config";
-import { Dream } from "./types";
+import type { Dream } from "./types";
 import { getUserById } from "./userCrud";
 import getFiles from "@/app/api/dream/drive/getFiles";
-import {
-	OrderByDirection,
-	OrderByValues,
-} from "../store/types/savedDreamsStore";
+import type { OrderByValues } from "../store/types/savedDreamsStore";
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -15,25 +12,25 @@ export async function createDream(dreamData: Omit<Dream, "id">) {
 		const result = await sql`
       INSERT INTO dreams (
         name, 
-        createdTime, 
-        modifiedTime, 
-        lastUpdatedTime, 
-        fileId, 
+        created_time, 
+        modified_time, 
+        last_updated_time, 
+        file_id, 
         size, 
-        webContentLink, 
-        playableUrl, 
-        isPrivate
+        web_content_link, 
+        playable_url, 
+        is_private
       )
       VALUES (
         ${dreamData.name},
-        ${dreamData.createdTime || new Date()},
-        ${dreamData.modifiedTime || new Date()},
-        ${dreamData.lastUpdatedTime || new Date()},
-        ${dreamData.fileId},
+        ${dreamData.created_time || new Date()},
+        ${dreamData.modified_time || new Date()},
+        ${dreamData.last_updated_time || new Date()},
+        ${dreamData.file_id},
         ${dreamData.size},
-        ${dreamData.webContentLink},
-        ${dreamData.playableUrl},
-        ${dreamData.isPrivate || false}
+        ${dreamData.web_content_link},
+        ${dreamData.playable_url},
+        ${dreamData.is_private || false}
       )
       RETURNING *;
     `;
@@ -72,11 +69,12 @@ export async function getAllDreams(sortBy: OrderByValues = "name") {
 		throw error;
 	}
 }
-
 export async function searchDreamsByName(
 	sortBy: OrderByValues = "name",
 	name: string,
 ) {
+		console.log('sortBy:',sortBy);
+
 	try {
 		const result = await sql`
       SELECT * FROM dreams
@@ -89,17 +87,18 @@ export async function searchDreamsByName(
 		throw error;
 	}
 }
+// check this
 export function findDuplicateDreams(
 	DBdreams: any[],
-	checkFields: string[] = ["fileId"],
+	checkFields: string[] = ["file_id"],
 ): any {
 	const results: any = {};
 
-	checkFields.forEach((field) => {
+	checkFields.forEach((file_id) => {
 		const fieldMap: any = new Map<string, any[]>();
 
 		DBdreams.forEach((dream) => {
-			const fieldValue = dream[field]?.toString().toLowerCase().trim();
+			const fieldValue = dream[file_id]?.toString().toLowerCase().trim();
 			if (!fieldValue) return;
 
 			if (!fieldMap.has(fieldValue)) {
@@ -108,11 +107,11 @@ export function findDuplicateDreams(
 			fieldMap.get(fieldValue).push(dream);
 		});
 
-		results[field] = [];
+		results[file_id] = [];
 		fieldMap.forEach((items: any, value: any) => {
 			if (items.length > 1) {
-				results[field].push({
-					field,
+				results[file_id].push({
+					file_id,
 					value,
 					count: items.length,
 					items,
@@ -123,7 +122,7 @@ export function findDuplicateDreams(
 
 	return results;
 }
-
+// check this
 export async function copyAllDreamsFromDriveToDB(): Promise<{
 	created: number;
 	skipped: number;
@@ -133,13 +132,13 @@ export async function copyAllDreamsFromDriveToDB(): Promise<{
 		const DBdreams = await getAllDreams();
 		const existingIds = new Set(
 			DBdreams.map((d) => {
-				const id = d.fileid?.toLowerCase().trim();
+				const id = d.file_id?.toLowerCase().trim();
 				return id;
 			}).filter(Boolean),
 		);
 
 		// 2. Get Drive files
-		const driveResponse = await getFiles("createdTime", 1000);
+		const driveResponse = await getFiles("created_time", 1000);
 		const driveDreams = driveResponse?.data?.files || [];
 
 		let created = 0;
@@ -171,16 +170,16 @@ export async function copyAllDreamsFromDriveToDB(): Promise<{
 
 				const dreamData = {
 					name: driveDream.name.replace("/private/", ""),
-					fileId: driveDream.id,
+					file_id: driveDream.id,
 					size: Number(driveDream.size),
-					createdTime: new Date(driveDream.createdTime || Date.now()),
-					modifiedTime: new Date(
+					created_time: new Date(driveDream.createdTime || Date.now()),
+					modified_time: new Date(
 						driveDream.modifiedTime || driveDream.createdTime || Date.now(),
 					),
-					lastUpdatedTime: new Date(),
-					webContentLink: `https://drive.google.com/uc?id=${driveDream.id}&export=download`,
-					playableUrl: `https://drive.google.com/file/d/${driveDream.id}/preview`,
-					isPrivate: driveDream.name.includes("/private/"),
+					last_updated_time: new Date(),
+					web_content_link: `https://drive.google.com/uc?id=${driveDream.id}&export=download`,
+					playable_url: `https://drive.google.com/file/d/${driveDream.id}/preview`,
+					is_private: driveDream.name.includes("/private/"),
 				};
 
 				await createDream(dreamData);
@@ -218,8 +217,8 @@ export async function removeDuplicateDreams(): Promise<{
 		const allDreams = await getAllDreams();
 
 		// Find duplicates by fileId
-		const duplicates = findDuplicateDreams(allDreams, ["fileid"]);
-		const fileIdDuplicates = duplicates.fileid || [];
+		const duplicates = findDuplicateDreams(allDreams, ["file_id"]);
+		const fileIdDuplicates = duplicates.file_id || [];
 
 		let removed = 0;
 		let errors = 0;
@@ -231,8 +230,8 @@ export async function removeDuplicateDreams(): Promise<{
 				.sort(
 					(a: Dream, b: Dream) =>
 						(a.id || 0) - (b.id || 0) ||
-						new Date(a.createdTime).getTime() -
-							new Date(b.createdTime).getTime(),
+						new Date(a.created_time).getTime() -
+							new Date(b.created_time).getTime(),
 				)
 				.slice(0, 1);
 
@@ -242,7 +241,7 @@ export async function removeDuplicateDreams(): Promise<{
 			// Remove duplicates
 			for (const dream of dreamsToRemove) {
 				try {
-					await deleteDream(dream.fileid);
+					await deleteDream(dream.file_id);
 					removed++;
 				} catch (error) {
 					errors++;
@@ -269,7 +268,7 @@ export async function getPublicDreams() {
 	try {
 		const result = await sql`
       SELECT * FROM dreams
-      WHERE isPrivate = false
+      WHERE is_private = false
     `;
 		return result;
 	} catch (error) {
@@ -284,14 +283,14 @@ export async function updateDream(dreamId: number, updateData: Partial<Dream>) {
       UPDATE dreams
       SET 
         name = ${updateData.name},
-        createdTime = ${updateData.createdTime || new Date()},
-        modifiedTime = ${updateData.modifiedTime || new Date()},
-        lastUpdatedTime = ${new Date()},
-        fileId = ${updateData.fileId},
+        created_time = ${updateData.created_time || new Date()},
+        modified_time = ${updateData.modified_time || new Date()},
+        last_updated_time = ${new Date()},
+        file_id = ${updateData.file_id},
         size = ${updateData.size},
-        webContentLink = ${updateData.webContentLink},
-        playableUrl = ${updateData.playableUrl},
-        isPrivate = ${updateData.isPrivate}
+        web_content_link = ${updateData.web_content_link},
+        playable_url = ${updateData.playable_url},
+        is_private = ${updateData.is_private}
       WHERE id = ${dreamId}
       RETURNING *;
     `;
@@ -307,7 +306,7 @@ export async function renameDream(dreamId: string, name: string) {
       UPDATE dreams
       SET
         name = ${name}	
-      WHERE fileId = ${dreamId}
+      WHERE file_id = ${dreamId}
       RETURNING *;
     `;
 		return result[0];
@@ -320,41 +319,12 @@ export async function deleteDream(dreamId: string) {
 	try {
 		const result = await sql`
       DELETE FROM dreams
-      WHERE fileId = ${dreamId}
+      WHERE file_id = ${dreamId}
       RETURNING *;
     `;
 		return result[0];
 	} catch (error) {
 		console.error("Error deleting dream:", error);
-		throw error;
-	}
-}
-
-export async function addDreamToWatched(userId: number, dreamId: number) {
-	try {
-		const user = await getUserById(userId);
-		if (!user) throw new Error("User not found");
-
-		let watchedDreams: number[] = [];
-		try {
-			watchedDreams = user.dreamsWatched ? JSON.parse(user.dreamsWatched) : [];
-		} catch (e) {
-			watchedDreams = [];
-		}
-
-		if (!watchedDreams.includes(dreamId)) {
-			watchedDreams.push(dreamId);
-		}
-
-		const result = await sql`
-      UPDATE users
-      SET dreamsWatched = ${JSON.stringify(watchedDreams)}
-      WHERE id = ${userId}
-      RETURNING *;
-    `;
-		return result[0];
-	} catch (error) {
-		console.error("Error adding dream to watched list:", error);
 		throw error;
 	}
 }
