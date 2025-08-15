@@ -10,14 +10,12 @@ export async function createUser(userData: CreateUser) {
 		const result = await sql`
       INSERT INTO users (
         status, 
-        email,
-        dreamsWatched
+        email
       )
       VALUES (
         ${userData.status || "user"},
-        ${userData.email},
-        ''
-        )
+        ${userData.email}
+		        )
       RETURNING *;
     `;
 		return result[0];
@@ -72,7 +70,6 @@ export async function updateUser(userId: number, updateData: User) {
       SET 
         status = ${updateData.status},
         email = ${updateData.email},
-        dreamsWatched = ${updateData.dreamsWatched},
         last_login = ${updateData.last_login},
         is_active = ${updateData.is_active}
       WHERE id = ${userId}
@@ -130,46 +127,3 @@ export async function deleteUser(userId: number) {
 		throw error;
 	}
 }
-
-export async function addDreamToWatched(userId: number, dreamId: number) {
-	try {
-		const user = await getUserById(userId);
-		if (!user) throw new Error("User not found");
-
-		const watchedDreams = JSON.parse(user.dreamsWatched || "[]");
-		if (!watchedDreams.includes(dreamId)) {
-			watchedDreams.push(dreamId);
-		}
-
-		const result = await sql`
-      UPDATE users
-      SET dreamsWatched = ${JSON.stringify(watchedDreams)}
-      WHERE id = ${userId}
-      RETURNING *;
-    `;
-		return result[0];
-	} catch (error) {
-		console.error("Error adding dream to watched list:", error);
-		throw error;
-	}
-}
-
-// export async function getUserWatchedDreams(userId: number): Promise<Dream[]> {
-//   try {
-//     const user = await getUserById(userId);
-//     if (!user) throw new Error('User not found');
-
-//     const watchedDreamIds: number[] = JSON.parse(user.dreamsWatched || '[]');
-//     if (watchedDreamIds.length === 0) return [];
-
-//     const result = await sql`
-//       SELECT * FROM dreams
-//       WHERE id = ANY(${sql.array(watchedDreamIds, 'int4')})
-//     `;
-
-//     return result;
-//   } catch (error) {
-//     console.error('Error getting user watched dreams:', error);
-//     throw error;
-//   }
-// }

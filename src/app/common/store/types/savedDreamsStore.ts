@@ -1,19 +1,18 @@
 export type File = {
-	isprivate?: boolean;
 	id: string;
-	fileid: string;
 	name: string;
+	created_time: string;
+	modified_time: string;
+	last_updated_time: string;
+	file_id: string;
 	size: number;
-	webContentLink: string;
-	webcontentlink?: string;
-	playableurl: string;
-	createdTime: string;
-	createdtime?: string;
-	processing?: boolean;
+	web_content_link: string;
+	playable_url: string;
+	is_private: boolean;
 };
 
 export type OrderByDirection = "ASC" | "DESC";
-export type OrderByValues = "name" | "createdTime" | "modifiedTime";
+export type OrderByValues = "name" | "created_time" | "modified_time";
 export type OrderByNames = "created time" | "name" | "modified time";
 
 export type SortBy = {
