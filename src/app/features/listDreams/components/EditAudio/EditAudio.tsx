@@ -11,7 +11,6 @@ import AcessControll from '@/app/common/hocs/AcessControll/AcessControll';
 
 function EditAudio({ file, renderId }: EditAudioProps) {
   const { size, processing, created_time } = file;
-  // console.log('processing', processing);
 
   const {
     deleteFile,

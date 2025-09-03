@@ -1,38 +1,39 @@
-import { signIn, signOut, useSession } from "next-auth/react";
-import style from "./UserDropDown.module.scss";
-import Button from "@/app/common/components/ui/Button/Button";
-import DropDown from "../../DropDown/DropDown";
-import Spinner from "../../../ui/Spinner/Spinner";
+import { signIn, signOut, useSession } from 'next-auth/react';
+import style from './UserDropDown.module.scss';
+import Button from '@/app/common/components/ui/Button/Button';
+import DropDown from '../../DropDown/DropDown';
+import Spinner from '../../../ui/Spinner/Spinner';
+import Image from 'next/image';
 
 export default function UserDropDown() {
-	const { data: session, status } = useSession();
-	switch (status) {
-		case "authenticated":
-			return (
-				<DropDown
-					thumbnail={
-						<img
-							className={style.userImg}
-							src={session?.user?.image || "img"}
-							alt={session?.user?.name || "name"}
-						/>
-					}
-					content={
-						<button
-							type="button"
-							onClick={() => signOut()}
-							style={{ zIndex: 10 }}
-							className={style.dropDown}
-						>
-							log out
-						</button>
-					}
-				/>
-			);
-		case "unauthenticated":
-			return <Button onClick={() => signIn()}>login</Button>;
+  const { data: session, status } = useSession();
+  switch (status) {
+    case 'authenticated':
+      return (
+        <DropDown
+          thumbnail={
+            <Image
+              className={style.userImg}
+              src={session?.user?.image || 'img'}
+              alt={session?.user?.name || 'name'}
+            />
+          }
+          content={
+            <button
+              type='button'
+              onClick={() => signOut()}
+              style={{ zIndex: 10 }}
+              className={style.dropDown}
+            >
+              log out
+            </button>
+          }
+        />
+      );
+    case 'unauthenticated':
+      return <Button onClick={() => signIn()}>login</Button>;
 
-		case "loading":
-			return <Spinner className={style.userImg} />;
-	}
+    case 'loading':
+      return <Spinner className={style.userImg} />;
+  }
 }

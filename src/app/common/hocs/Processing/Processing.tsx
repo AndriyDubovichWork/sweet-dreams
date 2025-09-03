@@ -1,6 +1,8 @@
-import { processingProps } from '@/app/common/hocs/types/Processing';
+// biome-ignore assist/source/organizeImports: <just types>
+import type { processingProps } from '@/app/common/hocs/types/Processing';
 import loadingSvg from './loading.svg';
 import Centered from '../Centered/Centered';
+import Image from 'next/image';
 
 function Processing({ isProcessing, children }: processingProps) {
   if (!isProcessing) return children;
@@ -8,7 +10,7 @@ function Processing({ isProcessing, children }: processingProps) {
   return (
     <Centered>
       {children}
-      <img src={loadingSvg.src} />
+      <Image src={loadingSvg.src} alt='spiner' />
     </Centered>
   );
 }
