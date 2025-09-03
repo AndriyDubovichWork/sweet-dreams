@@ -37,15 +37,15 @@ export default async function saveFileToDrive(
 
   const responseFile = createdFile.data as responseFile;
   createDream({
-    modifiedTime: new Date(),
-    fileId: responseFile.id,
+    modified_time: new Date(),
+    file_id: responseFile.id,
     size: blob.size,
     name: responseFile.name,
-    createdTime: new Date(),
-    lastUpdatedTime: new Date(),
-    isPrivate,
-    playableUrl: `https://drive.google.com/file/d/${responseFile.id}/preview`,
-    webContentLink: `https://drive.google.com/uc?id=${responseFile.id}&export=download`,
+    created_time: new Date(),
+    last_updated_time: new Date(),
+    is_private: isPrivate,
+    playable_url: `https://drive.google.com/file/d/${responseFile.id}/preview`,
+    web_content_link: `https://drive.google.com/uc?id=${responseFile.id}&export=download`,
   });
   return createdFile;
 }
