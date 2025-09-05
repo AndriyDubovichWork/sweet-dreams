@@ -1,11 +1,11 @@
-import { neon } from "@neondatabase/serverless";
-import "dotenv/config";
+import { neon } from '@neondatabase/serverless';
+import 'dotenv/config';
 
 const sql = neon(process.env.DATABASE_URL!);
 
 export async function initializeDatabase() {
-	try {
-		await sql`
+  try {
+    await sql`
 CREATE TABLE IF NOT EXISTS users(
             "id" SERIAL PRIMARY KEY UNIQUE,
             "status"  VARCHAR(20) CHECK (status IN ('admin', 'super_user', 'user')) NOT NULL DEFAULT 'user',
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users(
 );
         `;
 
-		await sql`
+    await sql`
   CREATE TABLE IF NOT EXISTS dreams(
     "id" SERIAL PRIMARY KEY,
     "name" TEXT NOT NULL,
@@ -31,14 +31,14 @@ CREATE TABLE IF NOT EXISTS users(
     "is_private" BOOLEAN NOT NULL
 );
         `;
-		await sql`
+    await sql`
 CREATE TABLE IF NOT EXISTS invitations(
       "id" SERIAL PRIMARY KEY,
       "token" TEXT NOT NULL UNIQUE,
       "used" BOOLEAN DEFAULT FALSE
       );
       `;
-		await sql`
+    await sql`
 CREATE TABLE IF NOT EXISTS watched_dreams(
     "user_id" INT NOT NULL,
     "dream_id" TEXT NOT NULL UNIQUE,
@@ -47,47 +47,43 @@ CREATE TABLE IF NOT EXISTS watched_dreams(
     FOREIGN KEY ("dream_id") REFERENCES dreams("file_id")
 );
     `;
-	} catch (error) {
-		console.error("Error initializing database:", error);
-		throw error;
-	}
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  }
 }
 
 export async function dropTables() {
-	console.log("fuck");
+  try {
+    await sql`DROP TABLE IF EXISTS dreams CASCADE`;
+    await sql`DROP TABLE IF EXISTS users CASCADE`;
+    await sql`DROP TABLE IF EXISTS invitations CASCADE`;
+    await sql`DROP TABLE IF EXISTS watched_dreams CASCADE`;
 
-	try {
-		await sql`DROP TABLE IF EXISTS dreams CASCADE`;
-		await sql`DROP TABLE IF EXISTS users CASCADE`;
-		await sql`DROP TABLE IF EXISTS invitations CASCADE`;
-		await sql`DROP TABLE IF EXISTS watched_dreams CASCADE`;
-
-		console.log("Database dropped successfully");
-	} catch (error) {
-		console.error("Error initializing database:", error);
-		throw error;
-	}
+    console.log('Database dropped successfully');
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  }
 }
 export async function dropDreamsTable() {
-	try {
-		await sql`
+  try {
+    await sql`
 DROP TABLE IF EXISTS "dreams"`;
 
-		console.log("dreams dropped successfully");
-	} catch (error) {
-		console.error("Error initializing database:", error);
-		throw error;
-	}
+    console.log('dreams dropped successfully');
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  }
 }
 export async function checkTableStructure() {
-	try {
-		const structure = await sql`SELECT column_name, data_type 
+  try {
+    const structure = await sql`SELECT column_name, data_type 
 FROM information_schema.columns 
 WHERE table_name = 'dreams';`;
-
-		console.log("structure", structure);
-	} catch (error) {
-		console.error("Error initializing database:", error);
-		throw error;
-	}
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  }
 }

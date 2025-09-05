@@ -8,7 +8,6 @@ import type { OrderByValues } from '../store/types/savedDreamsStore';
 const sql = neon(process.env.DATABASE_URL!);
 
 export async function createDream(dreamData: Omit<Dream, 'id'>) {
-  console.log(dreamData);
   try {
     const result = await sql`
       INSERT INTO dreams (
@@ -74,8 +73,6 @@ export async function searchDreamsByName(
   sortBy: OrderByValues = 'name',
   name: string
 ) {
-  console.log('sortBy:', sortBy);
-
   try {
     const result = await sql`
       SELECT * FROM dreams
@@ -317,7 +314,6 @@ export async function renameDream(dreamId: string, name: string) {
   }
 }
 export async function deleteDream(dreamId: string) {
-  console.log('Deleting dream with file_id:', dreamId);
   try {
     const result = await sql`
       DELETE FROM dreams
