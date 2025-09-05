@@ -10,7 +10,7 @@ function Processing({ isProcessing, children }: processingProps) {
   return (
     <Centered>
       {children}
-      <Image src={loadingSvg.src} alt='spiner' />
+      <Image width='50' height='50' src={loadingSvg.src} alt='spiner' />
     </Centered>
   );
 }

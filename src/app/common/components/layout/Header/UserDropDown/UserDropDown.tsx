@@ -13,6 +13,8 @@ export default function UserDropDown() {
         <DropDown
           thumbnail={
             <Image
+              width='50'
+              height='50'
               className={style.userImg}
               src={session?.user?.image || 'img'}
               alt={session?.user?.name || 'name'}
